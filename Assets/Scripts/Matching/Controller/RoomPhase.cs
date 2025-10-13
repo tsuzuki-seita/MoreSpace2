@@ -57,6 +57,7 @@ public class RoomPhase : IPhase
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         ResetModelData();
+        SetLocalPlayerToView();
         viewer.UpdateRemotePlayer(newPlayer.NickName,false);
     }
 
