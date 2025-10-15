@@ -12,10 +12,8 @@ namespace MoreSpace.Infrastructure
         private const string KeyUserName = "user_profile_username";
 
         public UserProfile Load()
-        {
-            var name = PlayerPrefs.GetString(KeyUserName, string.Empty);
-            return new UserProfile(name);
-        }
+            => new UserProfile(PlayerPrefs.GetString(KeyUserName, string.Empty));
+
 
         public void Save(UserProfile profile)
         {
@@ -24,7 +22,6 @@ namespace MoreSpace.Infrastructure
         }
     }
 
-    // シンプルな “型→オブジェクト” マップ、TryConsumeで取得と同時に削除
     public sealed class SceneArgsBus : ISceneArgsBus
     {
         private readonly Dictionary<Type, object> _store = new();

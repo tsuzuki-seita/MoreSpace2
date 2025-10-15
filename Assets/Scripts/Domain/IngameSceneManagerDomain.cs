@@ -19,9 +19,7 @@ namespace MoreSpace.Domain
         public SkillId Slot3;
 
         public SkillLoadout(SkillId s1, SkillId s2, SkillId s3)
-        {
-            Slot1 = s1; Slot2 = s2; Slot3 = s3;
-        }
+        { Slot1 = s1; Slot2 = s2; Slot3 = s3; }
 
         public bool IsValid()
             => !string.IsNullOrEmpty(Slot1.Value)
@@ -29,15 +27,6 @@ namespace MoreSpace.Domain
             && !string.IsNullOrEmpty(Slot3.Value);
     }
 
-    // スキルセット、一回ロードしたら消える
-    [Serializable]
-    public class IngameArgs
-    {
-        public SkillLoadout Loadout;
-        public IngameArgs(SkillLoadout loadout) => Loadout = loadout;
-    }
-
-    // 永続プロフィール
     [Serializable]
     public class UserProfile
     {

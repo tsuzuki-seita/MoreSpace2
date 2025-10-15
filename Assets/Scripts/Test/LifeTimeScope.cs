@@ -11,15 +11,14 @@ public sealed class GameLifetimeScope : LifetimeScope
 
     protected override void Configure(IContainerBuilder builder)
     {
-        // Core services
         builder.Register<IUserProfileRepository, PlayerPrefsUserProfileRepository>(Lifetime.Singleton);
-        builder.Register<ISceneArgsBus, SceneArgsBus>(Lifetime.Singleton);
-        builder.Register<INavigationService, NavigationService>(Lifetime.Singleton);
+            builder.Register<ISceneArgsBus, SceneArgsBus>(Lifetime.Singleton);
 
-        // Scene singleton (MonoBehaviour) をコンテナに登録
-        if (ingameSceneManagerInHierarchy == null)
-            ingameSceneManagerInHierarchy = FindObjectOfType<IngameSceneManager>(true);
+            // NavigationService はインターフェースでなく具象登録（メソッドにジェネリックを持つため）
+            builder.Register<NavigationService>(Lifetime.Singleton);
 
-        builder.RegisterComponent(ingameSceneManagerInHierarchy);
+            if (ingameSceneManagerInHierarchy == null)
+                ingameSceneManagerInHierarchy = FindObjectOfType<IngameSceneManager>(true);
+            builder.RegisterComponent(ingameSceneManagerInHierarchy);
     }
 }

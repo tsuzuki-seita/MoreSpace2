@@ -17,39 +17,43 @@ namespace MoreSpace.Application
         bool TryConsume<T>(out T value);
     }
 
-    // ナビゲーション：永続更新 + 一時引数 + シーンロード
-    public interface INavigationService
+    // 一時引数であることを示すマーカー
+    public interface ITransientArgs { }
+
+    // 永続更新があることを示す契約
+    public interface IPersistentUpdate
     {
-        void Navigate(InGameState sceneName, object transientArgs = null, UserProfile persistentUpdate = null);
+        void Apply(IUserProfileRepository repo);
     }
 
-    public sealed class NavigationService : INavigationService
+    public sealed class NavigationService
     {
         private readonly ISceneArgsBus _bus;
         private readonly IUserProfileRepository _repo;
 
         public NavigationService(ISceneArgsBus bus, IUserProfileRepository repo)
+        { _bus = bus; _repo = repo; }
+
+        public void ChangeScene(InGameState sceneName)
         {
-            _bus = bus;
-            _repo = repo;
+            SceneManager.LoadScene(sceneName.ToString());
         }
 
-        public void Navigate(InGameState sceneName, object transientArgs = null, UserProfile persistentUpdate = null)
+        public void ChangeScene<T>(InGameState sceneName, T args)
         {
-            // 永続更新（必要なときだけ）
-            if (persistentUpdate != null)
+            // 1) 永続更新があれば先に適用
+            if (args is IPersistentUpdate persistent)
             {
-                _repo.Save(persistentUpdate);
+                persistent.Apply(_repo);
             }
 
-            // 一時引数（型そのまま Publish<T>）
-            if (transientArgs != null)
+            // 2) 一時引数であれば、ロード後に消えるデータとして保存
+            if (args is ITransientArgs)
             {
-                var m = typeof(ISceneArgsBus).GetMethod(nameof(ISceneArgsBus.Publish))!;
-                var gm = m.MakeGenericMethod(transientArgs.GetType());
-                gm.Invoke(_bus, new[] { transientArgs });
+                _bus.Publish(args);
             }
 
+            // 3) シーンロード
             SceneManager.LoadScene(sceneName.ToString());
         }
     }

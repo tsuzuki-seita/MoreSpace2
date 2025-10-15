@@ -10,7 +10,8 @@ public enum InGameState
     Ingame,
     Result,
     GameOver,
-    Pause
+    Pause,
+    SampleScene
 }
 
 namespace MoreSpace.Presentation
@@ -18,58 +19,61 @@ namespace MoreSpace.Presentation
     public sealed class IngameSceneManager : MonoBehaviour
     {
         public static IngameSceneManager Instance { get; private set; }
-
         [SerializeField] private bool dontDestroyOnLoad = true;
 
-        private INavigationService _nav;
-        private IUserProfileRepository _repo;
+        private NavigationService _nav;
         private ISceneArgsBus _bus;
+        private IUserProfileRepository _repo;
 
-        // VContainer から注入
         [Inject]
-        public void Construct(INavigationService nav, IUserProfileRepository repo, ISceneArgsBus bus)
-        {
-            _nav = nav;
-            _repo = repo;
-            _bus = bus;
-        }
+        public void Construct(NavigationService nav, ISceneArgsBus bus, IUserProfileRepository repo)
+        { _nav = nav; _bus = bus; _repo = repo; }
 
         private void Awake()
         {
-            if (Instance != null && Instance != this)
-            {
-                Destroy(gameObject);
-                return;
-            }
+            if (Instance != null && Instance != this) { Destroy(gameObject); return; }
             Instance = this;
             if (dontDestroyOnLoad) DontDestroyOnLoad(gameObject);
         }
 
-        // ========== 公開API（ユーティリティ） ==========
+        // ★ 追加：遷移のみ
+        public void ChangeScene(InGameState sceneName)
+            => _nav.ChangeScene(sceneName);
 
-        // ユーザーネームの取得（永続）
+        // 既存：データ受け渡しあり
+        public void ChangeScene<T>(InGameState sceneName, T args)
+            => _nav.ChangeScene(sceneName, args);
+
+        public bool TryConsume<T>(out T value) => _bus.TryConsume(out value);
         public string LoadUserName() => _repo.Load().UserName;
+    }
 
-        // ユーザーネームを保存（永続）
-        public void SaveUserName(string name) => _repo.Save(new UserProfile(name));
+    // 例1: インゲーム開始用の“一時引数”だけ渡す
+    public sealed class IngameArgs : ITransientArgs
+    {
+        public SkillLoadout Loadout;
+        public IngameArgs(SkillLoadout loadout) => Loadout = loadout;
+    }
 
-        // 任意シーンへ：永続を更新しつつ一時引数も渡す
-        public void NavigateWith(InGameState sceneName, object transientArgs = null, string newUserName = null)
-        {
-            UserProfile persist = null;
-            if (newUserName != null) persist = new UserProfile(newUserName);
-            _nav.Navigate(sceneName, transientArgs, persist);
-        }
+    // 例2: ユーザーネームだけ “永続更新”
+    public sealed class UpdateUserName : IPersistentUpdate
+    {
+        public string NewName;
+        public UpdateUserName(string name) => NewName = name;
+        public void Apply(IUserProfileRepository repo)
+            => repo.Save(new UserProfile(NewName));
+    }
 
-        // 便利：インゲームへ（スキル3つ + 必要なら名前も更新）
-        public void GoToIngame(SkillLoadout loadout, string newUserName = null)
-        {
-            var args = new IngameArgs(loadout);
-            //NavigateWith("Ingame", args, newUserName);
-        }
+    // 例3: “一時 + 永続”の両方を 1つの型で
+    public sealed class StartIngameWithProfile : ITransientArgs, IPersistentUpdate
+    {
+        public SkillLoadout Loadout;
+        public string NewUserName;
 
-        // 受け取り側用：IngameArgsを“読んだら消える”で取得
-        public bool TryConsumeIngameArgs(out IngameArgs args)
-            => _bus.TryConsume(out args);
+        public StartIngameWithProfile(SkillLoadout loadout, string newUserName)
+        { Loadout = loadout; NewUserName = newUserName; }
+
+        public void Apply(IUserProfileRepository repo)
+            => repo.Save(new UserProfile(NewUserName));
     }
 }
