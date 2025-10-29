@@ -314,63 +314,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3689049448164958712, guid: 7dc40b26926c87645805f708fd95fdab, type: 3}
   m_PrefabInstance: {fileID: 689632482748441253}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1906211940
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1906211942}
-  - component: {fileID: 1906211941}
-  m_Layer: 0
-  m_Name: PlayerMaker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1906211941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1906211940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1fc29d53d9644b4f9f1609710386e30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playersPrefab:
-  - {fileID: 6686608151031813923, guid: 1ae97003c85a6c944ae1a90ad8ff66b5, type: 3}
-  - {fileID: 4473074249782968233, guid: 05497f599b94f0a499a12c0a3b15145f, type: 3}
-  startPosition:
-  - {x: 0, y: 0, z: 200}
-  - {x: 0, y: 0, z: -200}
-  planets:
-  - {fileID: 730049551}
-  - {fileID: 1973867045}
-  - {fileID: 445178903}
-  - {fileID: 448853292}
-  - {fileID: 1130607366}
-  - {fileID: 1168460952}
---- !u!4 &1906211942
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1906211940}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.067558646, y: 123.08208, z: -3.1350975}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1973867045 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1748960533535777755, guid: 7dc40b26926c87645805f708fd95fdab, type: 3}
@@ -433,6 +376,87 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dc40b26926c87645805f708fd95fdab, type: 3}
+--- !u!1001 &4008563316956973347
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1575276066822215865, guid: fc9590a506824a44c9c6afbdb049b8fd, type: 3}
+      propertyPath: m_Name
+      value: PlayerMaker
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438740674447978601, guid: fc9590a506824a44c9c6afbdb049b8fd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.067558646
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438740674447978601, guid: fc9590a506824a44c9c6afbdb049b8fd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 123.08208
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438740674447978601, guid: fc9590a506824a44c9c6afbdb049b8fd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.1350975
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438740674447978601, guid: fc9590a506824a44c9c6afbdb049b8fd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438740674447978601, guid: fc9590a506824a44c9c6afbdb049b8fd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438740674447978601, guid: fc9590a506824a44c9c6afbdb049b8fd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438740674447978601, guid: fc9590a506824a44c9c6afbdb049b8fd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438740674447978601, guid: fc9590a506824a44c9c6afbdb049b8fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438740674447978601, guid: fc9590a506824a44c9c6afbdb049b8fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438740674447978601, guid: fc9590a506824a44c9c6afbdb049b8fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7353277378805748665, guid: fc9590a506824a44c9c6afbdb049b8fd, type: 3}
+      propertyPath: 'planets.Array.data[0]'
+      value: 
+      objectReference: {fileID: 730049551}
+    - target: {fileID: 7353277378805748665, guid: fc9590a506824a44c9c6afbdb049b8fd, type: 3}
+      propertyPath: 'planets.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1973867045}
+    - target: {fileID: 7353277378805748665, guid: fc9590a506824a44c9c6afbdb049b8fd, type: 3}
+      propertyPath: 'planets.Array.data[2]'
+      value: 
+      objectReference: {fileID: 445178903}
+    - target: {fileID: 7353277378805748665, guid: fc9590a506824a44c9c6afbdb049b8fd, type: 3}
+      propertyPath: 'planets.Array.data[3]'
+      value: 
+      objectReference: {fileID: 448853292}
+    - target: {fileID: 7353277378805748665, guid: fc9590a506824a44c9c6afbdb049b8fd, type: 3}
+      propertyPath: 'planets.Array.data[4]'
+      value: 
+      objectReference: {fileID: 1130607366}
+    - target: {fileID: 7353277378805748665, guid: fc9590a506824a44c9c6afbdb049b8fd, type: 3}
+      propertyPath: 'planets.Array.data[5]'
+      value: 
+      objectReference: {fileID: 1168460952}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fc9590a506824a44c9c6afbdb049b8fd, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -440,4 +464,4 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 689632482748441253}
-  - {fileID: 1906211942}
+  - {fileID: 4008563316956973347}
