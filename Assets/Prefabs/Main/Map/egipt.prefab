@@ -123,4 +123,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crystalPrefab: {fileID: 5888038052712984347, guid: 1b05a48c58b3d7e45a7c875f49389f19, type: 3}
-  makeRange: 5
+  makeRange: 3.4
