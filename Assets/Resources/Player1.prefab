@@ -153,6 +153,8 @@ GameObject:
   - component: {fileID: 5451472222673186150}
   - component: {fileID: 7467615086056147136}
   - component: {fileID: 8953529862208123403}
+  - component: {fileID: -7089063617006925880}
+  - component: {fileID: -5865879064022737195}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -302,6 +304,39 @@ MonoBehaviour:
   mousePitchSensitivity: 10
   mouseRollSensitivity: 10
   yawSpeed: 50
+--- !u!114 &-7089063617006925880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6686608151031813923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a8f3c654fb6a444d89ffb3be05bf163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireRate: 0.25
+  maxDistance: 100
+  bullet: {fileID: 8533966869910427141, guid: c7275927203d74da69b9e657958d1547, type: 3}
+  initCount: 10
+  speed: 10
+  damage: 10
+--- !u!114 &-5865879064022737195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6686608151031813923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f5379fd069e4a87b99fabb541a83df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstWeaponIndex: 0
+  weapons:
+  - {fileID: -7089063617006925880}
 --- !u!1001 &4166958351457860141
 PrefabInstance:
   m_ObjectHideFlags: 0
