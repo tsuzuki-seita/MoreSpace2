@@ -17,19 +17,47 @@ public class ControlWeapon : MonoBehaviour
         ChangeWeapon(firstWeaponIndex);
         _actions = new InputSystem_Actions();
         _actions.MainPlayer.Enable();
+        _actions.MainPlayer.Fire.started += OnFirePressed;
+        _actions.MainPlayer.Fire.canceled += OnFireUp;
+        _actions.MainPlayer.ChangeWeapon.started += OnCPressed;
     }
 
     private void Update()
     {
         // if (_actions.MainPlayer.ChangeWeapon.ReadValue<bool>()) ChangeWeapon(nowWeapon is SingleShot ? 1 : 0);
+
+
         if (_actions.MainPlayer.Fire.IsPressed())
         {
-            nowWeapon?.OnFireDown();
-            Debug.Log("Fire Down");
+            nowWeapon?.OnFire();
+            Debug.Log("押され続けてる時");
         }
+
+    }
+
+    private void OnFirePressed(InputAction.CallbackContext context)
+    {
+        nowWeapon?.OnFireDown();
+        Debug.Log("ボタンが押されました！");
+        // if (_actions.MainPlayer.Fire.IsPressed())
+        // {
+        //     nowWeapon?.OnFireDown();
+        //     Debug.Log("Fire Down");
+        // }ここの部分
+    }
+
+    private void OnFireUp(InputAction.CallbackContext context)
+    {
+        nowWeapon?.OnFireUp();
+        Debug.Log("ボタンが離されました！ (canceled)");
+        // if (_actions.MainPlayer.Fire.ReadValue<bool>()) nowWeapon?.OnFireUp();
+        // ここの部分
+    }
+    private void OnCPressed(InputAction.CallbackContext context)
+    {
+        // ChangeWeapon(nowWeapon is SingleShot ? 1 : 0);
+        Debug.Log("Cキーが押されました！特別なアビリティを発動します。");
         
-        if (_actions.MainPlayer.Fire.ReadValue<bool>()) nowWeapon?.OnFire();
-        if (_actions.MainPlayer.Fire.ReadValue<bool>()) nowWeapon?.OnFireUp();
     }
 
 

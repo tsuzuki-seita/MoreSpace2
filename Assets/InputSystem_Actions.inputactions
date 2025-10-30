@@ -1073,22 +1073,13 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "OnFire",
-                    "type": "Value",
-                    "id": "2d62b340-ca34-45bb-b937-17fee9e8e14a",
+                    "name": "ChangeWeapon",
+                    "type": "Button",
+                    "id": "3db6037d-94ac-42a7-befa-f11be353498a",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "OnFireUp",
-                    "type": "Value",
-                    "id": "40c2ea9c-dd77-457b-a20e-3496b907328d",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "Press(behavior=1)",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1171,23 +1162,12 @@
                 },
                 {
                     "name": "",
-                    "id": "67ffc2a8-3328-468e-beed-d77f866ce60f",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "Press(behavior=2)",
+                    "id": "725c7282-5a14-4baa-be50-6b58273a2f85",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "OnFire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "620b7926-6d10-493c-ac68-769ff3e87b9a",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "Press(behavior=1)",
-                    "processors": "",
-                    "groups": "",
-                    "action": "OnFireUp",
+                    "action": "ChangeWeapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

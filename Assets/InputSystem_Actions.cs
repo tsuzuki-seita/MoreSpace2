@@ -1159,22 +1159,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""OnFire"",
-                    ""type"": ""Value"",
-                    ""id"": ""2d62b340-ca34-45bb-b937-17fee9e8e14a"",
+                    ""name"": ""ChangeWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""3db6037d-94ac-42a7-befa-f11be353498a"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""OnFireUp"",
-                    ""type"": ""Value"",
-                    ""id"": ""40c2ea9c-dd77-457b-a20e-3496b907328d"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": ""Press(behavior=1)"",
-                    ""initialStateCheck"": true
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1257,23 +1248,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""67ffc2a8-3328-468e-beed-d77f866ce60f"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": ""Press(behavior=2)"",
+                    ""id"": ""725c7282-5a14-4baa-be50-6b58273a2f85"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""OnFire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""620b7926-6d10-493c-ac68-769ff3e87b9a"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": ""Press(behavior=1)"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""OnFireUp"",
+                    ""action"": ""ChangeWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1374,8 +1354,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_MainPlayer_MouseControl = m_MainPlayer.FindAction("MouseControl", throwIfNotFound: true);
         m_MainPlayer_ADAxis = m_MainPlayer.FindAction("ADAxis", throwIfNotFound: true);
         m_MainPlayer_Fire = m_MainPlayer.FindAction("Fire", throwIfNotFound: true);
-        m_MainPlayer_OnFire = m_MainPlayer.FindAction("OnFire", throwIfNotFound: true);
-        m_MainPlayer_OnFireUp = m_MainPlayer.FindAction("OnFireUp", throwIfNotFound: true);
+        m_MainPlayer_ChangeWeapon = m_MainPlayer.FindAction("ChangeWeapon", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -1863,8 +1842,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_MainPlayer_MouseControl;
     private readonly InputAction m_MainPlayer_ADAxis;
     private readonly InputAction m_MainPlayer_Fire;
-    private readonly InputAction m_MainPlayer_OnFire;
-    private readonly InputAction m_MainPlayer_OnFireUp;
+    private readonly InputAction m_MainPlayer_ChangeWeapon;
     /// <summary>
     /// Provides access to input actions defined in input action map "MainPlayer".
     /// </summary>
@@ -1893,13 +1871,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Fire => m_Wrapper.m_MainPlayer_Fire;
         /// <summary>
-        /// Provides access to the underlying input action "MainPlayer/OnFire".
+        /// Provides access to the underlying input action "MainPlayer/ChangeWeapon".
         /// </summary>
-        public InputAction @OnFire => m_Wrapper.m_MainPlayer_OnFire;
-        /// <summary>
-        /// Provides access to the underlying input action "MainPlayer/OnFireUp".
-        /// </summary>
-        public InputAction @OnFireUp => m_Wrapper.m_MainPlayer_OnFireUp;
+        public InputAction @ChangeWeapon => m_Wrapper.m_MainPlayer_ChangeWeapon;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1938,12 +1912,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Fire.started += instance.OnFire;
             @Fire.performed += instance.OnFire;
             @Fire.canceled += instance.OnFire;
-            @OnFire.started += instance.OnOnFire;
-            @OnFire.performed += instance.OnOnFire;
-            @OnFire.canceled += instance.OnOnFire;
-            @OnFireUp.started += instance.OnOnFireUp;
-            @OnFireUp.performed += instance.OnOnFireUp;
-            @OnFireUp.canceled += instance.OnOnFireUp;
+            @ChangeWeapon.started += instance.OnChangeWeapon;
+            @ChangeWeapon.performed += instance.OnChangeWeapon;
+            @ChangeWeapon.canceled += instance.OnChangeWeapon;
         }
 
         /// <summary>
@@ -1967,12 +1938,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Fire.started -= instance.OnFire;
             @Fire.performed -= instance.OnFire;
             @Fire.canceled -= instance.OnFire;
-            @OnFire.started -= instance.OnOnFire;
-            @OnFire.performed -= instance.OnOnFire;
-            @OnFire.canceled -= instance.OnOnFire;
-            @OnFireUp.started -= instance.OnOnFireUp;
-            @OnFireUp.performed -= instance.OnOnFireUp;
-            @OnFireUp.canceled -= instance.OnOnFireUp;
+            @ChangeWeapon.started -= instance.OnChangeWeapon;
+            @ChangeWeapon.performed -= instance.OnChangeWeapon;
+            @ChangeWeapon.canceled -= instance.OnChangeWeapon;
         }
 
         /// <summary>
@@ -2270,18 +2238,11 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnFire(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "OnFire" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "ChangeWeapon" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnOnFire(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "OnFireUp" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnOnFireUp(InputAction.CallbackContext context);
+        void OnChangeWeapon(InputAction.CallbackContext context);
     }
 }
