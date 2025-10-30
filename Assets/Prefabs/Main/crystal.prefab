@@ -95,8 +95,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3919832563230665875}
+  - component: {fileID: 8670228836283376228}
   m_Layer: 0
-  m_Name: crystal
+  m_Name: Crystal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,3 +119,17 @@ Transform:
   - {fileID: 2852193744446558847}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8670228836283376228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5888038052712984347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6310099ec2d46324da1090d9b5060719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 50
+  damageParticlePrefab: {fileID: 5830832793778302127, guid: 6f971a6d33a1a744088a1cc9ce0ca805, type: 3}
