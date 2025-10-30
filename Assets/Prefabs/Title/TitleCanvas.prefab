@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 7114807424061161450}
   - component: {fileID: 7800551862656677753}
   m_Layer: 5
-  m_Name: MainButton
+  m_Name: GoSkillSet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -519,7 +519,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Tutrial
+  m_Text: Tutorial
 --- !u!1 &6713314619290991236
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,6 +532,8 @@ GameObject:
   - component: {fileID: 2239246304870432090}
   - component: {fileID: 7866799741345167203}
   - component: {fileID: 4765106731897727200}
+  - component: {fileID: 5073923636099535405}
+  - component: {fileID: 2317065504109502632}
   m_Layer: 5
   m_Name: TitleCanvas
   m_TagString: Untagged
@@ -625,6 +627,34 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5073923636099535405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6713314619290991236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf415042e695d7409f2f5d0066504ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  view: {fileID: 2317065504109502632}
+--- !u!114 &2317065504109502632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6713314619290991236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d3e585b0be4d7f902833ced5472792, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goSelectSkills: {fileID: 7800551862656677753}
+  goTutorial: {fileID: 4356216308699343138}
+  goSetting: {fileID: 3088645687583825649}
 --- !u!1 &8742027532120109983
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,8 @@ using VContainer;
 public enum InGameState
 {
     Title,
+    SelectSkills,
+    Matching,
     Ingame,
     Result,
     GameOver,
