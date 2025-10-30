@@ -46,7 +46,7 @@ public class RoomPhase : IPhase
     void CheckAllPlayerReady()
     {
         if (_router.Model.IsPlayerReady.All(b => b))
-            SceneManager.LoadScene("Main");
+            SceneManager.LoadScene("Ingame");
     }
     
     void Disconnect()
