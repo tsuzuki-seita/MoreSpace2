@@ -18,19 +18,19 @@ namespace MoreSpace.Presentation
         [SerializeField] private Button _level1UpButton;
         [SerializeField] private Button _level1DownButton;
         [SerializeField] private Image _level1Icon;
-        [SerializeField] private TextMeshProUGUI _level1Name;
+        // [SerializeField] private TextMeshProUGUI _level1Name;
 
         [Header("UI References (Level 2)")]
         [SerializeField] private Button _level2UpButton;
         [SerializeField] private Button _level2DownButton;
         [SerializeField] private Image _level2Icon;
-        [SerializeField] private TextMeshProUGUI _level2Name;
+        // [SerializeField] private TextMeshProUGUI _level2Name;
 
         [Header("UI References (Level 2)")]
         [SerializeField] private Button _level3UpButton;
         [SerializeField] private Button _level3DownButton;
         [SerializeField] private Image _level3Icon;
-        [SerializeField] private TextMeshProUGUI _level3Name;
+        // [SerializeField] private TextMeshProUGUI _level3Name;
         
         [Header("Common Buttons")]
         [SerializeField] private Button _confirmButton;
@@ -110,18 +110,18 @@ namespace MoreSpace.Presentation
                 case DeckLevel.Level1:
                     Skill s1 = _level1Skills[_level1Index];
                     _level1Icon.sprite = s1.Icon;
-                    _level1Name.text = s1.SkillName;
+                    //_level1Name.text = s1.SkillName;
                     break;
                 // (Lvl 2, Lvl 3 も同様に)
                 case DeckLevel.Level2:
                     Skill s2 = _level2Skills[_level2Index];
                     _level2Icon.sprite = s2.Icon;
-                    _level2Name.text = s2.SkillName;
+                    //_level2Name.text = s2.SkillName;
                     break;
                 case DeckLevel.Level3:
                     Skill s3 = _level3Skills[_level3Index];
                     _level3Icon.sprite = s3.Icon;
-                    _level3Name.text = s3.SkillName;
+                    //_level3Name.text = s3.SkillName;
                     break;
             }
         }

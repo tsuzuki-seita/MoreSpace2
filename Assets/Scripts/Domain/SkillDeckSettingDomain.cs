@@ -44,53 +44,6 @@ namespace MoreSpace.Domain
         public abstract void Act(GameObject owner);
     }
 
-    [CreateAssetMenu(fileName = "NewPassiveSkill", menuName = "MoreSpace/Passive Skill")]
-    public sealed class PassiveSkill : Skill
-    {
-        [Header("Passive Data")]
-        public float Value; // ハンドリング向上値、移動速度UP値など
-
-        public override void Initialize(GameObject owner)
-        {
-            // 例: プレイヤーのステータスにValueを適用する
-            Debug.Log($"{SkillName} initialized: Applying value {Value} to {owner.name}");
-            // owner.GetComponent<PlayerStats>().MoveSpeed += Value;
-        }
-
-        public override void Act(GameObject owner)
-        {
-            // パッシブなので発動(Act)処理は通常不要
-        }
-    }
-
-    // ウェポンやバフなど、能動的に発動するスキルの基底
-    public abstract class ActiveSkill : Skill
-    {
-        [Header("Active Data")]
-        public float RecastTime; // リキャストタイム
-    }
-
-    [CreateAssetMenu(fileName = "NewWeaponSkill", menuName = "MoreSpace/Weapon Skill")]
-    public sealed class WeaponSkill : ActiveSkill
-    {
-        [Header("Weapon Data")]
-        public float Distance;
-        public float Damage;
-        // public GameObject ProjectilePrefab; // プレハブなど
-
-        public override void Initialize(GameObject owner)
-        {
-            // 武器をプレイヤーにアタッチするなどの準備
-            Debug.Log($"{SkillName} initialized on {owner.name}");
-        }
-
-        public override void Act(GameObject owner)
-        {
-            // 武器を発射する処理
-            Debug.Log($"{SkillName} Act! Damage: {Damage}, Recast: {RecastTime}");
-        }
-    }
-
     [Serializable]
     public class SkillSet
     {

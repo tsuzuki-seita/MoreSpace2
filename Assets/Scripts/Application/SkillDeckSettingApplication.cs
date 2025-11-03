@@ -48,7 +48,7 @@ namespace MoreSpace.Application
 
             // 3. 既存のNavigationServiceを使ってシーン遷移
             // (IngameState.Ingame は仮。適切なシーン名に変更してください)
-            _nav.ChangeScene(InGameState.Ingame, args);
+            _nav.ChangeScene(InGameState.Matching, args);
         }
 
         // 戻るボタンが押された時の処理
