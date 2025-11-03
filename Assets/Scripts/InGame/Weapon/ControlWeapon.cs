@@ -55,8 +55,8 @@ public class ControlWeapon : MonoBehaviour
     }
     private void OnCPressed(InputAction.CallbackContext context)
     {
-        // ChangeWeapon(nowWeapon is SingleShot ? 1 : 0);
-        Debug.Log("Cキーが押されました！特別なアビリティを発動します。");
+        ChangeWeapon(nowWeapon is SingleShot ? 1 : 0);
+        Debug.Log("Cキーが押されました！");
         
     }
 
