@@ -19,7 +19,7 @@ namespace MoreSpace.InGame.Weapons.Bullets
         private void OnCollisionEnter(Collision other)
         {
             if(other.gameObject.TryGetComponent<IDamageable>(out var damage))
-                damage.Damage(_damage);
+                // damage.Damage(_damage);
             Release();
         }
     }
