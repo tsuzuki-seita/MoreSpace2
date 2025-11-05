@@ -5,17 +5,17 @@ public class SearchingPhase : IPhase
 {
     protected override void OnInitializePhase()
     {
-        PhotonNetwork.JoinRoom(_router.Model.RoomName);
+        PhotonNetwork.JoinRandomRoom();
     }
 
     public override void OnJoinedRoom()
     {
         _router.ChangePhase(PhaseType.Room);
     }
-
-    public override void OnJoinRoomFailed(short returnCode, string message)
+    
+    public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        PhotonNetwork.CreateRoom(_router.Model.RoomName, new RoomOptions() { MaxPlayers = 2 });
+        PhotonNetwork.CreateRoom(_router.Model.RoomName + PhotonNetwork.CountOfRooms, new RoomOptions() { MaxPlayers = 2 });
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)

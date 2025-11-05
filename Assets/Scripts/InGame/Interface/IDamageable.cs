@@ -2,6 +2,7 @@ namespace MoreSpace.InGame
 {
     public interface IDamageable
     {
-        public void Damage(int damage){}
+        public abstract void Damage(int damage);
+        public abstract void Die();
     }
 }

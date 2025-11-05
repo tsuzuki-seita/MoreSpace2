@@ -29,8 +29,7 @@ namespace MoreSpace.InGame.Weapons.Bullets
             
             lineRenderer.SetPosition(1,CalcTargetPosition());
             var target = CheckHitObjectDamageable();
-            if(target != null)
-                target.Damage(damage);
+            target?.Damage(damage);
         }
         public override void OnFireUp() 
         {

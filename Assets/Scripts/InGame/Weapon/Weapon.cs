@@ -14,7 +14,7 @@ namespace MoreSpace.InGame.Weapons
 
         private void Start()
         {
-            _mainCameraTransform = Camera.main.gameObject.transform;
+            _mainCameraTransform = GetComponentInChildren<Camera>(true).gameObject.transform;
         }
 
         protected bool CanShot()
@@ -36,7 +36,6 @@ namespace MoreSpace.InGame.Weapons
         protected Vector3 CalcTargetPosition()
         {
             Ray cameraRay = new Ray(_mainCameraTransform.position, _mainCameraTransform.forward);
-            Debug.DrawRay(cameraRay.origin,cameraRay.direction,Color.blue);
             if (Physics.Raycast(cameraRay, out var result,maxDistance))
             {
                 hitObject = result.collider.gameObject;

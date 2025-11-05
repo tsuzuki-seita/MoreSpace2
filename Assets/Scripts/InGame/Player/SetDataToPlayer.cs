@@ -12,15 +12,11 @@ public class SetDataToPlayer : MonoBehaviourPunCallbacks
 
     private void Start()
     {
+        _model = FindAnyObjectByType<PlayerMaker>().model;
         if (photonView.IsMine)
             AssertData(_model);
         else
             DisableComponents();
-    }
-
-    public void Initialize(PlayerModel model)
-    {
-        _model = model;
     }
 
     void AssertData(PlayerModel model)
