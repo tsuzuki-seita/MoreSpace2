@@ -17,5 +17,5 @@ MonoBehaviour:
   SkillName: "\u30B9\u30C6\u30EB\u30B9"
   Description: "\u767A\u52D5\u3059\u308B\u3068\u4E00\u5B9A\u6642\u9593\u900F\u660E\u306B\uFF01"
   Icon: {fileID: 21300000, guid: 7336ce69b1d214e74b38e96d14d78df5, type: 3}
-  RecastTime: 0
-  Duration: 0
+  RecastTime: 10
+  Duration: 10
