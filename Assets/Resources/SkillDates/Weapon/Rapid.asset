@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66e4a8d6a04a3417ea265bcaf9eb4d30, type: 3}
-  m_Name: Missile
+  m_Name: Rapid
   m_EditorClassIdentifier: Assembly-CSharp:MoreSpace.Domain:WeaponSkill
-  Type: 4
-  Level: 3
-  SkillName: "\u30DF\u30B5\u30A4\u30EB"
-  Description: "\u4E00\u6483\u5FC5\u6BBA\u30DF\u30B5\u30A4\u30EB"
+  Type: 1
+  Level: 1
+  SkillName: "\u9023\u5C04\u5F3E"
+  Description: "\u9023\u5C04\u3067\u304D\u308B\u901A\u5E38\u5F3E"
   Icon: {fileID: 21300000, guid: 000567f48fd64496baa6acd3d8d5c7a2, type: 3}
   Distance: 0
   Damage: 0

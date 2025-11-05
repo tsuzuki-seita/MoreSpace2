@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06501e5064480403b8055a01068f4a50, type: 3}
-  m_Name: SpeedUp
+  m_Name: DefenseUp
   m_EditorClassIdentifier: Assembly-CSharp:MoreSpace.Domain:PassiveSkill
-  Type: 6
+  Type: 7
   Level: 1
-  SkillName: "\u30B9\u30D4\u30FC\u30C9UP"
-  Description: "\u6A5F\u4F53\u306E\u30B9\u30D4\u30FC\u30C9\u304CUP"
+  SkillName: "\u30C7\u30A3\u30D5\u30A7\u30F3\u30B9UP"
+  Description: "\u6A5F\u4F53\u306E\u8010\u4E45\u529BUP"
   Icon: {fileID: 21300000, guid: f5866f8b6886949a0ba9db77e7f93429, type: 3}
   Value: 0
