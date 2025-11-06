@@ -357,6 +357,7 @@ MonoBehaviour:
   lineRenderer: {fileID: 0}
   range: 10
   damage: 10
+  timerMax: 1
 --- !u!114 &-8662853678641940839
 MonoBehaviour:
   m_ObjectHideFlags: 0

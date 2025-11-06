@@ -1,4 +1,5 @@
 using System;
+using MoreSpace.InGame.Player;
 using Photon.Pun;
 using UnityEngine;
 
@@ -20,12 +21,13 @@ public class PlayerMaker : MonoBehaviour
     void Start()
     {
         PhotonNetwork.IsMessageQueueRunning = true;
-        var playerIndex = Array.IndexOf(PhotonNetwork.PlayerList, PhotonNetwork.LocalPlayer);
+        var playerIndex = PhotonNetwork.IsMasterClient ? 0 : 1;
         MakePlayer(playerIndex);
     }
 
     void MakePlayer(int index)
     {
-        PhotonNetwork.Instantiate(playersPrefab[index].name,startPosition[index],Quaternion.identity);
+        var player = PhotonNetwork.Instantiate(playersPrefab[index].name,startPosition[index],Quaternion.identity);
+        SkillController.Instance.SetPlayer(player);
     }
 }
