@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06501e5064480403b8055a01068f4a50, type: 3}
-  m_Name: HandlingUp
+  m_Name: AttackUp
   m_EditorClassIdentifier: Assembly-CSharp:MoreSpace.Domain:PassiveSkill
-  Type: 8
+  Type: 5
   Level: 1
-  SkillName: "\u64CD\u4F5C\u6027UP"
-  Description: "\u6A5F\u4F53\u306E\u64CD\u4F5C\u6027\u304CUP"
+  SkillName: "\u653B\u6483\u529BUP"
+  Description: "\u6A5F\u4F53\u306E\u653B\u6483\u529BUP"
   Icon: {fileID: 21300000, guid: f5866f8b6886949a0ba9db77e7f93429, type: 3}
   Value: 10
