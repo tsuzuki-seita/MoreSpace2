@@ -46,7 +46,10 @@ public class RoomPhase : IPhase
     void CheckAllPlayerReady()
     {
         if (_router.Model.IsPlayerReady.All(b => b))
+        {
+            PhotonNetwork.IsMessageQueueRunning = false;
             SceneManager.LoadScene("Ingame");
+        }
     }
     
     void Disconnect()

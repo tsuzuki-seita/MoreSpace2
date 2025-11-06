@@ -5,7 +5,7 @@ using MoreSpace.InGame.Weapons;
 using Photon.Pun;
 using UnityEngine.InputSystem;
 
-public class ControlWeapon : MonoBehaviour
+public class ControlWeapon : MonoBehaviourPunCallbacks
 {
     [SerializeField] private int firstWeaponIndex = 0;
     [SerializeField] private List<Weapon> weapons;
@@ -14,7 +14,13 @@ public class ControlWeapon : MonoBehaviour
 
     private void Start()
     {
-        ChangeWeapon(firstWeaponIndex);
+        if(!photonView.IsMine)return;
+        photonView.RPC(nameof(ChangeWeapon),RpcTarget.All,firstWeaponIndex);
+        ActivateInputs();
+    }
+
+    void ActivateInputs()
+    {
         _actions = new InputSystem_Actions();
         _actions.MainPlayer.Enable();
         _actions.MainPlayer.Fire.started += OnFirePressed;
@@ -24,49 +30,61 @@ public class ControlWeapon : MonoBehaviour
 
     private void Update()
     {
-        // if (_actions.MainPlayer.ChangeWeapon.ReadValue<bool>()) ChangeWeapon(nowWeapon is SingleShot ? 1 : 0);
-
-
+        if(!photonView.IsMine)return;
         if (_actions.MainPlayer.Fire.IsPressed())
         {
-            nowWeapon?.OnFire();
-            Debug.Log("押され続けてる時");
+            photonView.RPC(nameof(OnFireRPC),RpcTarget.AllBuffered);
         }
-
     }
 
     private void OnFirePressed(InputAction.CallbackContext context)
     {
-        nowWeapon?.OnFireDown();
-        Debug.Log("ボタンが押されました！");
-        // if (_actions.MainPlayer.Fire.IsPressed())
-        // {
-        //     nowWeapon?.OnFireDown();
-        //     Debug.Log("Fire Down");
-        // }ここの部分
+        photonView.RPC(nameof(OnFireDownRPC),RpcTarget.AllBuffered);
     }
-
     private void OnFireUp(InputAction.CallbackContext context)
     {
-        nowWeapon?.OnFireUp();
-        Debug.Log("ボタンが離されました！ (canceled)");
-        // if (_actions.MainPlayer.Fire.ReadValue<bool>()) nowWeapon?.OnFireUp();
-        // ここの部分
+        photonView.RPC(nameof(OnFireUpRPC),RpcTarget.AllBuffered);
     }
     private void OnCPressed(InputAction.CallbackContext context)
     {
-        // ChangeWeapon(nowWeapon is SingleShot ? 1 : 0);
-        Debug.Log("Cキーが押されました！特別なアビリティを発動します。");
-        
+        int tesValue = nowWeapon is SingleShot ? 1 : 0;
+        photonView.RPC(nameof(ChangeWeapon),RpcTarget.All,tesValue);
     }
 
-
-
+    [PunRPC]
+    void OnFireDownRPC()
+    {
+        nowWeapon?.OnFireDown();
+    }
+    [PunRPC]
+    void OnFireRPC()
+    {
+        nowWeapon?.OnFire();
+    }
+    [PunRPC]
+    void OnFireUpRPC()
+    {
+        nowWeapon?.OnFireUp();
+    }
+    
+    [PunRPC]
     void ChangeWeapon(int toIndex)
     {
         nowWeapon?.OnUnEquip();
         nowWeapon = weapons[toIndex];
         nowWeapon.OnEquip();
+    }
+
+    private void OnDestroy()
+    {
+        if (photonView.IsMine && _actions != null)
+        {
+            _actions.MainPlayer.Fire.started -= OnFirePressed;
+            _actions.MainPlayer.Fire.canceled -= OnFireUp;
+            _actions.MainPlayer.ChangeWeapon.started -= OnCPressed;
+            _actions.MainPlayer.Disable();
+            _actions.Dispose();
+        }
     }
 }
 

@@ -23,4 +23,11 @@ public class PlayerMover : MonoBehaviourPunCallbacks
             rigid.AddForce(moveSpeed * transform.forward, ForceMode.Acceleration);
         }
     }
+
+    private void OnDestroy()
+    {
+        if(_actions == null) return;
+        _actions.MainPlayer.Disable();
+        _actions.Dispose();
+    }
 }
