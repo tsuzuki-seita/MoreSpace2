@@ -27,7 +27,7 @@ namespace MoreSpace.InGame.Weapons
         {
             _nextFireTime = Time.time + fireRate;
         }
-        
+
         public abstract void OnEquip();
         public abstract void OnUnEquip();
         public abstract void OnFireDown();
@@ -40,6 +40,7 @@ namespace MoreSpace.InGame.Weapons
             if (Physics.Raycast(cameraRay, out var result,maxDistance))
             {
                 hitObject = result.collider.gameObject;
+                Debug.Log($"🎯 Raycast HIT: {hitObject.name}. Layer: {hitObject.layer}");
                 return result.point;
             }
 
@@ -50,7 +51,11 @@ namespace MoreSpace.InGame.Weapons
         protected IDamageable CheckHitObjectDamageable()
         {
             IDamageable result = null;
-            hitObject?.TryGetComponent<IDamageable>(out result);
+            if (hitObject != null)
+            {
+                result = hitObject.GetComponentInParent<IDamageable>();
+            }
+            Debug.Log($"Hit Object Damageable: {result != null}");
             return result;
         }
     }

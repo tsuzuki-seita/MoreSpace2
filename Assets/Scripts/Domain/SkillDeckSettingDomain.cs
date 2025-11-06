@@ -6,22 +6,40 @@ using UnityEngine;
 namespace MoreSpace.Domain
 {
     // ユーザー定義
-    public enum SkillType 
-    { 
-        // Passive
-        HandlingUp, 
-        MoveSpeedUp, 
-        MaxHpUp,
-        
+    public enum SkillType
+    {
         // Weapon
-        Laser, 
-        Homing, 
-        HeavyShot, 
-        
+        Normal,
+        Rapid,
+        Laser,
+        Homing,
+        Missile,
+
+        // Passive
+        AttackUp,
+        SpeedUp,
+        DefenseUp,
+        HandlingUp,
+        AttackForObjectUp,
+
+        AttackUp2,
+        SpeedUp2,
+        DefenseUp2,
+        HandlingUp2,
+        AttackForObjectUp2,
+
+        AttackUp3,
+        SpeedUp3,
+        DefenseUp3,
+        HandlingUp3,
+        AttackForObjectUp3,
+
+        HPHeal,
+
         // Active/Buff
-        Stealth, 
-        Missile, // (これはWeaponでは？ SkillTypeの分類は自由です)
-        Sensor 
+        Unbeatable,
+        Stealth,
+        Sensor,
     }
 
     // ユーザー定義

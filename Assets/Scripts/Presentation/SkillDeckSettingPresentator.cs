@@ -5,7 +5,8 @@ using MoreSpace.Domain;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro; // TextMeshProを使う場合
-using VContainer; // DIコンテナ
+using VContainer;
+using System.Text; // DIコンテナ
 
 namespace MoreSpace.Presentation
 {
@@ -18,23 +19,35 @@ namespace MoreSpace.Presentation
         [SerializeField] private Button _level1UpButton;
         [SerializeField] private Button _level1DownButton;
         [SerializeField] private Image _level1Icon;
-        // [SerializeField] private TextMeshProUGUI _level1Name;
+        [SerializeField] private Text _level1Name;
+        [SerializeField] private Button _level1DetailButton;
 
         [Header("UI References (Level 2)")]
         [SerializeField] private Button _level2UpButton;
         [SerializeField] private Button _level2DownButton;
         [SerializeField] private Image _level2Icon;
-        // [SerializeField] private TextMeshProUGUI _level2Name;
+        [SerializeField] private Text _level2Name;
+        [SerializeField] private Button _level2DetailButton;
 
-        [Header("UI References (Level 2)")]
+        [Header("UI References (Level 3)")]
         [SerializeField] private Button _level3UpButton;
         [SerializeField] private Button _level3DownButton;
         [SerializeField] private Image _level3Icon;
-        // [SerializeField] private TextMeshProUGUI _level3Name;
+        [SerializeField] private Text _level3Name;
+        [SerializeField] private Button _level3DetailButton;
         
         [Header("Common Buttons")]
         [SerializeField] private Button _confirmButton;
         [SerializeField] private Button _backButton;
+
+        [Header("UI References (Skill Detail Panel)")]
+        [SerializeField] private GameObject _detailPanel; // 詳細パネルのルートGameObject
+        [SerializeField] private Image _detailIcon;
+        [SerializeField] private Text _detailLevel;
+        [SerializeField] private Text _detailName;
+        [SerializeField] private Text _detailDescription;
+        [SerializeField] private Text _detailStats; // スキル固有ステータス (Damage, Valueなど)
+        [SerializeField] private Button _detailCloseButton;
 
         // スキルリストのキャッシュ
         private List<Skill> _level1Skills;
@@ -82,6 +95,14 @@ namespace MoreSpace.Presentation
 
             _confirmButton.onClick.AddListener(OnConfirm);
             _backButton.onClick.AddListener(OnBack);
+
+            _level1DetailButton.onClick.AddListener(() => OpenDetailPanel(DeckLevel.Level1));
+            _level2DetailButton.onClick.AddListener(() => OpenDetailPanel(DeckLevel.Level2));
+            _level3DetailButton.onClick.AddListener(() => OpenDetailPanel(DeckLevel.Level3));
+
+            _detailCloseButton.onClick.AddListener(CloseDetailPanel);
+
+            _detailPanel.SetActive(false);
         }
 
         // スロットのスキルを切り替える
@@ -110,18 +131,18 @@ namespace MoreSpace.Presentation
                 case DeckLevel.Level1:
                     Skill s1 = _level1Skills[_level1Index];
                     _level1Icon.sprite = s1.Icon;
-                    //_level1Name.text = s1.SkillName;
+                    _level1Name.text = s1.SkillName;
                     break;
                 // (Lvl 2, Lvl 3 も同様に)
                 case DeckLevel.Level2:
                     Skill s2 = _level2Skills[_level2Index];
                     _level2Icon.sprite = s2.Icon;
-                    //_level2Name.text = s2.SkillName;
+                    _level2Name.text = s2.SkillName;
                     break;
                 case DeckLevel.Level3:
                     Skill s3 = _level3Skills[_level3Index];
                     _level3Icon.sprite = s3.Icon;
-                    //_level3Name.text = s3.SkillName;
+                    _level3Name.text = s3.SkillName;
                     break;
             }
         }
@@ -151,6 +172,87 @@ namespace MoreSpace.Presentation
             if (index < 0) return count - 1;
             if (index >= count) return 0;
             return index;
+        }
+
+        /// <summary>
+        /// 詳細パネルを開き、指定されたレベルのスキル情報を表示する
+        /// </summary>
+        private void OpenDetailPanel(DeckLevel level)
+        {
+            // 1. 現在選択中のスキルを取得
+            Skill currentSkill = null;
+            switch (level)
+            {
+                case DeckLevel.Level1:
+                    currentSkill = _level1Skills[_level1Index];
+                    break;
+                case DeckLevel.Level2:
+                    currentSkill = _level2Skills[_level2Index];
+                    break;
+                case DeckLevel.Level3:
+                    currentSkill = _level3Skills[_level3Index];
+                    break;
+            }
+
+            if (currentSkill == null) return;
+
+            // 2. パネルのUIコンポーネントに情報を設定
+            _detailIcon.sprite = currentSkill.Icon;
+            _detailName.text = currentSkill.SkillName;
+            _detailDescription.text = currentSkill.Description;
+            _detailLevel.text = currentSkill.Level.ToString();
+            
+            // 3. スキルの種類に応じて固有のステータスをフォーマット
+            _detailStats.text = FormatSkillStats(currentSkill);
+
+            // 4. パネルを表示
+            _detailPanel.SetActive(true);
+        }
+
+        /// <summary>
+        /// スキル詳細パネルを閉じる
+        /// </summary>
+        private void CloseDetailPanel()
+        {
+            _detailPanel.SetActive(false);
+        }
+
+        /// <summary>
+        /// スキル(SO)を受け取り、その種類に応じたステータス文字列を生成する
+        /// </summary>
+        private string FormatSkillStats(Skill skill)
+        {
+            // StringBuilderを使って効率的に文字列を結合
+            StringBuilder statsBuilder = new StringBuilder();
+
+            // ScriptableObjectの型をチェックして分岐
+            if (skill is PassiveSkill passive)
+            {
+                statsBuilder.AppendLine($"効果値: {passive.Value}");
+            }
+            else if (skill is WeaponSkill weapon)
+            {
+                statsBuilder.AppendLine($"ダメージ: {weapon.Damage}");
+                statsBuilder.AppendLine($"射程: {weapon.Distance}");
+                statsBuilder.AppendLine($"リキャスト: {weapon.RecastTime}秒");
+            }
+            else if (skill is ActiveSkill buff)
+            {
+                statsBuilder.AppendLine($"効果時間: {buff.Duration}秒");
+                statsBuilder.AppendLine($"リキャスト: {buff.RecastTime}秒");
+            }
+            // (もし ActiveSkill を直接継承するクラスがあれば、ここに追加)
+            else if (skill is ActiveSkill active) // 派生クラス(Weapon, Buff)に一致しなかった場合
+            {
+                statsBuilder.AppendLine($"リキャスト: {active.RecastTime}秒");
+            }
+
+            if (statsBuilder.Length == 0)
+            {
+                return "固有ステータスなし";
+            }
+
+            return statsBuilder.ToString();
         }
     }
 }
