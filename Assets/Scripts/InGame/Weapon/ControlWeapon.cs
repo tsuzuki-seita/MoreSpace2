@@ -24,13 +24,11 @@ public class ControlWeapon : MonoBehaviour
 
     private void Update()
     {
-        // if (_actions.MainPlayer.ChangeWeapon.ReadValue<bool>()) ChangeWeapon(nowWeapon is SingleShot ? 1 : 0);
 
 
         if (_actions.MainPlayer.Fire.IsPressed())
         {
             nowWeapon?.OnFire();
-            // Debug.Log("押され続けてる時");
         }
 
     }
@@ -38,25 +36,15 @@ public class ControlWeapon : MonoBehaviour
     private void OnFirePressed(InputAction.CallbackContext context)
     {
         nowWeapon?.OnFireDown();
-        // Debug.Log("ボタンが押されました！");
-        // if (_actions.MainPlayer.Fire.IsPressed())
-        // {
-        //     nowWeapon?.OnFireDown();
-        //     Debug.Log("Fire Down");
-        // }ここの部分
     }
 
     private void OnFireUp(InputAction.CallbackContext context)
     {
         nowWeapon?.OnFireUp();
-        // Debug.Log("ボタンが離されました！ (canceled)");
-        // if (_actions.MainPlayer.Fire.ReadValue<bool>()) nowWeapon?.OnFireUp();
-        // ここの部分
     }
     private void OnCPressed(InputAction.CallbackContext context)
     {
         ChangeWeapon(nowWeapon is SingleShot ? 1 : 0);
-        Debug.Log("Cキーが押されました！");
         
     }
 

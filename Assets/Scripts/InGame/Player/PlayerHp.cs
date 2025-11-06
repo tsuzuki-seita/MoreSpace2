@@ -15,7 +15,6 @@ namespace MoreSpace.InGame.Player
             {
                 Debug.Log("Player is dead.");
                 Destroy(gameObject);
-                // これテストようにデストロイしただけ
             }
         }
         private void Die()

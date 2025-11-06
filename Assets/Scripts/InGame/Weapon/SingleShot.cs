@@ -25,7 +25,7 @@ namespace MoreSpace.InGame.Weapons
             if(!CanShot()) return;
             var instance =  pool.GetPooledObject();
             instance.transform.position = this.transform.position + this.transform.forward*20;
-            instance.Shot(CalcTargetPosition(),speed,damage,this.gameObject);
+            instance.Shot(CalcTargetPosition(),speed,damage);
             SetNextFireTime();
         }
 

@@ -30,7 +30,11 @@ namespace MoreSpace.InGame.Weapons.Bullets
             lineRenderer.SetPosition(1,CalcTargetPosition());
             var target = CheckHitObjectDamageable();
             if(target != null)
+            {
+                Debug.Log("Beam hit and damage applied.");
                 target.Damage(damage);
+            }
+                
         }
         public override void OnFireUp() 
         {
