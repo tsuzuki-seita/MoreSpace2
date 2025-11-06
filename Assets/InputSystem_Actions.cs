@@ -1160,12 +1160,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""ChangeWeapon"",
-                    ""type"": ""Button"",
-                    ""id"": ""3db6037d-94ac-42a7-befa-f11be353498a"",
-                    ""expectedControlType"": """",
+                    ""type"": ""Value"",
+                    ""id"": ""b4347dc7-766f-430f-89fa-493bc2a33e9a"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -1248,8 +1248,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""725c7282-5a14-4baa-be50-6b58273a2f85"",
-                    ""path"": ""<Keyboard>/c"",
+                    ""id"": ""c9e0c226-6c9f-4626-aa31-57396892aab0"",
+                    ""path"": ""<Mouse>/scroll/y"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
