@@ -313,6 +313,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -7089063617006925880, guid: 1ae97003c85a6c944ae1a90ad8ff66b5, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 1889738247328448832, guid: 399da5b80593b4cf684c22b7f2cb67d4, type: 3}
+    - target: {fileID: -7089063617006925880, guid: 1ae97003c85a6c944ae1a90ad8ff66b5, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -326,7 +330,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6391164485155162207, guid: 1ae97003c85a6c944ae1a90ad8ff66b5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -23.57
       objectReference: {fileID: 0}
     - target: {fileID: 6391164485155162207, guid: 1ae97003c85a6c944ae1a90ad8ff66b5, type: 3}
       propertyPath: m_LocalRotation.w
