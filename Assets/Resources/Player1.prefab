@@ -178,7 +178,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4485383194094994628}
-  - {fileID: 2477981694797709086}
   - {fileID: 6076910526362525911}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -371,7 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 857e523130331445db0d7bfa025b56fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHp: 100
+  hp: 100
 --- !u!1001 &4166958351457860141
 PrefabInstance:
   m_ObjectHideFlags: 0

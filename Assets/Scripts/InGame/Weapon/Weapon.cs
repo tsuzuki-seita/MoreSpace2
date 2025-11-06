@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
+using Photon.Pun;
 using UnityEngine;
 
 namespace MoreSpace.InGame.Weapons
 {
-    public abstract class Weapon : MonoBehaviour
+    public abstract class Weapon : MonoBehaviourPunCallbacks
     {
         [SerializeField] protected float fireRate = 0.25f;
         [SerializeField] protected float maxDistance = 100;
@@ -14,7 +15,7 @@ namespace MoreSpace.InGame.Weapons
 
         private void Start()
         {
-            _mainCameraTransform = Camera.main.gameObject.transform;
+            _mainCameraTransform = GetComponentInChildren<Camera>(true).gameObject.transform;
         }
 
         protected bool CanShot()
@@ -36,8 +37,7 @@ namespace MoreSpace.InGame.Weapons
         protected Vector3 CalcTargetPosition()
         {
             Ray cameraRay = new Ray(_mainCameraTransform.position, _mainCameraTransform.forward);
-            Debug.DrawRay(cameraRay.origin, cameraRay.direction, Color.blue);
-            if (Physics.Raycast(cameraRay, out var result, maxDistance))
+            if (Physics.Raycast(cameraRay, out var result,maxDistance))
             {
                 hitObject = result.collider.gameObject;
                 Debug.Log($"🎯 Raycast HIT: {hitObject.name}. Layer: {hitObject.layer}");

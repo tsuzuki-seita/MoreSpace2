@@ -44,6 +44,13 @@ MonoBehaviour:
   - RPC_OnFire
   - RPC_OnFireDown
   - RPC_OnFireUp
+  - ChangeWeapon
+  - OnFireDownRPC
+  - OnFireRPC
+  - OnFireUpRPC
+  - DamageOnRPC
+  - RPC_Dead
+  - RPC_ReportDeath
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

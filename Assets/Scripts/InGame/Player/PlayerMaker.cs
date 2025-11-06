@@ -7,20 +7,25 @@ public class PlayerMaker : MonoBehaviour
     [SerializeField] private GameObject[] playersPrefab = new GameObject[2];
     [SerializeField] private Vector3[] startPosition = new Vector3[2];
     [SerializeField] private Transform[] planets;
-    
+    public PlayerModel model { get; private set; }
+
+    private void Awake()
+    {
+        model = new PlayerModel()
+        {
+            Planets = planets
+        };
+    }
+
     void Start()
     {
+        PhotonNetwork.IsMessageQueueRunning = true;
         var playerIndex = Array.IndexOf(PhotonNetwork.PlayerList, PhotonNetwork.LocalPlayer);
         MakePlayer(playerIndex);
     }
 
     void MakePlayer(int index)
     {
-        var target = PhotonNetwork.Instantiate(playersPrefab[index].name,startPosition[index],Quaternion.identity);
-        PlayerModel model = new PlayerModel()
-        {
-            Planets = planets
-        };
-        target.GetComponent<SetDataToPlayer>().Initialize(model);
+        PhotonNetwork.Instantiate(playersPrefab[index].name,startPosition[index],Quaternion.identity);
     }
 }

@@ -32,4 +32,11 @@ public class PlayerRotater : MonoBehaviour
         transform.Rotate(Vector3.right, -vector.y * mousePitchSensitivity * Time.deltaTime, Space.Self);
         transform.Rotate(Vector3.forward, -vector.x * mouseRollSensitivity * Time.deltaTime, Space.Self);
     }
+
+    private void OnDestroy()
+    {
+        if(_actions == null) return;
+        _actions.MainPlayer.Disable();
+        _actions.Dispose();
+    }
 }

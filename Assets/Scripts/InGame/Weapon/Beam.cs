@@ -28,13 +28,9 @@ namespace MoreSpace.InGame.Weapons.Bullets
             lineRenderer.SetPosition(0,transform.position);
             
             lineRenderer.SetPosition(1,CalcTargetPosition());
+            if(!photonView.IsMine) return;
             var target = CheckHitObjectDamageable();
-            if(target != null)
-            {
-                Debug.Log("Beam hit and damage applied.");
-                target.Damage(damage);
-            }
-                
+            target?.Damage(damage);
         }
         public override void OnFireUp() 
         {

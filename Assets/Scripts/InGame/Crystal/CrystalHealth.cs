@@ -1,18 +1,22 @@
 using System;
+using MoreSpace.InGame.Master;
+using Photon.Pun;
 using UnityEngine;
 
 namespace MoreSpace.InGame
 {
-    public class CrystalHealth : MonoBehaviour, IDamageable
+    public class CrystalHealth : HealthBase
     {
-        [SerializeField] private float hp = 50;
         [SerializeField] private GameObject damageParticlePrefab;
 
-        public void Damage(int damage)
+        protected override void OnInitialize()
         {
-            hp -= damage;
-            Instantiate(damageParticlePrefab, this.transform.position, Quaternion.identity);
-            if(hp < damage) Destroy(this.gameObject);
+            OnDamage += () => Instantiate(damageParticlePrefab, this.transform.position, Quaternion.identity);
+        }
+
+        public override void Die()
+        {
+            Destroy(this.gameObject);
         }
     }
 }
