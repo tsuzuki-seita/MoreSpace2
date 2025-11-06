@@ -8,6 +8,8 @@ namespace MoreSpace.InGame.Weapons.Bullets
         [SerializeField] private LineRenderer lineRenderer;
         [SerializeField] private float range = 10;
         [SerializeField] private int damage = 10;
+        [SerializeField] private float timerMax = 1;
+        private float _timer = 0;
         
         public override void OnEquip()
         {
@@ -26,11 +28,17 @@ namespace MoreSpace.InGame.Weapons.Bullets
         {
             if(!CanShot()) return;
             lineRenderer.SetPosition(0,transform.position);
-            
             lineRenderer.SetPosition(1,CalcTargetPosition());
+            
             if(!photonView.IsMine) return;
-            var target = CheckHitObjectDamageable();
-            target?.Damage(damage);
+            
+            _timer += Time.deltaTime;
+            if (_timer > timerMax)
+            {
+                var target = CheckHitObjectDamageable();
+                target?.Damage(damage);
+                _timer = 0;
+            }
         }
         public override void OnFireUp() 
         {
