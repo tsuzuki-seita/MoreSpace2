@@ -14,6 +14,7 @@ namespace MoreSpace.InGame
             Vector3 makeVector = Random.onUnitSphere.normalized;
             var crystal = PhotonNetwork.Instantiate(crystalPrefab.name,Vector3.zero, Quaternion.identity);
             crystal.transform.parent = this.transform;
+            crystal.transform.localScale = Vector3.one * 75;
             crystal.transform.localPosition = makeVector * makeRange;
             crystal.transform.LookAt(this.transform);
         }

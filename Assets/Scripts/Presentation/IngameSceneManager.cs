@@ -13,7 +13,6 @@ public enum InGameState
     Result,
     GameOver,
     Pause,
-    Matching,
     SampleScene
 }
 

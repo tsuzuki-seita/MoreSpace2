@@ -33,17 +33,17 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
         if(!photonView.IsMine)return;
         if (_actions.MainPlayer.Fire.IsPressed())
         {
-            photonView.RPC(nameof(OnFireRPC),RpcTarget.AllBuffered);
+            photonView.RPC(nameof(OnFireRPC),RpcTarget.All);
         }
     }
 
     private void OnFirePressed(InputAction.CallbackContext context)
     {
-        photonView.RPC(nameof(OnFireDownRPC),RpcTarget.AllBuffered);
+        photonView.RPC(nameof(OnFireDownRPC),RpcTarget.All);
     }
     private void OnFireUp(InputAction.CallbackContext context)
     {
-        photonView.RPC(nameof(OnFireUpRPC),RpcTarget.AllBuffered);
+        photonView.RPC(nameof(OnFireUpRPC),RpcTarget.All);
     }
     private void OnCPressed(InputAction.CallbackContext context)
     {
