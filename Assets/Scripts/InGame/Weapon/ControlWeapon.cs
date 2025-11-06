@@ -74,6 +74,18 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
         nowWeapon = weapons[toIndex];
         nowWeapon.OnEquip();
     }
+
+    private void OnDestroy()
+    {
+        if (photonView.IsMine && _actions != null)
+        {
+            _actions.MainPlayer.Fire.started -= OnFirePressed;
+            _actions.MainPlayer.Fire.canceled -= OnFireUp;
+            _actions.MainPlayer.ChangeWeapon.started -= OnCPressed;
+            _actions.MainPlayer.Disable();
+            _actions.Dispose();
+        }
+    }
 }
 
 

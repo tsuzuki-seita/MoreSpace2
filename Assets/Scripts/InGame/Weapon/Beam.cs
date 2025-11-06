@@ -28,6 +28,7 @@ namespace MoreSpace.InGame.Weapons.Bullets
             lineRenderer.SetPosition(0,transform.position);
             
             lineRenderer.SetPosition(1,CalcTargetPosition());
+            if(!photonView.IsMine) return;
             var target = CheckHitObjectDamageable();
             target?.Damage(damage);
         }

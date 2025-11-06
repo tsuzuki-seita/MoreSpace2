@@ -416,6 +416,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: JudgesOnMaster
       objectReference: {fileID: 0}
+    - target: {fileID: 6954974114598861642, guid: 36d2f3b8ddc55914189cdb36aba98f3d, type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8073328515961843317, guid: 36d2f3b8ddc55914189cdb36aba98f3d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 960

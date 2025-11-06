@@ -19,6 +19,7 @@ public class PlayerMaker : MonoBehaviour
 
     void Start()
     {
+        PhotonNetwork.IsMessageQueueRunning = true;
         var playerIndex = Array.IndexOf(PhotonNetwork.PlayerList, PhotonNetwork.LocalPlayer);
         MakePlayer(playerIndex);
     }

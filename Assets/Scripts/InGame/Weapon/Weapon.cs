@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
+using Photon.Pun;
 using UnityEngine;
 
 namespace MoreSpace.InGame.Weapons
 {
-    public abstract class Weapon : MonoBehaviour
+    public abstract class Weapon : MonoBehaviourPunCallbacks
     {
         [SerializeField] protected float fireRate = 0.25f;
         [SerializeField] protected float maxDistance = 100;
