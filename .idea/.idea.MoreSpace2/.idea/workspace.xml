@@ -5,14 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8fe98c55-1ddb-4105-9c37-509009933026" name="変更" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/InGame/Player/LookUiToCamera.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/InGame/Player/LookUiToCamera.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MoreSpace2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MoreSpace2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Crystal.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Crystal.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Title.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Title.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/InGame/Crystal/CrystalHealth.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InGame/Crystal/CrystalHealth.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/InGame/Interface/HealthBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InGame/Interface/HealthBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InGame/Player/LookUiToCamera.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InGame/Player/LookUiToCamera.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/InGame/Player/SetDataToPlayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InGame/Player/SetDataToPlayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InGame/SetHpToUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InGame/SetHpToUI.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

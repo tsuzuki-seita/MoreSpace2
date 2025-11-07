@@ -21,8 +21,8 @@ public class SetHpToUI : MonoBehaviour
         target.OnDamage -= ChangeValue;
     }
 
-    void ChangeValue(int hp)
+    void ChangeValue(int hp, int maxHp)
     {
-        hpBar.size = (float)hp / 100;
+        hpBar.size = (float)hp / maxHp;
     }
 }

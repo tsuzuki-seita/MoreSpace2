@@ -20,7 +20,7 @@ public class SetDataToPlayer : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
             _model = FindAnyObjectByType<PlayerMaker>().model;
-            FindAnyObjectByType<LookUiToCamera>().AssertUI(playerCamera.transform);
+            FindAnyObjectByType<LookUiToCamera>().AssertCamera(playerCamera.transform);
             AssertData(_model);
             SetUIs(true);
         }

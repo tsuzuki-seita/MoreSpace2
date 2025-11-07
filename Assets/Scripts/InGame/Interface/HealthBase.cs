@@ -8,10 +8,12 @@ namespace MoreSpace.InGame
     public class HealthBase : MonoBehaviourPunCallbacks, IDamageable
     {
         [SerializeField] int hp = 100;
-        public Action<int> OnDamage;
+        private int maxHp;
+        public Action<int, int> OnDamage;
         private void Start()
         {
             DamageableHolder.Holders.Add(photonView.ViewID,this);
+            maxHp = hp;
             OnInitialize();
         }
         
@@ -26,7 +28,7 @@ namespace MoreSpace.InGame
         protected void DamageOnRPC(int damage, PhotonMessageInfo info)
         {
             hp -= damage;
-            OnDamage?.Invoke(hp);
+            OnDamage?.Invoke(hp, maxHp);
             Debug.Log($"{gameObject.name}が{damage}受けています, 残りHP: {hp}");
             if (hp <= 0 && info.Sender.Equals(PhotonNetwork.LocalPlayer))
             {

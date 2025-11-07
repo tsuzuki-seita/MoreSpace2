@@ -22,9 +22,12 @@ namespace MoreSpace.InGame.Player
 
         private void Update()
         {
-            if(mainCamera == null) return;
-            foreach(var ui in UIs)
+            if(!mainCamera) return;
+            foreach (var ui in UIs)
+            {
                 ui.LookAt(mainCamera.transform);
+                ui.localEulerAngles = new Vector3(0,ui.localEulerAngles.y, 0);
+            }
         }
     }
 }
