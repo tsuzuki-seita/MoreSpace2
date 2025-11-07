@@ -7,6 +7,9 @@ using MoreSpace.Presentation;   // Presenter, SceneManager
 
 public class SelectSkillLifeTimeScope : LifetimeScope
 {
+    [SerializeField] private IngameSceneManager ingameSceneManagerInHierarchy;
+
+
     protected override void Configure(IContainerBuilder builder)
     {
         // -------------------------------------------------
@@ -19,10 +22,10 @@ public class SelectSkillLifeTimeScope : LifetimeScope
 
         // 永続データ(PlayerPrefs)のI/Fと実装
         builder.Register<IUserProfileRepository, PlayerPrefsUserProfileRepository>(Lifetime.Singleton);
-        
+
         // シーン間引数バスのI/Fと実装
         builder.Register<ISceneArgsBus, SceneArgsBus>(Lifetime.Singleton);
-        
+
         // シーン遷移サービス本体 (上記2つに依存)
         builder.Register<NavigationService>(Lifetime.Singleton);
 
@@ -36,7 +39,7 @@ public class SelectSkillLifeTimeScope : LifetimeScope
 
         // スキルデータ(Resources)のI/Fと実装
         builder.Register<ISkillRepository, ResourceSkillRepository>(Lifetime.Scoped);
-        
+
         // スキル選択シーンのユースケース (NavigationService と ISkillRepository に依存)
         builder.Register<SkillSelectionService>(Lifetime.Scoped);
 
@@ -54,6 +57,8 @@ public class SelectSkillLifeTimeScope : LifetimeScope
         // シーンマネージャー (シングルトンインスタンス)
         // (NavigationService, ISceneArgsBus, IUserProfileRepository が [Inject] されます)
         // ※IngameSceneManagerがこのシーンに配置されている場合
-        builder.RegisterComponentInHierarchy<IngameSceneManager>();
+        if (ingameSceneManagerInHierarchy == null)
+            ingameSceneManagerInHierarchy = FindObjectOfType<IngameSceneManager>(true);
+        builder.RegisterComponent(ingameSceneManagerInHierarchy);
     }
 }

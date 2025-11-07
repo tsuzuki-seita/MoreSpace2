@@ -35,7 +35,7 @@ public class PlayerMaker : MonoBehaviour
         SkillController.Instance.SetPlayer(player);
 
         if (IngameSceneManager.Instance != null
-            && IngameSceneManager.Instance.TryGet<StartIngameArgs>(out var args))
+            && IngameSceneManager.Instance.TryConsume<StartIngameArgs>(out var args))
         {
             SkillController.Instance.SetSelectedSkills(args.SelectedSkills);
             Debug.Log("PlayerMaker: StartIngameArgs read (sticky) and passed to SkillController.");

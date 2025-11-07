@@ -48,21 +48,21 @@ public class RoomPhase : IPhase
 
     void CheckAllPlayerReady()
     {
+        var skillSets = GetSkillSet();
         if (_router.Model.IsPlayerReady.All(b => b))
         {
             PhotonNetwork.IsMessageQueueRunning = false;
-            var skillSets = GetSkillSet();
             IngameSceneManager.Instance.ChangeScene(InGameState.Ingame, skillSets);
         }
     }
 
-    SkillSet GetSkillSet()
+    StartIngameArgs GetSkillSet()
     {
         if (IngameSceneManager.Instance != null
-            && IngameSceneManager.Instance.TryGet<StartIngameArgs>(out var args))
+            && IngameSceneManager.Instance.TryConsume<StartIngameArgs>(out var args))
         {
             Debug.Log("PlayerMaker: StartIngameArgs read (sticky) and passed to SkillController.");
-            return args.SelectedSkills;
+            return args;
         }
         else
         {
