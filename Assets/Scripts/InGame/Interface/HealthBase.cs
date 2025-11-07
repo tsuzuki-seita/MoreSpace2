@@ -40,6 +40,6 @@ namespace MoreSpace.InGame
             Debug.Log("Destroy" + name);
         }
 
-        public virtual void Die(){}
+        public virtual void Die(Photon.Realtime.Player doPlayer){}
     }
 }
