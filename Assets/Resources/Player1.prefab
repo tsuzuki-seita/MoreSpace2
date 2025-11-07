@@ -385,7 +385,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8870463ef93440c18b27611d414c8221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skill: []
+  skill:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   index: 0
 --- !u!1001 &4166958351457860141
 PrefabInstance:

@@ -48,9 +48,9 @@ public class RoomPhase : IPhase
 
     void CheckAllPlayerReady()
     {
-        var skillSets = GetSkillSet();
         if (_router.Model.IsPlayerReady.All(b => b))
         {
+            var skillSets = GetSkillSet();
             PhotonNetwork.IsMessageQueueRunning = false;
             IngameSceneManager.Instance.ChangeScene(InGameState.Ingame, skillSets);
         }

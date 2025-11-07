@@ -9,7 +9,7 @@ namespace MoreSpace.InGame.Player
 {
     public class SkillController : SingletonMonoBehaviourPunCallbacks<SkillController>
     {
-        [SerializeField] private Skill[] skill;
+        [SerializeField] private Skill[] skill = new Skill[4];
         [SerializeField] private int index = 0;
         private GameObject _player;
 
