@@ -12,7 +12,7 @@ namespace MoreSpace.InGame
 
         protected override void OnInitialize()
         {
-            OnDamage += () => damageParticle.Emit(1);
+            OnDamage += (hp) => damageParticle.Emit(1);
         }
 
         public override void Die(Photon.Realtime.Player doPlayer)
