@@ -6,9 +6,9 @@ namespace MoreSpace.InGame.Weapons.Bullets
     public class Beam : Weapon
     {
         [SerializeField] private LineRenderer lineRenderer;
-        [SerializeField] private float range = 10;
-        [SerializeField] private int damage = 10;
-        [SerializeField] private float timerMax = 1;
+        [SerializeField] public float range = 10;
+        [SerializeField] public int damage = 10;
+        [SerializeField] public float timerMax = 1;
         private float _timer = 0;
         
         public override void OnEquip()

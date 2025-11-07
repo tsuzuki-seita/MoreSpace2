@@ -1,5 +1,8 @@
 using System;
 using System.Linq;
+using MoreSpace.Domain;
+using MoreSpace.InGame.Player;
+using MoreSpace.Presentation;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
@@ -48,7 +51,23 @@ public class RoomPhase : IPhase
         if (_router.Model.IsPlayerReady.All(b => b))
         {
             PhotonNetwork.IsMessageQueueRunning = false;
-            SceneManager.LoadScene("Ingame");
+            var skillSets = GetSkillSet();
+            IngameSceneManager.Instance.ChangeScene(InGameState.Ingame, skillSets);
+        }
+    }
+
+    SkillSet GetSkillSet()
+    {
+        if (IngameSceneManager.Instance != null
+            && IngameSceneManager.Instance.TryGet<StartIngameArgs>(out var args))
+        {
+            Debug.Log("PlayerMaker: StartIngameArgs read (sticky) and passed to SkillController.");
+            return args.SelectedSkills;
+        }
+        else
+        {
+            Debug.LogWarning("PlayerMaker: StartIngameArgs が見つかりません（Sticky モードでも未セット）");
+            return null;
         }
     }
     

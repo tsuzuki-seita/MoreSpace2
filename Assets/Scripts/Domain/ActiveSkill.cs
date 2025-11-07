@@ -12,6 +12,5 @@ public sealed class ActiveSkill : Skill
     {
         //プレイヤーに武器ごとのコンポーネントをつける
         Debug.Log($"{SkillName} initialized: Time: {Duration} to {owner.name}");
-        
     }
 }

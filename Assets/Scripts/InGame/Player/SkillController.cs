@@ -12,28 +12,21 @@ namespace MoreSpace.InGame.Player
         [SerializeField] private Skill[] skill;
         [SerializeField] private int index = 0;
         private GameObject _player;
-        public void SetPlayer(GameObject p)
-        {
-            _player = p;
-        }
 
-        private void Start()
-        {
-            InitializeSkillLists();
-        }
+        public void SetPlayer(GameObject p) => _player = p;
 
-        void InitializeSkillLists()
+        // PlayerMaker から呼ばれる想定
+        public void SetSelectedSkills(SkillSet set)
         {
-            if (IngameSceneManager.Instance != null && IngameSceneManager.Instance.TryConsume<StartIngameArgs>(out var args))
+            if (set == null)
             {
-                var list = args.SelectedSkills;
-                skill = new Skill[] {null, list.Level1Skill, list.Level2Skill, list.Level3Skill};
+                Debug.LogWarning("SkillController: SkillSet is null");
+                return;
             }
-            else
-            {
-                // スキルデータが渡されなかった場合 (デバッグ実行など)
-                Debug.LogWarning("スキル選択データ (StartIngameArgs) が見つかりませんでした。");
-            }
+            skill[1] = set.Level1Skill;
+            skill[2] = set.Level2Skill;
+            skill[3] = set.Level3Skill;
+            Debug.Log("SkillController: Selected skills were set.");
         }
         
         public void BreakCrystal()

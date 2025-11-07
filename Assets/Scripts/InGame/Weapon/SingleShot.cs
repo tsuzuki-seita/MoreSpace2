@@ -6,10 +6,12 @@ namespace MoreSpace.InGame.Weapons
 {
     public class SingleShot : Weapon
     {
-        [SerializeField] private SingleBullet bullet;
-        [SerializeField] private uint initCount = 10;
-        [SerializeField] private float speed = 10;
-        [SerializeField] private int damage = 10;
+        [SerializeField] public SingleBullet bullet;
+        [SerializeField] public uint initCount = 10;
+        [SerializeField] public float speed = 10;
+        [SerializeField] public int damage = 10;
+
+        [SerializeField] public int ObjectDamage = 0;
 
         private Pool<SingleBullet> pool;
         

@@ -46,7 +46,9 @@ namespace MoreSpace.Presentation
         public void ChangeScene<T>(InGameState sceneName, T args)
             => _nav.ChangeScene(sceneName, args);
 
+        public bool TryGet<T>(out T value)     => _bus.TryGet(out value);
         public bool TryConsume<T>(out T value) => _bus.TryConsume(out value);
+        public void ClearArgs<T>() => _bus.Clear<T>();
         public string LoadUserName() => _repo.Load().UserName;
     }
 

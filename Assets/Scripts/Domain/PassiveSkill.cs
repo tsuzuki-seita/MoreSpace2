@@ -1,16 +1,76 @@
 using UnityEngine;
 using MoreSpace.Domain;
+using System;
 
 [CreateAssetMenu(fileName = "NewPassiveSkill", menuName = "MoreSpace/Passive Skill")]
 public sealed class PassiveSkill : Skill
 {
+    public enum PassiveKind
+    {
+        AttackUp,          // 全SingleShot.Damage に加算
+        SpeedUp,           // PlayerMover.MoveSpeed に加算
+        DefenseUp,         // PlayerHP.Defense に加算
+        HandlingUp,        // PlayerRotator.YawSpeed に加算
+        AttackForObjectUp  // 全SingleShot.ObjectDamage に加算
+    }
+
     [Header("Passive Data")]
-    public float Value; // ハンドリング向上値、移動速度UP値など
+    public PassiveKind Kind;
+    public float Value;
 
     public override void Initialize(GameObject owner)
     {
-        // 例: プレイヤーのステータスにValueを適用する
-        Debug.Log($"{SkillName} initialized: Applying value {Value} to {owner.name}");
-        // owner.GetComponent<PlayerStats>().MoveSpeed += Value;
+        if (owner == null) return;
+
+        switch (Kind)
+        {
+            case PassiveKind.AttackUp:
+                foreach (var s in owner.GetComponents<MoreSpace.InGame.Weapons.SingleShot>())
+                    s.damage += Mathf.RoundToInt(Value);
+                break;
+
+            case PassiveKind.AttackForObjectUp:
+                foreach (var s in owner.GetComponents<MoreSpace.InGame.Weapons.SingleShot>())
+                    s.ObjectDamage += Mathf.RoundToInt(Value);
+                break;
+
+            case PassiveKind.SpeedUp:
+                AddToFloatMember(owner, "PlayerMover", "MoveSpeed", Value);
+                break;
+
+            case PassiveKind.DefenseUp:
+                AddToFloatMember(owner, "PlayerHP", "Defense", Value);
+                break;
+
+            case PassiveKind.HandlingUp:
+                AddToFloatMember(owner, "PlayerRotator", "YawSpeed", Value);
+                break;
+        }
+
+        Debug.Log($"{SkillName} initialized: {Kind} +{Value} → {owner.name}");
+    }
+    
+    // 軽量リフレクション: 指定コンポーネントの float プロパティ/フィールドに加算
+    static void AddToFloatMember(GameObject owner, string componentTypeName, string memberName, float add)
+    {
+        var comp = owner.GetComponent(componentTypeName);
+        if (comp == null) { Debug.LogWarning($"[Passive] {componentTypeName} が見つからないため {memberName} に加算できません。"); return; }
+
+        var t = comp.GetType();
+        var p = t.GetProperty(memberName, System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public);
+        if (p != null && (p.PropertyType == typeof(float) || p.PropertyType == typeof(double)))
+        {
+            var cur = Convert.ToSingle(p.GetValue(comp));
+            p.SetValue(comp, cur + add);
+            return;
+        }
+        var f = t.GetField(memberName, System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic);
+        if (f != null && (f.FieldType == typeof(float) || f.FieldType == typeof(double)))
+        {
+            var cur = Convert.ToSingle(f.GetValue(comp));
+            f.SetValue(comp, cur + add);
+            return;
+        }
+        Debug.LogWarning($"[Passive] {componentTypeName}.{memberName} が見つかりません。");
     }
 }
