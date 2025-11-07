@@ -10,13 +10,8 @@ public sealed class ActiveSkill : Skill
 
     public override void Initialize(GameObject owner)
     {
-        // 例: プレイヤーのステータスにValueを適用する
+        //プレイヤーに武器ごとのコンポーネントをつける
         Debug.Log($"{SkillName} initialized: Time: {Duration} to {owner.name}");
-        // owner.GetComponent<PlayerStats>().MoveSpeed += Value;
-    }
-
-    public override void Act(GameObject owner)
-    {
-        // パッシブなので発動(Act)処理は通常不要
+        
     }
 }

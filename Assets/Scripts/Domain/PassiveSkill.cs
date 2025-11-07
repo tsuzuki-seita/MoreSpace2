@@ -13,9 +13,4 @@ public sealed class PassiveSkill : Skill
         Debug.Log($"{SkillName} initialized: Applying value {Value} to {owner.name}");
         // owner.GetComponent<PlayerStats>().MoveSpeed += Value;
     }
-
-    public override void Act(GameObject owner)
-    {
-        // パッシブなので発動(Act)処理は通常不要
-    }
 }

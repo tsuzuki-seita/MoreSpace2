@@ -36,14 +36,14 @@ namespace MoreSpace.Domain
 
         HPHeal,
 
-        // Active/Buff
+        // Active
         Unbeatable,
         Stealth,
         Sensor,
     }
 
     // ユーザー定義
-    public enum DeckLevel { Level1 = 1, Level2 = 2, Level3 = 3 }
+    public enum DeckLevel { Level0 = 0, Level1 = 1, Level2 = 2, Level3 = 3 }
 
     // スキルデータの基底クラス
     public abstract class Skill : ScriptableObject
@@ -57,9 +57,6 @@ namespace MoreSpace.Domain
 
         // スキル選択時に呼ばれる初期化処理など
         public abstract void Initialize(GameObject owner);
-
-        // スキルの実処理（パッシブなら空、アクティブなら発動）
-        public abstract void Act(GameObject owner);
     }
 
     [Serializable]

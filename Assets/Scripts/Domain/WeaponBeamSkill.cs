@@ -1,14 +1,11 @@
 using UnityEngine;
 using MoreSpace.Domain;
 
-[CreateAssetMenu(fileName = "NewWeaponSkill", menuName = "MoreSpace/Weapon Skill")]
-public class WeaponSkill : Skill
+[CreateAssetMenu(fileName = "NewWeaponBeamSkill", menuName = "MoreSpace/WeaponBeamSkill")]
+public sealed class WeaponBeamSkill : WeaponSkill
 {
     [Header("Weapon Data")]
-    public float Distance;
-    public float Damage;
-    public float RecastTime;
-    // public GameObject ProjectilePrefab; // プレハブなど
+    public float ReleaseDurationTime;
 
     public override void Initialize(GameObject owner)
     {
