@@ -828,6 +828,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5403093797496194573, guid: 1912fdde775da5147897bc5a1d16bc04, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8423188219438900020, guid: 1912fdde775da5147897bc5a1d16bc04, type: 3}
       propertyPath: m_Name
       value: SelectSkillCanvas
