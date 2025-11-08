@@ -1,6 +1,8 @@
 using System;
+using MoreSpace.Domain;
 using MoreSpace.InGame;
 using MoreSpace.InGame.Player;
+using MoreSpace.Presentation;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +19,8 @@ public class SetDataToPlayer : MonoBehaviourPunCallbacks
 
     private void Start()
     {
+        SkillController.Instance.SetPlayer(photonView);
+        
         if (photonView.IsMine)
         {
             _model = FindAnyObjectByType<PlayerMaker>().model;
@@ -33,6 +37,8 @@ public class SetDataToPlayer : MonoBehaviourPunCallbacks
 
     void AssertData(PlayerModel model)
     {
+        IngameSceneManager.Instance.TryConsume<StartIngameArgs>(out var args);
+        SkillController.Instance.SetSelectedSkills(args?.SelectedSkills);
         gravity.SetPlanets(model.Planets);
     }
 

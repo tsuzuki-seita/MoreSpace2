@@ -1,7 +1,8 @@
-using System;
+using System.Collections.Generic;
+using System.Linq;
 using MoreSpace.Domain;
+using MoreSpace.Infrastructure;
 using MoreSpace.InGame.Master;
-using MoreSpace.Presentation;
 using Photon.Pun;
 using UnityEngine;
 
@@ -11,13 +12,19 @@ namespace MoreSpace.InGame.Player
     {
         [SerializeField] private Skill[] skill = new Skill[4];
         [SerializeField] private int index = 0;
-        private GameObject _player;
+        private List<PhotonView> _player = new List<PhotonView>();
 
-        public void SetPlayer(GameObject p) => _player = p;
+        public void SetPlayer(PhotonView p)
+        {
+            _player.Add(p);
+        }
 
         // PlayerMaker から呼ばれる想定
         public void SetSelectedSkills(SkillSet set)
         {
+            Debug.Log(_player.First(p => p.IsMine));
+            photonView.RPC(nameof(InitializeSkill),RpcTarget.All,skill[index].ToString(), _player.First(p => p.IsMine).ViewID);
+            
             if (set == null)
             {
                 Debug.LogWarning("SkillController: SkillSet is null");
@@ -33,8 +40,15 @@ namespace MoreSpace.InGame.Player
         {
             index++;
             Debug.Log($"{index}番目を開放");
-            if (index < 4) skill[index]?.Initialize(_player);
+            if (index < 4) photonView.RPC(nameof(InitializeSkill),RpcTarget.All,skill[index].ToString(), _player.First(p => p.IsMine).ViewID);
             else JudgeVictory.Instance.photonView.RPC(nameof(JudgeVictory.AddClearIncident), RpcTarget.AllViaServer);
+        }
+
+        [PunRPC]
+        public void InitializeSkill(string target, int id)
+        {
+            Debug.Log($"InitializeSkill:{id}/{target}");
+            ResourceSkillRepository.Skills[target].Initialize(_player.First(p => p.ViewID == id).gameObject);
         }
     }
 }
