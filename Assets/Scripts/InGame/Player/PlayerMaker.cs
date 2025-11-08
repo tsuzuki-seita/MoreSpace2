@@ -1,5 +1,7 @@
 using System;
+using MoreSpace.Domain;
 using MoreSpace.InGame.Player;
+using MoreSpace.Presentation;
 using Photon.Pun;
 using UnityEngine;
 
@@ -27,7 +29,20 @@ public class PlayerMaker : MonoBehaviour
 
     void MakePlayer(int index)
     {
-        var player = PhotonNetwork.Instantiate(playersPrefab[index].name,startPosition[index],Quaternion.identity);
+        var player = PhotonNetwork.Instantiate(playersPrefab[index].name, startPosition[index], Quaternion.identity);
+
+        // SkillController に owner をセット
         SkillController.Instance.SetPlayer(player);
+
+        if (IngameSceneManager.Instance != null
+            && IngameSceneManager.Instance.TryConsume<StartIngameArgs>(out var args))
+        {
+            SkillController.Instance.SetSelectedSkills(args.SelectedSkills);
+            Debug.Log("PlayerMaker: StartIngameArgs read (sticky) and passed to SkillController.");
+        }
+        else
+        {
+            Debug.LogWarning("PlayerMaker: StartIngameArgs が見つかりません（Sticky モードでも未セット）");
+        }
     }
 }

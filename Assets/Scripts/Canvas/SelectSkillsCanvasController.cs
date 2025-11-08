@@ -9,7 +9,7 @@ namespace MoreSpace.SelectSkills
 
         void Start()
         {
-            view.OnInputGoMatching += () => IngameSceneManager.Instance.ChangeScene(InGameState.Matching);
+            //view.OnInputGoMatching += () => IngameSceneManager.Instance.ChangeScene(InGameState.Matching);
             view.OnInputBack += () => IngameSceneManager.Instance.ChangeScene(InGameState.Title);
             view.Initialize();
         }
