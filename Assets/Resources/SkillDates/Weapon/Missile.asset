@@ -20,5 +20,5 @@ MonoBehaviour:
   Distance: 999
   Damage: 999
   RecastTime: 20
-  Speed: 0
+  Speed: 100
   ProjectilePrefab: {fileID: 5380397611793071110, guid: 41afb0e02558347269b2e6f2faf81557, type: 3}

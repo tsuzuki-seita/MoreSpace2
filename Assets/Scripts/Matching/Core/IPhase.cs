@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class IPhase : MonoBehaviourPunCallbacks
 {
     public PhaseType phaseType;
+    public bool isBack = false;
     protected PhaseRouter _router;
 
     public void InitializeOnStart(PhaseRouter router)
@@ -32,6 +33,7 @@ public abstract class IPhase : MonoBehaviourPunCallbacks
     
     public override void OnDisconnected(DisconnectCause cause)
     {
+        if(isBack) return;
         _router.Model.DisconnectCause = cause;
         _router.ChangePhase(PhaseType.Failed);
     }
