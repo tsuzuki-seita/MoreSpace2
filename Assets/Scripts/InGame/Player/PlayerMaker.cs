@@ -10,10 +10,17 @@ public class PlayerMaker : MonoBehaviour
     [SerializeField] private GameObject[] playersPrefab = new GameObject[2];
     [SerializeField] private Vector3[] startPosition = new Vector3[2];
     [SerializeField] private Transform[] planets;
+    [SerializeField] private bool isOffline = false;
     public PlayerModel model { get; private set; }
 
     private void Awake()
     {
+        if (isOffline)
+        {
+            PhotonNetwork.IsMessageQueueRunning = true;
+            PhotonNetwork.OfflineMode = true;
+            PhotonNetwork.CreateRoom(null);
+        }
         model = new PlayerModel()
         {
             Planets = planets
