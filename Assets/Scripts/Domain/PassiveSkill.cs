@@ -22,32 +22,12 @@ public sealed class PassiveSkill : Skill
     {
         if (owner == null) return;
 
-        switch (Kind)
-        {
-            case PassiveKind.AttackUp:
-                foreach (var s in owner.GetComponents<MoreSpace.InGame.Weapons.SingleShot>())
-                    s.damage += Mathf.RoundToInt(Value);
-                break;
+        var buffs = owner.GetComponent<PlayerBuffs>();
+        if (buffs == null) buffs = owner.AddComponent<PlayerBuffs>();
 
-            case PassiveKind.AttackForObjectUp:
-                foreach (var s in owner.GetComponents<MoreSpace.InGame.Weapons.SingleShot>())
-                    s.ObjectDamage += Mathf.RoundToInt(Value);
-                break;
+        buffs.Add(Kind, Value);
 
-            case PassiveKind.SpeedUp:
-                AddToFloatMember(owner, "PlayerMover", "MoveSpeed", Value);
-                break;
-
-            case PassiveKind.DefenseUp:
-                AddToFloatMember(owner, "PlayerHP", "Defense", Value);
-                break;
-
-            case PassiveKind.HandlingUp:
-                AddToFloatMember(owner, "PlayerRotator", "YawSpeed", Value);
-                break;
-        }
-
-        Debug.Log($"{SkillName} initialized: {Kind} +{Value} → {owner.name}");
+        Debug.Log($"{SkillName} initialized (Passive): {Kind} +{Value} → {owner.name}");
     }
     
     // 軽量リフレクション: 指定コンポーネントの float プロパティ/フィールドに加算

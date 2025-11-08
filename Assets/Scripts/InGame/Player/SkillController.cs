@@ -27,14 +27,17 @@ namespace MoreSpace.InGame.Player
             skill[2] = set.Level2Skill;
             skill[3] = set.Level3Skill;
             Debug.Log("SkillController: Selected skills were set.");
+            BreakCrystal();
+            BreakCrystal();
+            BreakCrystal();
         }
-        
+
         public void BreakCrystal()
         {
             index++;
             Debug.Log($"{index}番目を開放");
-            if(index < 4) skill[index]?.Initialize(_player);
-            else JudgeVictory.Instance.photonView.RPC(nameof(JudgeVictory.AddClearIncident),RpcTarget.AllViaServer);
+            if (index < 4) skill[index]?.Initialize(_player);
+            else JudgeVictory.Instance.photonView.RPC(nameof(JudgeVictory.AddClearIncident), RpcTarget.AllViaServer);
         }
     }
 }
