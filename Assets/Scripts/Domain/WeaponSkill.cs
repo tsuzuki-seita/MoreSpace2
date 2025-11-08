@@ -17,6 +17,7 @@ public class WeaponSkill : Skill
     
     public override void Initialize(GameObject owner)
     {
+        Debug.Log(owner.name);
         // SingleShot を owner に付与
         var shot = owner.AddComponent<MoreSpace.InGame.Weapons.SingleShot>();
 
