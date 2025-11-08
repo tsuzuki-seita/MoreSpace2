@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using MoreSpace.InGame.Weapons;
+using NUnit.Framework;
 using Photon.Pun;
 using UnityEngine.InputSystem;
 
@@ -10,9 +11,13 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
     [SerializeField] private int firstWeaponIndex = 0;
     [SerializeField] private List<Weapon> weapons = new();
     [SerializeField] private float ScrollThreshold = 0.01f;
-    
-    private Weapon nowWeapon;
+
+    private int nowIndex; //現在装備している武器
+    private int usingIndex; //現在発火している武器
     private InputSystem_Actions _actions;
+
+    //int toIndex, int weaponsCountの順で保持します
+    private List<(int, int)> ChangeWeaponCache = new List<(int, int)>();
 
     /// <summary>
     /// WeaponSkill の Initialize から呼び出される
@@ -26,16 +31,22 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
         // もしこれが最初に追加された武器なら、自動で装備する
         if (photonView.IsMine && weapons.Count == 1)
         {
-            photonView.RPC(nameof(ChangeWeapon), RpcTarget.All, firstWeaponIndex);
+            photonView.RPC(nameof(ChangeWeapon), RpcTarget.All, firstWeaponIndex, weapons.Count);
             ActivateInputs(); // 最初の武器が追加されたタイミングで入力を有効化
         }
+        
+        CheckCache();
     }
 
-    private void Start()
+    void CheckCache()
     {
-        if (!photonView.IsMine) return;
-        photonView.RPC(nameof(ChangeWeapon), RpcTarget.All, firstWeaponIndex);
-        ActivateInputs();
+        foreach (var cache in ChangeWeaponCache)
+        {
+            if (cache.Item2 == weapons.Count)
+                ChangeWeapon(cache.Item1, cache.Item2);
+            else
+                break;
+        }
     }
 
     void ActivateInputs()
@@ -58,7 +69,7 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
 
     private void OnFirePressed(InputAction.CallbackContext context)
     {
-        photonView.RPC(nameof(OnFireDownRPC), RpcTarget.All);
+        photonView.RPC(nameof(OnFireDownRPC), RpcTarget.All, nowIndex);
     }
     private void OnFireUp(InputAction.CallbackContext context)
     {
@@ -68,37 +79,50 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
     {
         Vector2 scrollDelta = context.ReadValue<Vector2>();
         float scrollY = scrollDelta.y;
-        Debug.Log($"Scroll Y: {scrollY}");
         if (scrollY > ScrollThreshold || scrollY < -ScrollThreshold)
         {
-            int tesValue = nowWeapon is SingleShot ? 1 : 0;
-            photonView.RPC(nameof(ChangeWeapon), RpcTarget.All, tesValue);
+            int index = GetWrappedIndex(nowIndex + (int)Mathf.Sign(scrollY),weapons.Count);
+            photonView.RPC(nameof(ChangeWeapon), RpcTarget.All, index, weapons.Count);
         }
-
+    }
+    
+    private int GetWrappedIndex(int toIndex, int count)
+    {
+        if (count == 0) return 0;
+        if (toIndex < 0) return count - 1;
+        if (toIndex >= count) return 0;
+        return toIndex;
     }
 
     [PunRPC]
-    void OnFireDownRPC()
+    void OnFireDownRPC(int fireIndex)
     {
-        nowWeapon?.OnFireDown();
+        usingIndex = fireIndex;
+        weapons[nowIndex]?.OnFireDown();
     }
     [PunRPC]
     void OnFireRPC()
     {
-        nowWeapon?.OnFire();
+        weapons[usingIndex]?.OnFire();
     }
     [PunRPC]
     void OnFireUpRPC()
     {
-        nowWeapon?.OnFireUp();
+        weapons[usingIndex]?.OnFireUp();
     }
 
     [PunRPC]
-    void ChangeWeapon(int toIndex)
+    void ChangeWeapon(int toIndex, int weaponsCount)
     {
-        nowWeapon?.OnUnEquip();
-        nowWeapon = weapons[toIndex];
-        nowWeapon.OnEquip();
+        Debug.Log($"OnChangeWeapon:{weapons.Count}");
+        if (weapons.Count != weaponsCount)
+        {
+            ChangeWeaponCache.Add((toIndex,weaponsCount));
+            return;
+        }
+        weapons[nowIndex]?.OnUnEquip();
+        nowIndex = toIndex;
+        weapons[nowIndex].OnEquip();
     }
 
     private void OnDestroy()

@@ -13,12 +13,12 @@ namespace MoreSpace.InGame
         protected override void OnInitialize()
         {
             OnDamage += (hp,maxHp) => damageParticle.Emit(1);
+            OnHpZero += () => Destroy(this.gameObject);
         }
 
         public override void Die(Photon.Realtime.Player doPlayer)
         {
             if(doPlayer.Equals(PhotonNetwork.LocalPlayer)) SkillController.Instance.BreakCrystal();
-            Destroy(this.gameObject);
         }
     }
 }
