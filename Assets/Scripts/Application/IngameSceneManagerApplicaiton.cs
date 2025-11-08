@@ -15,6 +15,10 @@ namespace MoreSpace.Application
     {
         void Publish<T>(T value);
         bool TryConsume<T>(out T value);
+
+        bool TryGet<T>(out T value);
+
+        void Clear<T>();
     }
 
     // 一時引数であることを示すマーカー

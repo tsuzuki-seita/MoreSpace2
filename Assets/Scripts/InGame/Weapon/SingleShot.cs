@@ -6,12 +6,15 @@ namespace MoreSpace.InGame.Weapons
 {
     public class SingleShot : Weapon
     {
-        [SerializeField] private SingleBullet bullet;
-        [SerializeField] private uint initCount = 10;
-        [SerializeField] private float speed = 10;
-        [SerializeField] private int damage = 10;
+        [SerializeField] public SingleBullet bullet;
+        [SerializeField] public uint initCount = 10;
+        [SerializeField] public float speed = 10;
+        [SerializeField] public int damage = 10;
+
+        [SerializeField] public int ObjectDamage = 0;
 
         private Pool<SingleBullet> pool;
+        private PlayerBuffs _buffs;
         
         public override void OnEquip()
         {
@@ -22,10 +25,19 @@ namespace MoreSpace.InGame.Weapons
 
         public override void OnFireDown()
         {
-            if(!CanShot()) return;
+            if (!CanShot()) return;
+            
+            // 1) バフの取得（なければ 0）
+            float atkBonus    = _buffs != null ? _buffs.Attack          : 0f;
+            float objAtkBonus = _buffs != null ? _buffs.AttackForObject : 0f;
+
+            // 2) 最終ダメージを算出（加算）
+            int finalDamage       = damage       + Mathf.RoundToInt(atkBonus);
+            int finalObjectDamage = ObjectDamage + Mathf.RoundToInt(objAtkBonus);
+
             var instance =  pool.GetPooledObject();
             instance.transform.position = this.transform.position + this.transform.forward*20;
-            instance.Shot(CalcTargetPosition(),speed,damage,this.gameObject,photonView.IsMine);
+            instance.Shot(CalcTargetPosition(),speed,finalDamage,this.gameObject,photonView.IsMine);
             SetNextFireTime();
         }
 
