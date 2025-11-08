@@ -9,6 +9,8 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
 {
     [SerializeField] private int firstWeaponIndex = 0;
     [SerializeField] private List<Weapon> weapons = new();
+    [SerializeField] private float ScrollThreshold = 0.01f;
+    
     private Weapon nowWeapon;
     private InputSystem_Actions _actions;
 
@@ -31,8 +33,8 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        if(!photonView.IsMine)return;
-        photonView.RPC(nameof(ChangeWeapon),RpcTarget.All,firstWeaponIndex);
+        if (!photonView.IsMine) return;
+        photonView.RPC(nameof(ChangeWeapon), RpcTarget.All, firstWeaponIndex);
         ActivateInputs();
     }
 
@@ -42,30 +44,37 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
         _actions.MainPlayer.Enable();
         _actions.MainPlayer.Fire.started += OnFirePressed;
         _actions.MainPlayer.Fire.canceled += OnFireUp;
-        _actions.MainPlayer.ChangeWeapon.started += OnCPressed;
+        _actions.MainPlayer.ChangeWeapon.started += OnScrollPerformed;
     }
 
     private void Update()
     {
-        if(!photonView.IsMine)return;
+        if (!photonView.IsMine) return;
         if (_actions.MainPlayer.Fire.IsPressed())
         {
-            photonView.RPC(nameof(OnFireRPC),RpcTarget.All);
+            photonView.RPC(nameof(OnFireRPC), RpcTarget.All);
         }
     }
 
     private void OnFirePressed(InputAction.CallbackContext context)
     {
-        photonView.RPC(nameof(OnFireDownRPC),RpcTarget.All);
+        photonView.RPC(nameof(OnFireDownRPC), RpcTarget.All);
     }
     private void OnFireUp(InputAction.CallbackContext context)
     {
-        photonView.RPC(nameof(OnFireUpRPC),RpcTarget.All);
+        photonView.RPC(nameof(OnFireUpRPC), RpcTarget.All);
     }
-    private void OnCPressed(InputAction.CallbackContext context)
+    private void OnScrollPerformed(InputAction.CallbackContext context)
     {
-        int tesValue = nowWeapon is SingleShot ? 1 : 0;
-        photonView.RPC(nameof(ChangeWeapon),RpcTarget.All,tesValue);
+        Vector2 scrollDelta = context.ReadValue<Vector2>();
+        float scrollY = scrollDelta.y;
+        Debug.Log($"Scroll Y: {scrollY}");
+        if (scrollY > ScrollThreshold || scrollY < -ScrollThreshold)
+        {
+            int tesValue = nowWeapon is SingleShot ? 1 : 0;
+            photonView.RPC(nameof(ChangeWeapon), RpcTarget.All, tesValue);
+        }
+
     }
 
     [PunRPC]
@@ -83,7 +92,7 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
     {
         nowWeapon?.OnFireUp();
     }
-    
+
     [PunRPC]
     void ChangeWeapon(int toIndex)
     {
@@ -98,7 +107,7 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
         {
             _actions.MainPlayer.Fire.started -= OnFirePressed;
             _actions.MainPlayer.Fire.canceled -= OnFireUp;
-            _actions.MainPlayer.ChangeWeapon.started -= OnCPressed;
+            _actions.MainPlayer.ChangeWeapon.started -= OnScrollPerformed;
             _actions.MainPlayer.Disable();
             _actions.Dispose();
         }
