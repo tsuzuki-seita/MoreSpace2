@@ -323,7 +323,6 @@ MonoBehaviour:
   firstWeaponIndex: 0
   weapons:
   - {fileID: -7089063617006925880}
-  - {fileID: -8622389752751590357}
 --- !u!114 &-7089063617006925880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,7 +337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRate: 0.25
   maxDistance: 100
-  bullet: {fileID: 8533966869910427141, guid: c7275927203d74da69b9e657958d1547, type: 3}
+  bullet: {fileID: 1889738247328448832, guid: 399da5b80593b4cf684c22b7f2cb67d4, type: 3}
   initCount: 10
   speed: 10
   damage: 10

@@ -27,9 +27,6 @@ namespace MoreSpace.InGame.Player
             skill[2] = set.Level2Skill;
             skill[3] = set.Level3Skill;
             Debug.Log("SkillController: Selected skills were set.");
-            BreakCrystal();
-            BreakCrystal();
-            BreakCrystal();
         }
 
         public void BreakCrystal()
