@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using MoreSpace.Domain;
+using MoreSpace.InGame.Master;
 using MoreSpace.InGame.Player;
 using MoreSpace.Presentation;
 using Photon.Pun;
@@ -50,6 +51,7 @@ public class RoomPhase : IPhase
     {
         if (_router.Model.IsPlayerReady.All(b => b))
         {
+            DamageableHolder.Holders.Clear();
             var skillSets = GetSkillSet();
             PhotonNetwork.IsMessageQueueRunning = false;
             IngameSceneManager.Instance.ChangeScene(InGameState.Ingame, skillSets);
