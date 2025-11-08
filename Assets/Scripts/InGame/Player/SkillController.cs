@@ -53,11 +53,11 @@ namespace MoreSpace.InGame.Player
         public void InitializeSkill(string target, int id)
         {
             Debug.Log($"InitializeSkill:{id}/{target}");
-            var targetPlayer = _player.First(p => p.ViewID == id).gameObject;
+            var targetPlayer = _player.First(p => p.ViewID == id);
             if (targetPlayer == null)
                 _cacheAddSkill.Add((target,id));
             else
-                ResourceSkillRepository.Skills[target].Initialize(targetPlayer);
+                ResourceSkillRepository.Skills[target].Initialize(targetPlayer.gameObject);
         }
     }
 }
