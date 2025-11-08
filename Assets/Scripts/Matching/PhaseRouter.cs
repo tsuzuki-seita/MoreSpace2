@@ -9,7 +9,7 @@ public class PhaseRouter : MonoBehaviour
     
     private void Start()
     {
-        Model = new PhaseModel() { LocalPlayerName = "testPlayer", RoomName = "room" };
+        Model = new PhaseModel() { RoomName = "room" };
         foreach (var phase in phases)
             phase.InitializeOnStart(this);
         ChangePhase(PhaseType.ConnectServer);

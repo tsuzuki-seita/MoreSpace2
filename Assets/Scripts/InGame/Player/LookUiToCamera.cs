@@ -25,6 +25,7 @@ namespace MoreSpace.InGame.Player
             if(!mainCamera) return;
             foreach (var ui in UIs)
             {
+                if(!ui) continue;
                 ui.LookAt(mainCamera.transform);
                 ui.localEulerAngles = new Vector3(0,ui.localEulerAngles.y, 0);
             }

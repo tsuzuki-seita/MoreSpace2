@@ -1,4 +1,7 @@
 using System.Collections;
+using MoreSpace.Application;
+using MoreSpace.Domain;
+using MoreSpace.Presentation;
 using Photon.Pun;
 using UnityEngine;
 
@@ -8,13 +11,17 @@ namespace MoreSpace.InGame.Master
     {
         private int?[] isWin = new int?[2];
         private bool _isQueueCheck = false;
+        private bool _isDisconnectUser = false;
         private bool _isFinishGame = false;
         
         [PunRPC]
         public void AddClearIncident(PhotonMessageInfo info)
         {
             Debug.Log($"破壊確認が送信されました");
-            if (!PhotonNetwork.IsMasterClient || _isFinishGame) return; 
+            if(_isFinishGame) return;
+            _isFinishGame = true;
+            
+            if (!PhotonNetwork.IsMasterClient) return; 
 
             Debug.Log($"マスターが受信しました");
             int timestamp = info.SentServerTimestamp;
@@ -94,14 +101,59 @@ namespace MoreSpace.InGame.Master
         [PunRPC]
         void RPC_Win(bool isMasterWin, bool isDraw)
         {
-            _isFinishGame = true;
-            Debug.Log($"このゲームに{(isMasterWin == PhotonNetwork.IsMasterClient ? "勝ち" : "負け")}ました");
+            ResultPattern result = ResultPattern.Draw;
+            if (!isDraw)
+            {
+                result = isMasterWin == PhotonNetwork.IsMasterClient ? ResultPattern.Win : ResultPattern.Lose;
+            }
+
+            StartCoroutine(WaitToFinishUser(result));
+        }
+
+        IEnumerator WaitToFinishUser(ResultPattern result)
+        {
+            if(PhotonNetwork.IsMasterClient)
+                yield return new WaitUntil(() => _isDisconnectUser);
+            PhotonNetwork.Disconnect();
+            IngameSceneManager.Instance.ChangeScene(InGameState.Result, new ResultArgs(result));
         }
 
         public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
         {
+            Disconnect();   
+        }
+
+        public override void OnLeftRoom()
+        {
+            Disconnect();
+        }
+
+        void Disconnect()
+        {
+            if (_isFinishGame)
+            {
+                _isDisconnectUser = true;
+                return;
+            }
             _isFinishGame = true;
+            IngameSceneManager.Instance.ChangeScene(InGameState.Result, new ResultArgs(ResultPattern.Disconnect));
             Debug.Log($"切断");
+        }
+    }
+
+    public enum ResultPattern
+    {
+        Win,
+        Lose,
+        Draw,
+        Disconnect
+    }
+    public sealed class ResultArgs : ITransientArgs
+    {
+        public ResultPattern Result;
+        public ResultArgs(ResultPattern r)
+        {
+            Result = r;
         }
     }
 }
