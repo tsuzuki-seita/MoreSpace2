@@ -53,7 +53,7 @@ namespace MoreSpace.InGame.Player
         public void InitializeSkill(string target, int id)
         {
             Debug.Log($"InitializeSkill:{id}/{target}");
-            var targetPlayer = _player.First(p => p.ViewID == id);
+            var targetPlayer = _player.FirstOrDefault(p => p.ViewID == id);
             if (targetPlayer == null)
                 _cacheAddSkill.Add((target,id));
             else
