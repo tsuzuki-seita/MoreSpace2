@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using MoreSpace.InGame.Weapons;
+using NUnit.Framework;
 using Photon.Pun;
 using UnityEngine.InputSystem;
 
@@ -15,6 +16,9 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
     private Weapon nowWeapon;
     private InputSystem_Actions _actions;
 
+    //int toIndex, int weaponsCountの順で保持します
+    private List<(int, int)> ChangeWeaponCache = new List<(int, int)>();
+
     /// <summary>
     /// WeaponSkill の Initialize から呼び出される
     /// </summary>
@@ -27,8 +31,21 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
         // もしこれが最初に追加された武器なら、自動で装備する
         if (photonView.IsMine && weapons.Count == 1)
         {
-            photonView.RPC(nameof(ChangeWeapon), RpcTarget.All, firstWeaponIndex);
+            photonView.RPC(nameof(ChangeWeapon), RpcTarget.All, firstWeaponIndex, weapons.Count);
             ActivateInputs(); // 最初の武器が追加されたタイミングで入力を有効化
+        }
+        
+        CheckCache();
+    }
+
+    void CheckCache()
+    {
+        foreach (var cache in ChangeWeaponCache)
+        {
+            if (cache.Item2 == weapons.Count)
+                ChangeWeapon(cache.Item1, cache.Item2);
+            else
+                break;
         }
     }
 
@@ -62,11 +79,10 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
     {
         Vector2 scrollDelta = context.ReadValue<Vector2>();
         float scrollY = scrollDelta.y;
-        Debug.Log($"Scroll Y: {scrollY}");
         if (scrollY > ScrollThreshold || scrollY < -ScrollThreshold)
         {
             int tesValue = nowWeapon is SingleShot ? 1 : 0;
-            photonView.RPC(nameof(ChangeWeapon), RpcTarget.All, tesValue);
+            photonView.RPC(nameof(ChangeWeapon), RpcTarget.All, tesValue, weapons.Count);
         }
 
     }
@@ -88,9 +104,14 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    void ChangeWeapon(int toIndex)
+    void ChangeWeapon(int toIndex, int weaponsCount)
     {
         Debug.Log($"OnChangeWeapon:{weapons.Count}");
+        if (weapons.Count != weaponsCount)
+        {
+            ChangeWeaponCache.Add((toIndex,weaponsCount));
+            return;
+        }
         indexForDebug = toIndex;
         nowWeapon?.OnUnEquip();
         nowWeapon = weapons[toIndex];
