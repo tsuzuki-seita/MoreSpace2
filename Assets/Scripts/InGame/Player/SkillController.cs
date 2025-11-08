@@ -3,6 +3,7 @@ using System.Linq;
 using MoreSpace.Domain;
 using MoreSpace.Infrastructure;
 using MoreSpace.InGame.Master;
+using NUnit.Framework;
 using Photon.Pun;
 using UnityEngine;
 
@@ -13,10 +14,14 @@ namespace MoreSpace.InGame.Player
         [SerializeField] private Skill[] skill = new Skill[4];
         [SerializeField] private int index = 0;
         private List<PhotonView> _player = new List<PhotonView>();
-
+        private List<(string, int)> _cacheAddSkill = new List<(string, int)>();
+        
         public void SetPlayer(PhotonView p)
         {
             _player.Add(p);
+            foreach (var cache in _cacheAddSkill)
+                if(cache.Item2 == p.ViewID)
+                    InitializeSkill(cache.Item1,cache.Item2);
         }
 
         // PlayerMaker から呼ばれる想定
@@ -48,7 +53,11 @@ namespace MoreSpace.InGame.Player
         public void InitializeSkill(string target, int id)
         {
             Debug.Log($"InitializeSkill:{id}/{target}");
-            ResourceSkillRepository.Skills[target].Initialize(_player.First(p => p.ViewID == id).gameObject);
+            var targetPlayer = _player.First(p => p.ViewID == id).gameObject;
+            if (targetPlayer == null)
+                _cacheAddSkill.Add((target,id));
+            else
+                ResourceSkillRepository.Skills[target].Initialize(targetPlayer);
         }
     }
 }
