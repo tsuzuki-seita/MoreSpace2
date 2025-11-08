@@ -39,5 +39,23 @@ namespace MoreSpace.Infrastructure
             value = default!;
             return false;
         }
+
+        // ★追加: 読んでも消えない
+        public bool TryGet<T>(out T value)
+        {
+            if (_store.TryGetValue(typeof(T), out var obj) && obj is T t)
+            {
+                value = t;
+                return true;
+            }
+            value = default!;
+            return false;
+        }
+
+        // ★追加: 明示削除
+        public void Clear<T>()
+        {
+            _store.Remove(typeof(T));
+        }
     }
 }

@@ -8,9 +8,26 @@ using UnityEngine.InputSystem;
 public class ControlWeapon : MonoBehaviourPunCallbacks
 {
     [SerializeField] private int firstWeaponIndex = 0;
-    [SerializeField] private List<Weapon> weapons;
+    [SerializeField] private List<Weapon> weapons = new();
     private Weapon nowWeapon;
     private InputSystem_Actions _actions;
+
+    /// <summary>
+    /// WeaponSkill の Initialize から呼び出される
+    /// </summary>
+    public void AddWeapon(Weapon newWeapon)
+    {
+        weapons ??= new List<Weapon>();
+        weapons.Add(newWeapon);
+        Debug.Log($"ControlWeapon: {newWeapon.GetType().Name} が追加されました。総数: {weapons.Count}");
+
+        // もしこれが最初に追加された武器なら、自動で装備する
+        if (photonView.IsMine && weapons.Count == 1)
+        {
+            photonView.RPC(nameof(ChangeWeapon), RpcTarget.All, firstWeaponIndex);
+            ActivateInputs(); // 最初の武器が追加されたタイミングで入力を有効化
+        }
+    }
 
     private void Start()
     {

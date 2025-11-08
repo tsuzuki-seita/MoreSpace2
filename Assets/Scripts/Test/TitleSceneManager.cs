@@ -9,7 +9,7 @@ public class TitleSceneManager : MonoBehaviour
 
     void Start()
     {
-        button.onClick.AddListener(OnClickStartButton);
+        // button.onClick.AddListener(OnClickStartButton);
     }
 
     // Update is called once per frame
@@ -20,9 +20,9 @@ public class TitleSceneManager : MonoBehaviour
     
     public void OnClickStartButton()
     {
-        var loadout = new SkillLoadout(new("Laser"), new("Homing"), new("Stealth"));
-        IngameSceneManager.Instance.ChangeScene(InGameState.Ingame);
-        IngameSceneManager.Instance.ChangeScene(InGameState.GameOver, new IngameArgs(loadout));
-        IngameSceneManager.Instance.ChangeScene(InGameState.SampleScene, new UpdateUserName("contena"));
+        // var loadout = new SkillLoadout(new("Laser"), new("Homing"), new("Stealth"));
+        // IngameSceneManager.Instance.ChangeScene(InGameState.Ingame);
+        // IngameSceneManager.Instance.ChangeScene(InGameState.GameOver, new IngameArgs(loadout));
+        // IngameSceneManager.Instance.ChangeScene(InGameState.SampleScene, new UpdateUserName("contena"));
     }
 }
