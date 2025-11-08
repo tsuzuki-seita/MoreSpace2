@@ -31,13 +31,6 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
         }
     }
 
-    private void Start()
-    {
-        if (!photonView.IsMine) return;
-        photonView.RPC(nameof(ChangeWeapon), RpcTarget.All, firstWeaponIndex);
-        ActivateInputs();
-    }
-
     void ActivateInputs()
     {
         _actions = new InputSystem_Actions();
