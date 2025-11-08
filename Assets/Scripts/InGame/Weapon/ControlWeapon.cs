@@ -12,8 +12,8 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
     [SerializeField] private List<Weapon> weapons = new();
     [SerializeField] private float ScrollThreshold = 0.01f;
 
-    [SerializeField] private int indexForDebug;
-    private Weapon nowWeapon;
+    private int nowIndex; //現在装備している武器
+    private int usingIndex; //現在発火している武器
     private InputSystem_Actions _actions;
 
     //int toIndex, int weaponsCountの順で保持します
@@ -69,7 +69,7 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
 
     private void OnFirePressed(InputAction.CallbackContext context)
     {
-        photonView.RPC(nameof(OnFireDownRPC), RpcTarget.All);
+        photonView.RPC(nameof(OnFireDownRPC), RpcTarget.All, nowIndex);
     }
     private void OnFireUp(InputAction.CallbackContext context)
     {
@@ -81,26 +81,34 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
         float scrollY = scrollDelta.y;
         if (scrollY > ScrollThreshold || scrollY < -ScrollThreshold)
         {
-            int tesValue = nowWeapon is SingleShot ? 1 : 0;
-            photonView.RPC(nameof(ChangeWeapon), RpcTarget.All, tesValue, weapons.Count);
+            int index = GetWrappedIndex(nowIndex + (int)Mathf.Sign(scrollY),weapons.Count);
+            photonView.RPC(nameof(ChangeWeapon), RpcTarget.All, index, weapons.Count);
         }
-
+    }
+    
+    private int GetWrappedIndex(int toIndex, int count)
+    {
+        if (count == 0) return 0;
+        if (toIndex < 0) return count - 1;
+        if (toIndex >= count) return 0;
+        return toIndex;
     }
 
     [PunRPC]
-    void OnFireDownRPC()
+    void OnFireDownRPC(int fireIndex)
     {
-        nowWeapon?.OnFireDown();
+        usingIndex = fireIndex;
+        weapons[nowIndex]?.OnFireDown();
     }
     [PunRPC]
     void OnFireRPC()
     {
-        nowWeapon?.OnFire();
+        weapons[usingIndex]?.OnFire();
     }
     [PunRPC]
     void OnFireUpRPC()
     {
-        nowWeapon?.OnFireUp();
+        weapons[usingIndex]?.OnFireUp();
     }
 
     [PunRPC]
@@ -112,10 +120,9 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
             ChangeWeaponCache.Add((toIndex,weaponsCount));
             return;
         }
-        indexForDebug = toIndex;
-        nowWeapon?.OnUnEquip();
-        nowWeapon = weapons[toIndex];
-        nowWeapon.OnEquip();
+        weapons[nowIndex]?.OnUnEquip();
+        nowIndex = toIndex;
+        weapons[nowIndex].OnEquip();
     }
 
     private void OnDestroy()

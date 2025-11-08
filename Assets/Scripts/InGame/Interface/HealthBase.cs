@@ -31,11 +31,13 @@ namespace MoreSpace.InGame
             hp -= damage;
             OnDamage?.Invoke(hp, maxHp);
             Debug.Log($"{gameObject.name}が{damage}受けています, 残りHP: {hp}");
-            if (hp <= 0 && info.Sender.Equals(PhotonNetwork.LocalPlayer))
+            if (hp <= 0)
             {
-                Debug.Log("破壊処理を送信します");
                 OnHpZero?.Invoke();
-                CheckDestroyOnMasterClient.Instance.photonView.RPC(nameof(CheckDestroyOnMasterClient.RPC_ReportDeath),RpcTarget.AllViaServer,this.photonView.ViewID);
+                if (info.Sender.Equals(PhotonNetwork.LocalPlayer))
+                    CheckDestroyOnMasterClient.Instance.photonView.RPC(
+                        nameof(CheckDestroyOnMasterClient.RPC_ReportDeath), RpcTarget.AllViaServer,
+                        this.photonView.ViewID);
             }
         }
 
