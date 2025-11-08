@@ -13,7 +13,7 @@ namespace MoreSpace.SelectSkills
 
         public void Initialize()
         {
-            goMatching.onClick.AddListener(OnInputGoMatching);
+            //goMatching.onClick.AddListener(OnInputGoMatching);
             goBack.onClick.AddListener(OnInputBack);
         }
     }

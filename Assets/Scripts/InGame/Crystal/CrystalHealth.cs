@@ -1,5 +1,6 @@
 using System;
 using MoreSpace.InGame.Master;
+using MoreSpace.InGame.Player;
 using Photon.Pun;
 using UnityEngine;
 
@@ -7,15 +8,16 @@ namespace MoreSpace.InGame
 {
     public class CrystalHealth : HealthBase
     {
-        [SerializeField] private GameObject damageParticlePrefab;
+        [SerializeField] private ParticleSystem damageParticle;
 
         protected override void OnInitialize()
         {
-            OnDamage += () => Instantiate(damageParticlePrefab, this.transform.position, Quaternion.identity);
+            OnDamage += (hp,maxHp) => damageParticle.Emit(1);
         }
 
-        public override void Die()
+        public override void Die(Photon.Realtime.Player doPlayer)
         {
+            if(doPlayer.Equals(PhotonNetwork.LocalPlayer)) SkillController.Instance.BreakCrystal();
             Destroy(this.gameObject);
         }
     }

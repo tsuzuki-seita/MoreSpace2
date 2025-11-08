@@ -51,6 +51,8 @@ MonoBehaviour:
   - DamageOnRPC
   - RPC_Dead
   - RPC_ReportDeath
+  - AddClearIncident
+  - RPC_Win
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
