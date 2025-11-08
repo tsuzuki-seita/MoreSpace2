@@ -44,7 +44,7 @@ namespace MoreSpace.Infrastructure
             }
 
             foreach (var skill in _skillCache)
-                Skills.Add(skill.ToString(), skill);
+                Skills[skill.ToString()] = skill;
 
             return _skillCache;
         }
