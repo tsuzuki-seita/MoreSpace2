@@ -10,7 +10,8 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
     [SerializeField] private int firstWeaponIndex = 0;
     [SerializeField] private List<Weapon> weapons = new();
     [SerializeField] private float ScrollThreshold = 0.01f;
-    
+
+    [SerializeField] private int indexForDebug;
     private Weapon nowWeapon;
     private InputSystem_Actions _actions;
 
@@ -89,6 +90,8 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
     [PunRPC]
     void ChangeWeapon(int toIndex)
     {
+        Debug.Log($"OnChangeWeapon:{weapons.Count}");
+        indexForDebug = toIndex;
         nowWeapon?.OnUnEquip();
         nowWeapon = weapons[toIndex];
         nowWeapon.OnEquip();

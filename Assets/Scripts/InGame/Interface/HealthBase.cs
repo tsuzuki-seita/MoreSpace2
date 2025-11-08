@@ -10,6 +10,7 @@ namespace MoreSpace.InGame
         [SerializeField] int hp = 100;
         private int maxHp;
         public Action<int, int> OnDamage;
+        protected Action OnHpZero;
         private void Start()
         {
             DamageableHolder.Holders.Add(photonView.ViewID,this);
@@ -33,13 +34,9 @@ namespace MoreSpace.InGame
             if (hp <= 0 && info.Sender.Equals(PhotonNetwork.LocalPlayer))
             {
                 Debug.Log("破壊処理を送信します");
+                OnHpZero?.Invoke();
                 CheckDestroyOnMasterClient.Instance.photonView.RPC(nameof(CheckDestroyOnMasterClient.RPC_ReportDeath),RpcTarget.AllViaServer,this.photonView.ViewID);
             }
-        }
-
-        private void OnDestroy()
-        {
-            Debug.Log("Destroy" + name);
         }
 
         public virtual void Die(Photon.Realtime.Player doPlayer){}
