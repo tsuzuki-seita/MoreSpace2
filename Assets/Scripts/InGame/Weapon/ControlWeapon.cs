@@ -98,7 +98,7 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
     void OnFireDownRPC(int fireIndex)
     {
         usingIndex = fireIndex;
-        weapons[nowIndex]?.OnFireDown();
+        weapons[usingIndex]?.OnFireDown();
     }
     [PunRPC]
     void OnFireRPC()

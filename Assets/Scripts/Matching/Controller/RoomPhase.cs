@@ -75,7 +75,9 @@ public class RoomPhase : IPhase
     
     void Disconnect()
     {
+        isBack = true;
         PhotonNetwork.Disconnect();
+        IngameSceneManager.Instance.ChangeScene(InGameState.Title);
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
