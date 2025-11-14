@@ -7,8 +7,9 @@ using UnityEngine;
 
 namespace MoreSpace.Infrastructure
 {
-    public sealed class ResourceSkillRepository : ISkillRepository
+    public class ResourceSkillRepository : ISkillRepository
     {
+        public static Dictionary<string, Skill> Skills = new Dictionary<string, Skill>();
         private List<Skill> _skillCache;
 
         // ★変更点 1: 検索対象のフォルダパスを配列で定義
@@ -41,6 +42,10 @@ namespace MoreSpace.Infrastructure
                 // Distinct() で重複を除外します
                 _skillCache = _skillCache.Distinct().ToList();
             }
+
+            foreach (var skill in _skillCache)
+                Skills[skill.ToString()] = skill;
+
             return _skillCache;
         }
 

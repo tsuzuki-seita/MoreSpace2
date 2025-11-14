@@ -32,7 +32,7 @@ public class FailedPhase : IPhase
             case DisconnectCause.ExceptionOnConnect:
                 return "接続に失敗しました。\n通信状況を確認してください。";
             default:
-                return "切断されました。";
+                return "切断されました";
         }
     }
 }

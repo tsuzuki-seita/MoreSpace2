@@ -57,6 +57,11 @@ namespace MoreSpace.Domain
 
         // スキル選択時に呼ばれる初期化処理など
         public abstract void Initialize(GameObject owner);
+
+        public override string ToString()
+        {
+            return Type.ToString() + Level.ToString();
+        }
     }
 
     [Serializable]

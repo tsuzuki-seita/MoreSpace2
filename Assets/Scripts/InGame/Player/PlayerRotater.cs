@@ -30,7 +30,7 @@ public class PlayerRotater : MonoBehaviour
     void ControlFromMouse(Vector2 vector)
     {
         transform.Rotate(Vector3.right, -vector.y * mousePitchSensitivity * Time.deltaTime, Space.Self);
-        transform.Rotate(Vector3.up, -vector.x * mouseRollSensitivity * Time.deltaTime, Space.Self);
+        transform.Rotate(Vector3.up, vector.x * mouseRollSensitivity * Time.deltaTime, Space.Self);
     }
 
     private void OnDestroy()
