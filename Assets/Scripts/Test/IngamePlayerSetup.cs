@@ -13,9 +13,11 @@ namespace MoreSpace.Presentation
     {
         // IngameSceneManager から受け取ったスキルセット
         private SkillSet _selectedSkillSet;
+        private GameObject _playerObject;
 
         private void Start()
         {
+            _playerObject = this.gameObject;
             // 1. スキル選択シーンからのデータを取得
             if (IngameSceneManager.Instance != null && 
                 IngameSceneManager.Instance.TryConsume<StartIngameArgs>(out var args))
@@ -46,19 +48,19 @@ namespace MoreSpace.Presentation
             // 各スキルのInitializeを実行し、プレイヤーオブジェクトを渡す
             if (s1 != null)
             {
-                //s1.Initialize(_playerObject);
+                s1.Initialize(_playerObject);
                 Debug.Log($"Level 1 Skill [{s1.Type}] Initialized.");
             }
             
             if (s2 != null)
             {
-                // s2.Initialize(_playerObject);
+                s2.Initialize(_playerObject);
                 Debug.Log($"Level 2 Skill [{s2.Type}] Initialized.");
             }
 
             if (s3 != null)
             {
-                // s3.Initialize(_playerObject);
+                s3.Initialize(_playerObject);
                 Debug.Log($"Level 3 Skill [{s3.Type}] Initialized.");
             }
 

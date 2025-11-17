@@ -8,14 +8,18 @@ namespace MoreSpace.InGame.Weapons.Bullets
     public class SingleBullet : PooledObject
     {
         [SerializeField] private Rigidbody _rigidbody;
-        private int _damage;
+        // private int _damage;
+        private int _playerDamage;    // 敵機（PlayerHp）用
+        private int _objectDamage;    // クリスタル（CrystalHealthなど）用
         private GameObject _ownerObject;
         private bool _isMine;
-        public void Shot(Vector3 targetPosition, float speed, int damage ,GameObject ownerObject,bool isMine)
+        public void Shot(Vector3 targetPosition, float speed, int finalPlayerDamage, int finalObjectDamage,GameObject ownerObject,bool isMine)
         {
             _ownerObject = ownerObject;
             _isMine = isMine;
-            _damage = damage;
+            // _damage = damage;
+            _playerDamage = finalPlayerDamage;
+            _objectDamage = finalObjectDamage;
             this.transform.LookAt(targetPosition);
             _rigidbody.linearVelocity = transform.forward * speed;
         }
@@ -31,8 +35,11 @@ namespace MoreSpace.InGame.Weapons.Bullets
                     return;
                 }
 
-                if (other.gameObject.TryGetComponent<IDamageable>(out var damage))
-                    damage.Damage(_damage);
+                if (other.gameObject.TryGetComponent<IDamageable>(out var damage)) 
+                {
+                    int appliedDamage = other.gameObject.GetComponent<CrystalHealth>() != null ? _objectDamage : _playerDamage;
+                    damage.Damage(appliedDamage);
+                }
             }
 
             Release();
