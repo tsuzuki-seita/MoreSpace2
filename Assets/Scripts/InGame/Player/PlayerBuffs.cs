@@ -1,5 +1,6 @@
 using UnityEngine;
 using static PassiveSkill;
+using R3;
 
 [DisallowMultipleComponent]
 public sealed class PlayerBuffs : MonoBehaviour
@@ -7,7 +8,8 @@ public sealed class PlayerBuffs : MonoBehaviour
     [Header("Additive buffs (accumulated)")]
     public float Attack;          // 例: 通常ダメージに加算
     public float Defense;         // 例: 受けるダメージを軽減など
-    public float Speed;           // 例: 移動速度に加算
+    // public float Speed;           // 例: 移動速度に加算
+    public readonly ReactiveProperty<float> Speed = new ReactiveProperty<float>(0f);
     public float Handling;        // 例: 旋回速度に加算
     public float AttackForObject; // 例: オブジェクト専用ダメージに加算
 
@@ -18,7 +20,7 @@ public sealed class PlayerBuffs : MonoBehaviour
         {
             case PassiveKind.AttackUp:          Attack          += value; break;
             case PassiveKind.DefenseUp:         Defense         += value; break;
-            case PassiveKind.SpeedUp:           Speed           += value; break;
+            case PassiveKind.SpeedUp:           Speed.Value     += value; break;
             case PassiveKind.HandlingUp:        Handling        += value; break;
             case PassiveKind.AttackForObjectUp: AttackForObject += value; break;
             default: break;
@@ -28,6 +30,7 @@ public sealed class PlayerBuffs : MonoBehaviour
     /// <summary>開始時に全部リセットしたい場合に使用（任意）</summary>
     public void ClearAll()
     {
-        Attack = Defense = Speed = Handling = AttackForObject = 0f;
+        Attack = Defense = Handling = AttackForObject = 0f;
+        Speed.Value = 0f;
     }
 }

@@ -2,6 +2,7 @@ using System;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using R3;
 
 public class PlayerMover : MonoBehaviourPunCallbacks
 {
@@ -9,18 +10,29 @@ public class PlayerMover : MonoBehaviourPunCallbacks
     private InputSystem_Actions _actions;
     [SerializeField] private Rigidbody rigid;
     [SerializeField] private float moveSpeed;
+    private PlayerBuffs _buffs;
+    private float finalSpeed;
 
     private void Start()
     {
         _actions = new InputSystem_Actions();
         _actions.MainPlayer.Enable();
+        _buffs = GetComponent<PlayerBuffs>();
+        finalSpeed = moveSpeed;
+        _buffs.Speed.Subscribe(speedBonus => 
+             {                
+                 finalSpeed = moveSpeed + speedBonus;
+                 Debug.Log($"{finalSpeed} に更新");
+             })
+             .AddTo(this);
     }
 
     void Update()
     {
         if (_actions.MainPlayer.Move.ReadValue<float>() > 0)
-        {
-            rigid.AddForce(moveSpeed * transform.forward, ForceMode.Acceleration);
+        {    
+            Debug.Log(finalSpeed+"fianalSpeed");
+            rigid.AddForce(finalSpeed* transform.forward, ForceMode.Acceleration);
         }
     }
 
