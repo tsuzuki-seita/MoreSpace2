@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Photon.Pun;
 using UnityEngine;
+using R3;
 
 namespace MoreSpace.InGame.Weapons
 {
@@ -12,10 +13,13 @@ namespace MoreSpace.InGame.Weapons
         private GameObject hitObject;
         private float _nextFireTime = 0;
         private Transform _mainCameraTransform;
+        public PlayerBuffs playerBuffs;
 
         private void Start()
         {
             _mainCameraTransform = GetComponentInChildren<Camera>(true).gameObject.transform;
+            playerBuffs = GetComponentInParent<PlayerBuffs>();
+            InitializeBuffsAndSubscribe();
         }
 
         protected bool CanShot()
@@ -27,7 +31,7 @@ namespace MoreSpace.InGame.Weapons
         {
             _nextFireTime = Time.time + fireRate;
         }
-
+        protected virtual void InitializeBuffsAndSubscribe() { }
         public abstract void OnEquip();
         public abstract void OnUnEquip();
         public abstract void OnFireDown();
@@ -37,7 +41,7 @@ namespace MoreSpace.InGame.Weapons
         protected Vector3 CalcTargetPosition()
         {
             Ray cameraRay = new Ray(_mainCameraTransform.position, _mainCameraTransform.forward);
-            if (Physics.Raycast(cameraRay, out var result,maxDistance))
+            if (Physics.Raycast(cameraRay, out var result, maxDistance))
             {
                 hitObject = result.collider.gameObject;
                 Debug.Log($"🎯 Raycast HIT: {hitObject.name}. Layer: {hitObject.layer}");
