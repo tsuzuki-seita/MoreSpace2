@@ -15,6 +15,9 @@ public class SetDataToPlayer : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject worldCanvas;
     [SerializeField] private GameObject localCanvas;
     [SerializeField] private GameObject playerCamera;
+
+    [SerializeField] private StartGameWithCountDown countdown;
+    
     private PlayerModel _model;
 
     private void Start()
@@ -33,6 +36,8 @@ public class SetDataToPlayer : MonoBehaviourPunCallbacks
             DisableComponents();
             SetUIs(false);
         }
+        
+        countdown.OnEndPrepare();
     }
 
     void AssertData(PlayerModel model)
