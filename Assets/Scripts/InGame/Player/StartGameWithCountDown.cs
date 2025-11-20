@@ -24,7 +24,7 @@ namespace MoreSpace.InGame.Player
 
         private void Start()
         {
-            _countdownText.text = "Waiting";
+            WriteCountDownText(-1);
         }
 
         public void OnEndPrepare()
@@ -72,17 +72,25 @@ namespace MoreSpace.InGame.Player
 
             while(timeRemaining > 0)
             {
-                timeRemaining = _targetStartTime - PhotonNetwork.Time;
-                _countdownText.text = Mathf.CeilToInt(Mathf.Clamp((float)timeRemaining,0,(float)_countDownTime)).ToString();
+                WriteCountDownText(timeRemaining);
                 yield return null;
+                timeRemaining = _targetStartTime - PhotonNetwork.Time;
             }
             
             _countdownText.text = "START!";
             StartGame();
 
             yield return new WaitForSeconds(1);
-            yield return _countdownText.DOFade(0, 0.5f).WaitForCompletion();
+            yield return _countdownText.DOFade(0, 0.25f).WaitForCompletion();
             _countdownText.gameObject.SetActive(false);
+        }
+
+        void WriteCountDownText(double timeRemaining)
+        {
+            if (timeRemaining is > 0 and < 3)
+                _countdownText.text = Mathf.CeilToInt(Mathf.Clamp((float)timeRemaining,0,(float)_countDownTime)).ToString();
+            else
+                _countdownText.text = "Waiting";
         }
 
         private void StartGame()
