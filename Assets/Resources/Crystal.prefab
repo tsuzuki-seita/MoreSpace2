@@ -353,7 +353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6310099ec2d46324da1090d9b5060719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 50
+  hp: 200
   damageParticle: {fileID: 2715520829400124307}
   destroyParticle: {fileID: 5619544210750912257}
 --- !u!114 &3612101996811855752
