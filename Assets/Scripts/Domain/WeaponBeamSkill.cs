@@ -9,6 +9,7 @@ public sealed class WeaponBeamSkill : WeaponSkill
 
     public override void Initialize(GameObject owner)
     {
+        owner.GetComponent<SkillViewer>().ActivateSkillUI(this, null);
         // 武器をプレイヤーにアタッチするなどの準備
         Debug.Log($"{SkillName} initialized on {owner.name}");
     }

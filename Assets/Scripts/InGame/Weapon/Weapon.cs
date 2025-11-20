@@ -8,10 +8,10 @@ namespace MoreSpace.InGame.Weapons
 {
     public abstract class Weapon : MonoBehaviourPunCallbacks
     {
-        [SerializeField] protected float fireRate = 0.25f;
+        public float fireRate = 0.25f;
         [SerializeField] protected float maxDistance = 100;
+        public ReactiveProperty<float> nextFireTime { get; private set; } = new ReactiveProperty<float>(0);
         private GameObject hitObject;
-        private float _nextFireTime = 0;
         private Transform _mainCameraTransform;
         public PlayerBuffs playerBuffs;
 
@@ -22,14 +22,19 @@ namespace MoreSpace.InGame.Weapons
             InitializeBuffsAndSubscribe();
         }
 
+        private void Update()
+        {
+            nextFireTime.Value = Mathf.Clamp(nextFireTime.Value - Time.deltaTime, 0, Mathf.Infinity);
+        }
+
         protected bool CanShot()
         {
-            return Time.time > _nextFireTime;
+            return nextFireTime.Value == 0;
         }
 
         protected void SetNextFireTime()
         {
-            _nextFireTime = Time.time + fireRate;
+            nextFireTime.Value = fireRate;
         }
         protected virtual void InitializeBuffsAndSubscribe() { }
         public abstract void OnEquip();
