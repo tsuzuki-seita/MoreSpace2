@@ -354,7 +354,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 50
-  mesh: {fileID: 260804840909819979}
   damageParticle: {fileID: 2715520829400124307}
   destroyParticle: {fileID: 5619544210750912257}
 --- !u!114 &3612101996811855752
