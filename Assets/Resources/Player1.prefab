@@ -1785,6 +1785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
+  playerBuffs: {fileID: -8596913082856945091}
 --- !u!114 &-8596913082856945091
 MonoBehaviour:
   m_ObjectHideFlags: 0
