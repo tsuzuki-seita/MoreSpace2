@@ -10,6 +10,7 @@ public sealed class ActiveSkill : Skill
 
     public override void Initialize(GameObject owner)
     {
+        owner.GetComponent<SkillViewer>().ActivateSkillUI(this, null);
         //プレイヤーに武器ごとのコンポーネントをつける
         Debug.Log($"{SkillName} initialized: Time: {Duration} to {owner.name}");
     }

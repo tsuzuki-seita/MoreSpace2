@@ -24,7 +24,6 @@ namespace MoreSpace.InGame.Player
                     InitializeSkill(cache.Item1,cache.Item2);
         }
 
-        // PlayerMaker から呼ばれる想定
         public void SetSelectedSkills(SkillSet set)
         {
             Debug.Log(_player.First(p => p.IsMine));
@@ -39,6 +38,8 @@ namespace MoreSpace.InGame.Player
             skill[2] = set.Level2Skill;
             skill[3] = set.Level3Skill;
             Debug.Log("SkillController: Selected skills were set.");
+            
+            _player.First(p => p.IsMine).gameObject.GetComponent<SkillViewer>().VisualizeSkills(skill);
         }
 
         public void BreakCrystal()
