@@ -9,16 +9,34 @@ namespace MoreSpace.InGame
     public class CrystalHealth : HealthBase
     {
         [SerializeField] private ParticleSystem damageParticle;
+        [SerializeField] private ParticleSystem destroyParticle;
 
         protected override void OnInitialize()
         {
-            OnDamage += (hp,maxHp) => damageParticle.Emit(1);
+            DetachParticles();
+            OnDamage += (hp,maxHp) =>
+            {
+                if(hp > 0)
+                    damageParticle.Emit(1);
+                else 
+                    destroyParticle.Emit(1);
+            };
             OnHpZero += () => Destroy(this.gameObject);
         }
 
         public override void Die(Photon.Realtime.Player doPlayer)
         {
             if(doPlayer.Equals(PhotonNetwork.LocalPlayer)) SkillController.Instance.BreakCrystal();
+        }
+
+        void DetachParticles()
+        {
+            var scaleValue = damageParticle.transform.localScale.x;
+            damageParticle.transform.SetParent(null);
+            destroyParticle.transform.SetParent(null);
+
+            damageParticle.transform.localScale = Vector3.one * scaleValue;
+            destroyParticle.transform.localScale = Vector3.one * scaleValue;
         }
     }
 }
