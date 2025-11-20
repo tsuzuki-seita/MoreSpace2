@@ -7,7 +7,6 @@ using R3;
 public class PlayerMover : MonoBehaviourPunCallbacks
 {
     
-    private InputSystem_Actions _actions;
     [SerializeField] private Rigidbody rigid;
     [SerializeField] private float moveSpeed;
     private PlayerBuffs _buffs;
@@ -15,8 +14,6 @@ public class PlayerMover : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        _actions = new InputSystem_Actions();
-        _actions.MainPlayer.Enable();
         _buffs = GetComponent<PlayerBuffs>();
         finalSpeed = moveSpeed;
         _buffs.Speed.Subscribe(speedBonus => 
@@ -29,17 +26,7 @@ public class PlayerMover : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        if (_actions.MainPlayer.Move.ReadValue<float>() > 0)
-        {    
-            Debug.Log(finalSpeed+"fianalSpeed");
-            rigid.AddForce(finalSpeed* transform.forward, ForceMode.Acceleration);
-        }
-    }
-
-    private void OnDestroy()
-    {
-        if(_actions == null) return;
-        _actions.MainPlayer.Disable();
-        _actions.Dispose();
+        Debug.Log(finalSpeed + "fianalSpeed");
+        rigid.AddForce(finalSpeed * transform.forward, ForceMode.Acceleration);
     }
 }
