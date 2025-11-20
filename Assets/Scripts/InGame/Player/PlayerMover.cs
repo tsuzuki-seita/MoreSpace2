@@ -6,29 +6,31 @@ using R3;
 
 namespace MoreSpace.InGame.Player
 {
-    
-    [SerializeField] private Rigidbody rigid;
-    [SerializeField] private float moveSpeed;
-    private PlayerBuffs _buffs;
-    private float finalSpeed;
-
-    private void Start()
+    public class PlayerMover : MonoBehaviourPunCallbacks
     {
-        _buffs = GetComponent<PlayerBuffs>();
-        finalSpeed = moveSpeed;
-        _buffs.Speed.Subscribe(speedBonus => 
-             {                
-                 finalSpeed = moveSpeed + speedBonus;
-                 Debug.Log($"{finalSpeed} に更新");
-             })
-             .AddTo(this);
-    }
+        [SerializeField] private Rigidbody rigid;
+        [SerializeField] private float moveSpeed;
+        private PlayerBuffs _buffs;
+        private float finalSpeed;
 
-    void Update()
-    {
-        if (!StartGameWithCountDown.isStartGame) return;
-      
-        Debug.Log(finalSpeed + "fianalSpeed");
-        rigid.AddForce(finalSpeed * transform.forward, ForceMode.Acceleration);
+        private void Start()
+        {
+            _buffs = GetComponent<PlayerBuffs>();
+            finalSpeed = moveSpeed;
+            _buffs.Speed.Subscribe(speedBonus =>
+                {
+                    finalSpeed = moveSpeed + speedBonus;
+                    Debug.Log($"{finalSpeed} に更新");
+                })
+                .AddTo(this);
+        }
+
+        void Update()
+        {
+            if (!StartGameWithCountDown.isStartGame) return;
+
+            Debug.Log(finalSpeed + "fianalSpeed");
+            rigid.AddForce(finalSpeed * transform.forward, ForceMode.Acceleration);
+        }
     }
 }
