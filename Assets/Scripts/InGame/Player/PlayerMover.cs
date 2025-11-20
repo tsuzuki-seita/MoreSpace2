@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using R3;
 
-public class PlayerMover : MonoBehaviourPunCallbacks
+namespace MoreSpace.InGame.Player
 {
     
     [SerializeField] private Rigidbody rigid;
@@ -26,6 +26,8 @@ public class PlayerMover : MonoBehaviourPunCallbacks
 
     void Update()
     {
+        if (!StartGameWithCountDown.isStartGame) return;
+      
         Debug.Log(finalSpeed + "fianalSpeed");
         rigid.AddForce(finalSpeed * transform.forward, ForceMode.Acceleration);
     }
