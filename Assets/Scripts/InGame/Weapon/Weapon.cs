@@ -2,32 +2,41 @@ using System;
 using System.Collections;
 using Photon.Pun;
 using UnityEngine;
+using R3;
 
 namespace MoreSpace.InGame.Weapons
 {
     public abstract class Weapon : MonoBehaviourPunCallbacks
     {
-        [SerializeField] protected float fireRate = 0.25f;
-        [SerializeField] protected float maxDistance = 100;
+        public float fireRate = 0.25f;
+        [SerializeField] protected float maxDistance = 10000;
+        public ReactiveProperty<float> nextFireTime { get; private set; } = new ReactiveProperty<float>(0);
         private GameObject hitObject;
-        private float _nextFireTime = 0;
         private Transform _mainCameraTransform;
+        public PlayerBuffs playerBuffs;
 
         private void Start()
         {
             _mainCameraTransform = GetComponentInChildren<Camera>(true).gameObject.transform;
+            playerBuffs = GetComponentInParent<PlayerBuffs>();
+            InitializeBuffsAndSubscribe();
+        }
+
+        private void Update()
+        {
+            nextFireTime.Value = Mathf.Clamp(nextFireTime.Value - Time.deltaTime, 0, Mathf.Infinity);
         }
 
         protected bool CanShot()
         {
-            return Time.time > _nextFireTime;
+            return nextFireTime.Value == 0;
         }
 
         protected void SetNextFireTime()
         {
-            _nextFireTime = Time.time + fireRate;
+            nextFireTime.Value = fireRate;
         }
-
+        protected virtual void InitializeBuffsAndSubscribe() { }
         public abstract void OnEquip();
         public abstract void OnUnEquip();
         public abstract void OnFireDown();
@@ -37,7 +46,7 @@ namespace MoreSpace.InGame.Weapons
         protected Vector3 CalcTargetPosition()
         {
             Ray cameraRay = new Ray(_mainCameraTransform.position, _mainCameraTransform.forward);
-            if (Physics.Raycast(cameraRay, out var result,maxDistance))
+            if (Physics.Raycast(cameraRay, out var result, maxDistance))
             {
                 hitObject = result.collider.gameObject;
                 Debug.Log($"🎯 Raycast HIT: {hitObject.name}. Layer: {hitObject.layer}");

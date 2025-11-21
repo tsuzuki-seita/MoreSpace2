@@ -24,21 +24,24 @@ namespace MoreSpace.InGame.Player
                     InitializeSkill(cache.Item1,cache.Item2);
         }
 
-        // PlayerMaker から呼ばれる想定
         public void SetSelectedSkills(SkillSet set)
         {
             Debug.Log(_player.First(p => p.IsMine));
-            photonView.RPC(nameof(InitializeSkill),RpcTarget.All,skill[index].ToString(), _player.First(p => p.IsMine).ViewID);
             
-            if (set == null)
+            if (set != null)
             {
-                Debug.LogWarning("SkillController: SkillSet is null");
-                return;
+                skill[1] = set.Level1Skill;
+                skill[2] = set.Level2Skill;
+                skill[3] = set.Level3Skill;
             }
-            skill[1] = set.Level1Skill;
-            skill[2] = set.Level2Skill;
-            skill[3] = set.Level3Skill;
+            else
+            {
+                Debug.LogWarning("SkillController: SkillSet is null. UseDefaultSkill");
+            }
             Debug.Log("SkillController: Selected skills were set.");
+            
+            _player.First(p => p.IsMine).gameObject.GetComponent<SkillViewer>().VisualizeSkills(skill);
+            photonView.RPC(nameof(InitializeSkill),RpcTarget.All,skill[index].ToString(), _player.First(p => p.IsMine).ViewID);
         }
 
         public void BreakCrystal()

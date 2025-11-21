@@ -2,32 +2,46 @@ using System;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using R3;
 
-public class PlayerMover : MonoBehaviourPunCallbacks
+namespace MoreSpace.InGame.Player
 {
-    
-    private InputSystem_Actions _actions;
-    [SerializeField] private Rigidbody rigid;
-    [SerializeField] private float moveSpeed;
-
-    private void Start()
+    public class PlayerMover : MonoBehaviourPunCallbacks
     {
-        _actions = new InputSystem_Actions();
-        _actions.MainPlayer.Enable();
-    }
+        [SerializeField] private Rigidbody rigid;
+        [SerializeField] private float moveSpeed;
+        [SerializeField] private float acceleration;
+        private PlayerBuffs _buffs;
+        private float finalSpeed;
 
-    void Update()
-    {
-        if (_actions.MainPlayer.Move.ReadValue<float>() > 0)
+        private void Start()
         {
-            rigid.AddForce(moveSpeed * transform.forward, ForceMode.Acceleration);
+            _buffs = GetComponent<PlayerBuffs>();
+            finalSpeed = moveSpeed;
+            _buffs.Speed.Subscribe(speedBonus =>
+                {
+                    finalSpeed = moveSpeed + speedBonus;
+                    Debug.Log($"{finalSpeed} に更新");
+                })
+                .AddTo(this);
         }
-    }
 
-    private void OnDestroy()
-    {
-        if(_actions == null) return;
-        _actions.MainPlayer.Disable();
-        _actions.Dispose();
+        void FixedUpdate()
+        {
+            if (!photonView.IsMine) return;
+            if (!StartGameWithCountDown.isStartGame)
+            {
+                rigid.linearVelocity = Vector3.zero;
+                return;
+            }
+
+            Debug.Log(finalSpeed + "finalSpeed");
+            rigid.AddForce(acceleration * transform.forward, ForceMode.Acceleration);
+
+            if (rigid.linearVelocity.magnitude > finalSpeed)
+            {
+                rigid.linearVelocity = rigid.linearVelocity.normalized * finalSpeed;
+            }
+        }
     }
 }

@@ -33,7 +33,7 @@ namespace MoreSpace.InGame
         }
 
         [PunRPC]
-        protected void DamageOnRPC(int damage, PhotonMessageInfo info)
+        protected void DamageOnRPC(int rawDamage, PhotonMessageInfo info)
         {
             // --- 追加箇所: ダメージ判定チェック ---
             if (!CanTakeDamage)
@@ -46,7 +46,7 @@ namespace MoreSpace.InGame
 
             hp -= damage;
             OnDamage?.Invoke(hp, maxHp);
-            Debug.Log($"{gameObject.name}が{damage}受けています, 残りHP: {hp}");
+            Debug.Log($"{gameObject.name}が{rawDamage}をうけて{_defenseBonus}で守り最終{finalDamage}受けています, 残りHP: {hp}");
             if (hp <= 0)
             {
                 OnHpZero?.Invoke();

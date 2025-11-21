@@ -26,7 +26,7 @@ public sealed class PassiveSkill : Skill
         if (buffs == null) buffs = owner.AddComponent<PlayerBuffs>();
 
         buffs.Add(Kind, Value);
-
+        owner.GetComponent<SkillViewer>().ActivateSkillUI(this, null);
         Debug.Log($"{SkillName} initialized (Passive): {Kind} +{Value} → {owner.name}");
     }
     

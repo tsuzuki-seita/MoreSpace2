@@ -5,6 +5,7 @@ public class PlayerMaker : MonoBehaviour
 {
     [SerializeField] private GameObject[] playersPrefab = new GameObject[2];
     [SerializeField] private Vector3[] startPosition = new Vector3[2];
+    [SerializeField] private Vector3[] startRotation = new Vector3[2];
     [SerializeField] private Transform[] planets;
     [SerializeField] private bool isOffline = false;
     public PlayerModel model { get; private set; }
@@ -32,6 +33,6 @@ public class PlayerMaker : MonoBehaviour
 
     void MakePlayer(int index)
     {
-        PhotonNetwork.Instantiate(playersPrefab[index].name, startPosition[index], Quaternion.identity);
+        PhotonNetwork.Instantiate(playersPrefab[index].name, startPosition[index], Quaternion.Euler(startRotation[index]));
     }
 }

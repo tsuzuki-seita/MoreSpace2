@@ -12,9 +12,11 @@ public class SetDataToPlayer : MonoBehaviourPunCallbacks
     [SerializeField] private PlayerMover mover;
     [SerializeField] private PlayerRotater rotater;
     [SerializeField] private PlanetGravity gravity;
-    [SerializeField] private GameObject worldCanvas;
     [SerializeField] private GameObject localCanvas;
     [SerializeField] private GameObject playerCamera;
+
+    [SerializeField] private StartGameWithCountDown countdown;
+    
     private PlayerModel _model;
 
     private void Start()
@@ -24,7 +26,6 @@ public class SetDataToPlayer : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
             _model = FindAnyObjectByType<PlayerMaker>().model;
-            FindAnyObjectByType<LookUiToCamera>().AssertCamera(playerCamera.transform);
             AssertData(_model);
             SetUIs(true);
         }
@@ -33,6 +34,8 @@ public class SetDataToPlayer : MonoBehaviourPunCallbacks
             DisableComponents();
             SetUIs(false);
         }
+        
+        countdown.OnEndPrepare();
     }
 
     void AssertData(PlayerModel model)
@@ -53,7 +56,6 @@ public class SetDataToPlayer : MonoBehaviourPunCallbacks
     void SetUIs(bool isLocalPlayer)
     {
         localCanvas.SetActive(isLocalPlayer);
-        worldCanvas.SetActive(!isLocalPlayer);
     }
 }
 

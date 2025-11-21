@@ -1,6 +1,7 @@
 using ObjectPool;
 using UnityEngine;
 using MoreSpace.InGame.Weapons.Bullets;
+using R3;
 
 namespace MoreSpace.InGame.Weapons
 {
@@ -11,11 +12,32 @@ namespace MoreSpace.InGame.Weapons
         [SerializeField] public float speed = 10;
         [SerializeField] public int damage = 10;
 
-        [SerializeField] public int ObjectDamage = 0;
+        [SerializeField] public int ObjectDamage = 10;
 
         private Pool<SingleBullet> pool;
-        private PlayerBuffs _buffs;
+        private int _finalDamage = 0;
+        private int _finalObjectDamage = 0;
         
+        protected override void InitializeBuffsAndSubscribe()
+        {
+            _finalDamage = damage;
+            _finalObjectDamage = ObjectDamage;
+            if (playerBuffs == null) return; 
+
+            playerBuffs.Attack
+                .Subscribe(atkBonus => 
+                {
+                    _finalDamage = damage + Mathf.RoundToInt(atkBonus);
+                })
+                .AddTo(this); 
+
+            playerBuffs.AttackForObject
+                .Subscribe(objAtkBonus => 
+                {
+                    _finalObjectDamage = ObjectDamage + Mathf.RoundToInt(objAtkBonus);
+                })
+                .AddTo(this);
+        }
         public override void OnEquip()
         {
             pool ??= new Pool<SingleBullet>(initCount, bullet);
@@ -26,18 +48,13 @@ namespace MoreSpace.InGame.Weapons
         public override void OnFireDown()
         {
             if (!CanShot()) return;
-            
-            // 1) バフの取得（なければ 0）
-            float atkBonus    = _buffs != null ? _buffs.Attack          : 0f;
-            float objAtkBonus = _buffs != null ? _buffs.AttackForObject : 0f;
-
-            // 2) 最終ダメージを算出（加算）
-            int finalDamage       = damage       + Mathf.RoundToInt(atkBonus);
-            int finalObjectDamage = ObjectDamage + Mathf.RoundToInt(objAtkBonus);
+            int finalDamage       = _finalDamage;
+            int finalObjectDamage = _finalObjectDamage;
+            Debug.Log($"最終攻撃力: {finalDamage}, 最終対物攻撃力: {finalObjectDamage}");
 
             var instance =  pool.GetPooledObject();
             instance.transform.position = this.transform.position + this.transform.forward*20;
-            instance.Shot(CalcTargetPosition(),speed,finalDamage,this.gameObject,photonView.IsMine);
+            instance.Shot(CalcTargetPosition(),speed,finalDamage,finalObjectDamage,this.gameObject,photonView.IsMine);
             SetNextFireTime();
         }
 

@@ -6,8 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="8fe98c55-1ddb-4105-9c37-509009933026" name="変更" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MoreSpace2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MoreSpace2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/UnbreakablePlayer.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/UnbreakablePlayer.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Planets/Materials/stars.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Planets/Materials/stars.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Crystal.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Crystal.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Player1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InGame/Player/PlayerRotater.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InGame/Player/PlayerRotater.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Ingame.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Ingame.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestIngame.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TestIngame.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InGame/Crystal/CrystalHealth.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InGame/Crystal/CrystalHealth.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InGame/Player/LookUiToCamera.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InGame/Player/LookUiToCamera.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InGame/Player/SetDataToPlayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InGame/Player/SetDataToPlayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InGame/Player/SetHpToUI.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InGame/Player/SetHpToUI.cs.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,7 +31,7 @@
     <setting file="file://$PROJECT_DIR$/../MR1_QRTest/Assets/Scripts/ControlPhase/PhaseRouter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../MR1_QRTest/Assets/Scripts/Phases/BasePhase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/InGame/Master/DamageableHolder.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/InGame/SetHpToUI.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/InGame/Player/SetHpToUI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Urs1week_ver2025/Assets/Scripts/Utils/SingletonMonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -39,7 +49,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;fix/MakeSkillChache&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/BreakCrystalDesign&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -60,6 +70,14 @@
       <option name="EXE_PATH" value="C:\Program Files\Unity\6000.0.58f2\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath C:\Drive_D\Unity_GameData\MoreSpace2 -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Drive_D\Unity_GameData\MoreSpace2" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="スタンドアロンプレイヤー" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/../Builds/MoreSpace2\MoreSpace2.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\Drive_D\Unity_GameData\Builds\MoreSpace2" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <method v="2" />
@@ -103,6 +121,7 @@
       <updated>1760252048042</updated>
       <workItem from="1760252050724" duration="5471000" />
       <workItem from="1762394446029" duration="729000" />
+      <workItem from="1763550561876" duration="1973000" />
     </task>
     <servers />
   </component>
