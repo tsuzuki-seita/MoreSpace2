@@ -50,6 +50,9 @@ MonoBehaviour:
   startPosition:
   - {x: 0, y: 0, z: 200}
   - {x: 0, y: 0, z: -200}
+  startRotation:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 180, z: 0}
   planets:
   - {fileID: 0}
   - {fileID: 0}
@@ -57,3 +60,4 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  isOffline: 0
