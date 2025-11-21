@@ -24,6 +24,7 @@ namespace MoreSpace.InGame.Player
 
         private void Start()
         {
+            isStartGame = false;
             WriteCountDownText(-1);
         }
 

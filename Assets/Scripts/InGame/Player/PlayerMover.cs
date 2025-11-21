@@ -28,7 +28,12 @@ namespace MoreSpace.InGame.Player
 
         void FixedUpdate()
         {
-            if (!photonView.IsMine || !StartGameWithCountDown.isStartGame) return;
+            if (!photonView.IsMine) return;
+            if (!StartGameWithCountDown.isStartGame)
+            {
+                rigid.linearVelocity = Vector3.zero;
+                return;
+            }
 
             Debug.Log(finalSpeed + "finalSpeed");
             rigid.AddForce(acceleration * transform.forward, ForceMode.Acceleration);
