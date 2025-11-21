@@ -1,106 +1,109 @@
-using Photon.Pun;
 using UnityEngine;
+using Photon.Pun;
 
 namespace MoreSpace.InGame.Weapons
 {
-    [DisallowMultipleComponent]
+    // Active系の共通ロジック（リキャスト・効果時間・排他制御）
     public abstract class Active : Weapon
     {
-        [Header("Active Config (Scriptableから代入)")]
+        [Header("Active Config (Skillデータから代入される)")]
         public float RecastTime = 10f;
         public float Duration   = 5f;
 
-        [SerializeField] protected float _currentRecast   = 0f;
-        [SerializeField] protected float _currentDuration = 0f;
-        [SerializeField] protected bool  _isActive        = false;
+        protected float _currentRecast   = 0f;
+        protected float _currentDuration = 0f;
+        protected bool  _isActive        = false;
 
-        /// <summary>外部（例: PlayerHP）から見える発動状態</summary>
-        public bool IsActive => _isActive;
-
+        // --- 時間管理（自分専用のCD/Durationだけ進める） ---
         protected virtual void Update()
         {
-            if (_currentRecast > 0f)   _currentRecast  -= Time.deltaTime;
-
+            // 効果時間中
             if (_isActive)
             {
                 _currentDuration -= Time.deltaTime;
                 if (_currentDuration <= 0f)
                 {
-                    if (photonView && photonView.IsMine)
-                        photonView.RPC(nameof(RPC_StopActive), RpcTarget.All);
-                    else
-                        StopActiveLocal();
+                    StopActiveLocal();
                 }
+            }
+
+            // リキャスト中
+            if (_currentRecast > 0f)
+            {
+                _currentRecast -= Time.deltaTime;
+                if (_currentRecast < 0f) _currentRecast = 0f;
             }
         }
 
-        // ===== Weapon 標準インターフェイス実装 =====
+        // --- 発動ボタン押した瞬間（ControlWeapon から全クライアントで呼ばれる） ---
+        public override void OnFireDown()
+        {
+            // すでに発動中なら無視
+            if (_isActive) return;
+
+            // リキャスト中なら無視
+            if (_currentRecast > 0f) return;
+
+            // ここでローカル発動（RPCは不要）
+            StartActiveLocal();
+        }
+
+        // 押しっぱなし／離した瞬間はActiveでは特に使わない
+        public override void OnFire() { }
+        public override void OnFireUp() { }
+
+        // --- 武器切り替え時 ---
+        public override void OnUnEquip()
+        {
+            // ここでは何もしない
+            // → 「武器/Activeを切り替えただけでは効果を切らない」という仕様
+        }
 
         public override void OnEquip()
         {
-            // 必要ならVFXやUIの初期化など
+            // 必要ならUI更新など
         }
 
-        public override void OnUnEquip()
+        // ===== 共通の開始/終了ロジック =====
+
+        /// <summary>実際の発動開始処理（RPC不要、全クライアントで同じことをする）</summary>
+        protected void StartActiveLocal()
         {
-            // 装備解除時は効果が残らないように停止
-            if (_isActive)
+            // 1) 自分以外で「発動中のActive」があれば止めてリキャストに入れる
+            var actives = GetComponents<Active>();
+            foreach (var other in actives)
             {
-                if (photonView && photonView.IsMine)
-                    photonView.RPC(nameof(RPC_StopActive), RpcTarget.All);
-                else
-                    StopActiveLocal();
+                if (other == this) continue;
+                if (!other._isActive) continue;
+
+                other.StopActiveLocal();  // この中でそのActiveのリキャスト開始
             }
-        }
 
-        public override void OnFireDown()
-        {
-            TryActivate();
-        }
-
-        public override void OnFire()   { /* 押しっぱなし不要 */ }
-        public override void OnFireUp() { /* 何もしない      */ }
-
-        // ===== 発動系 =====
-
-        /// <summary>発動を試みる（クールダウン中や発動中は失敗）</summary>
-        public bool TryActivate()
-        {
-            if (_isActive)        return false;
-            if (_currentRecast > 0f) return false;
-            if (!CanShot())       return false; // Weapon.fireRate による連打抑制
-
-            if (photonView && photonView.IsMine)
-                photonView.RPC(nameof(RPC_StartActive), RpcTarget.All);
-            else
-                StartActiveLocal();
-
-            SetNextFireTime(); // Weapon.fireRate を尊重（入力スパム抑制）
-            return true;
-        }
-
-        [PunRPC] protected void RPC_StartActive() => StartActiveLocal();
-        [PunRPC] protected void RPC_StopActive()  => StopActiveLocal();
-
-        protected virtual void StartActiveLocal()
-        {
+            // 2) 自分を発動状態にする
             _isActive        = true;
             _currentDuration = Duration;
-            _currentRecast   = RecastTime;
+
             OnActivateStart();
         }
 
-        protected virtual void StopActiveLocal()
+        /// <summary>実際の終了処理（Duration切れ or 他のActive発動時）</summary>
+        protected void StopActiveLocal()
         {
+            if (!_isActive) return;
+
             _isActive        = false;
             _currentDuration = 0f;
+
+            // 自分だけリキャストに入る
+            _currentRecast = RecastTime;
+
             OnActivateStop();
         }
 
-        /// <summary>派生クラスでの効果開始処理</summary>
+        /// <summary>派生クラスで：効果開始時の処理（見た目やフラグ）</summary>
         protected abstract void OnActivateStart();
 
-        /// <summary>派生クラスでの効果終了処理</summary>
+        /// <summary>派生クラスで：効果終了時の処理（見た目やフラグ解除）</summary>
         protected abstract void OnActivateStop();
     }
 }

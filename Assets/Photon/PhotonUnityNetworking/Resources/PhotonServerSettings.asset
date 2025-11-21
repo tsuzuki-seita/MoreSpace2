@@ -54,6 +54,8 @@ MonoBehaviour:
   - AddClearIncident
   - RPC_Win
   - InitializeSkill
+  - RPC_StartActive
+  - RPC_StopActive
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

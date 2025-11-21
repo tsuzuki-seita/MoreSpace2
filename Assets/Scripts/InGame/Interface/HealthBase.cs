@@ -11,9 +11,16 @@ namespace MoreSpace.InGame
         private int maxHp;
         public Action<int, int> OnDamage;
         protected Action OnHpZero;
+
+        /// <summary>
+        /// ダメージを受けることが可能かどうかを判定するプロパティ。
+        /// 派生クラスで条件（無敵モードなど）を追加可能にします。
+        /// </summary>
+        protected virtual bool CanTakeDamage => true;
+
         private void Start()
         {
-            DamageableHolder.Holders.Add(photonView.ViewID,this);
+            DamageableHolder.Holders.Add(photonView.ViewID, this);
             maxHp = hp;
             OnInitialize();
         }
@@ -22,12 +29,21 @@ namespace MoreSpace.InGame
 
         public void Damage(int damage)
         {
-            photonView.RPC(nameof(DamageOnRPC),RpcTarget.All,damage);
+            photonView.RPC(nameof(DamageOnRPC), RpcTarget.All, damage);
         }
 
         [PunRPC]
         protected void DamageOnRPC(int damage, PhotonMessageInfo info)
         {
+            // --- 追加箇所: ダメージ判定チェック ---
+            if (!CanTakeDamage)
+            {
+                // 無敵状態などでダメージが無効化された場合
+                Debug.Log($"{gameObject.name}はダメージを無効化しました。");
+                return;
+            }
+            // ----------------------------------
+
             hp -= damage;
             OnDamage?.Invoke(hp, maxHp);
             Debug.Log($"{gameObject.name}が{damage}受けています, 残りHP: {hp}");
