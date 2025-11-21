@@ -8,7 +8,6 @@ namespace MoreSpace.InGame.Weapons.Bullets
     public class SingleBullet : PooledObject
     {
         [SerializeField] private Rigidbody _rigidbody;
-        // private int _damage;
         private int _playerDamage;    // 敵機（PlayerHp）用
         private int _objectDamage;    // クリスタル（CrystalHealthなど）用
         private GameObject _ownerObject;
@@ -17,7 +16,6 @@ namespace MoreSpace.InGame.Weapons.Bullets
         {
             _ownerObject = ownerObject;
             _isMine = isMine;
-            // _damage = damage;
             _playerDamage = finalPlayerDamage;
             _objectDamage = finalObjectDamage;
             this.transform.LookAt(targetPosition);

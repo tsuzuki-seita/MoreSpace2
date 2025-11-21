@@ -18,7 +18,7 @@ public sealed class PlayerBuffs : MonoBehaviour
         switch (kind)
         {
             case PassiveKind.AttackUp: Attack.Value += value; break;
-            case PassiveKind.DefenseUp: Defense += value; break;
+            case PassiveKind.DefenseUp: Defense.Value += value; break;
             case PassiveKind.SpeedUp: Speed.Value += value; break;
             case PassiveKind.HandlingUp: Handling.Value += value; break;
             case PassiveKind.AttackForObjectUp: AttackForObject.Value += value; break;

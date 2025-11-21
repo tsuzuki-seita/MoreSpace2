@@ -11,6 +11,7 @@ namespace MoreSpace.InGame
         private int maxHp;
         public Action<int, int> OnDamage;
         protected Action OnHpZero;
+        protected float _defenseBonus = 0f;
         private void Start()
         {
             DamageableHolder.Holders.Add(photonView.ViewID,this);
@@ -26,11 +27,13 @@ namespace MoreSpace.InGame
         }
 
         [PunRPC]
-        protected void DamageOnRPC(int damage, PhotonMessageInfo info)
+        protected void DamageOnRPC(int rawDamage, PhotonMessageInfo info)
         {
-            hp -= damage;
+            int finalDamage = rawDamage - Mathf.RoundToInt(_defenseBonus);
+
+            hp -= finalDamage;
             OnDamage?.Invoke(hp, maxHp);
-            Debug.Log($"{gameObject.name}が{damage}受けています, 残りHP: {hp}");
+            Debug.Log($"{gameObject.name}が{rawDamage}をうけて{_defenseBonus}で守り最終{finalDamage}受けています, 残りHP: {hp}");
             if (hp <= 0)
             {
                 OnHpZero?.Invoke();
