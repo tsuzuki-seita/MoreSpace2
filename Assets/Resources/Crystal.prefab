@@ -300,8 +300,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpBar: {fileID: 7671852021365754963}
+  redDamageBar: {fileID: 0}
   target: {fileID: 8670228836283376228}
   isLookPlayer: 1
+  damageDrainSpeed: 0.5
 --- !u!1 &5888038052712984347
 GameObject:
   m_ObjectHideFlags: 0
