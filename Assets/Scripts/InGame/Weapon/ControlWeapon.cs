@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using MoreSpace.InGame.Player;
 using UnityEngine;
 using MoreSpace.InGame.Weapons;
 using NUnit.Framework;
@@ -62,7 +63,7 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        if (!photonView.IsMine) return;
+        if (!photonView.IsMine || !StartGameWithCountDown.isStartGame) return;
         if (_actions.MainPlayer.Fire.IsPressed())
         {
             photonView.RPC(nameof(OnFireRPC), RpcTarget.All);
@@ -71,10 +72,12 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
 
     private void OnFirePressed(InputAction.CallbackContext context)
     {
+        if (!photonView.IsMine || !StartGameWithCountDown.isStartGame) return;
         photonView.RPC(nameof(OnFireDownRPC), RpcTarget.All, _nowIndex.Value);
     }
     private void OnFireUp(InputAction.CallbackContext context)
     {
+        if (!photonView.IsMine || !StartGameWithCountDown.isStartGame) return;
         photonView.RPC(nameof(OnFireUpRPC), RpcTarget.All);
     }
     private void OnScrollPerformed(InputAction.CallbackContext context)
