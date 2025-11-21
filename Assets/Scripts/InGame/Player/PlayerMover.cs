@@ -25,11 +25,11 @@ namespace MoreSpace.InGame.Player
                 .AddTo(this);
         }
 
-        void Update()
+        void FixedUpdate()
         {
             if (!StartGameWithCountDown.isStartGame) return;
 
-            Debug.Log(finalSpeed + "fianalSpeed");
+            Debug.Log(finalSpeed + "finalSpeed");
             rigid.AddForce(finalSpeed * transform.forward, ForceMode.Acceleration);
         }
     }

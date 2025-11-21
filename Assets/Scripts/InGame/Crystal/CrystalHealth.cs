@@ -10,12 +10,17 @@ namespace MoreSpace.InGame
     {
         [SerializeField] private ParticleSystem damageParticle;
         [SerializeField] private ParticleSystem destroyParticle;
+        [SerializeField] private MeshRenderer mesh;
+        private Material _instance;
+        private static readonly int Degree = Shader.PropertyToID("_Degree");
 
         protected override void OnInitialize()
         {
             DetachParticles();
+            _instance = mesh.material;
             OnDamage += (hp,maxHp) =>
             {
+                _instance.SetFloat(Degree,(float)hp/maxHp);
                 if(hp > 0)
                     damageParticle.Emit(1);
                 else 
