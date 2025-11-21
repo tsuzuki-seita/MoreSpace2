@@ -8,7 +8,6 @@ namespace MoreSpace.InGame.Player
     public class PlayerRotater : MonoBehaviour
     {
         private InputSystem_Actions _actions;
-        private InputSystem_Actions _actions;
     
         public float mousePitchSensitivity = 0.5f;
         public float mouseRollSensitivity = 0.5f;
