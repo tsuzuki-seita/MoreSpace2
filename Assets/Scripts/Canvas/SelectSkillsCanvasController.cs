@@ -12,6 +12,7 @@ namespace MoreSpace.SelectSkills
             //view.OnInputGoMatching += () => IngameSceneManager.Instance.ChangeScene(InGameState.Matching);
             view.OnInputBack += () => IngameSceneManager.Instance.ChangeScene(InGameState.Title);
             view.Initialize();
+            SoundManager.Instance.PlayBGM(SoundManager.BGMData.BGMTYPE.SkillSelect);
         }
     }
 }

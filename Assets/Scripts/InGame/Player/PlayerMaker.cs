@@ -29,6 +29,7 @@ public class PlayerMaker : MonoBehaviour
         PhotonNetwork.IsMessageQueueRunning = true;
         var playerIndex = PhotonNetwork.IsMasterClient ? 0 : 1;
         MakePlayer(playerIndex);
+        SoundManager.Instance.PlayBGM(SoundManager.BGMData.BGMTYPE.InGame);
     }
 
     void MakePlayer(int index)

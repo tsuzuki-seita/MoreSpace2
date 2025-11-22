@@ -15,6 +15,7 @@ namespace MoreSpace.Title
             view.OnNameInput += OnEdit;
             view.OnInputGoSelectSkills += () => IngameSceneManager.Instance.ChangeScene(InGameState.SelectSkills);
             view.Initialize();
+            SoundManager.Instance.PlayBGM(SoundManager.BGMData.BGMTYPE.Title);
         }
 
         void OnEdit(string target)

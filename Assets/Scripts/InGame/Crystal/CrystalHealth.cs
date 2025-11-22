@@ -31,6 +31,7 @@ namespace MoreSpace.InGame
 
         public override void Die(Photon.Realtime.Player doPlayer)
         {
+            SoundManager.Instance.PlaySE(SoundManager.SEData.SETYPE.CrystalBreak);
             if(doPlayer.Equals(PhotonNetwork.LocalPlayer)) SkillController.Instance.BreakCrystal();
         }
 
