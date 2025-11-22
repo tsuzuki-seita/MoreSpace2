@@ -162,7 +162,12 @@ MonoBehaviour:
   hp: 200
   damageParticle: {fileID: 2715520829400124307}
   destroyParticle: {fileID: 5619544210750912257}
-  mesh: {fileID: 260804840909819979}
+  crystalMesh: {fileID: 260804840909819979}
+  crystalCollider: {fileID: 3228747656879740910}
+  planetMesh: {fileID: 0}
+  changedColor:
+  - {r: 0, g: 1, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &3612101996811855752
 MonoBehaviour:
   m_ObjectHideFlags: 0

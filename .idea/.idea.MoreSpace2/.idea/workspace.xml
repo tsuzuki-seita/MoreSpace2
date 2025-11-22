@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8fe98c55-1ddb-4105-9c37-509009933026" name="変更" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.MoreSpace2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MoreSpace2/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Main/Map/egipt.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Main/Map/egipt.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Main/Map/forest.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Main/Map/forest.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Main/Map/havay.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Main/Map/havay.prefab" afterDir="false" />
@@ -12,7 +13,8 @@
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Main/Map/ice_gray.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Main/Map/ice_gray.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Main/Map/orange_planet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Main/Map/orange_planet.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Main/Map/pine.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Main/Map/pine.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InGame/Crystal/SetCrystal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InGame/Crystal/SetCrystal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Crystal.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Crystal.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InGame/Crystal/CrystalHealth.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InGame/Crystal/CrystalHealth.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
