@@ -91,9 +91,7 @@ public class RoomPhase : IPhase
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        ResetModelData();
-        SetLocalPlayerToView();
-        SetRemotePlayerWaiting();
+        Disconnect();
     }
 
     int GetPlayerIndex(Player target)
