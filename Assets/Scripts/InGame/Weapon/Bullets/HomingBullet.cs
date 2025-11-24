@@ -88,16 +88,10 @@ namespace MoreSpace.InGame.Weapons.Bullets
         {
             if (isCollisioned) return;
             isCollisioned = true;
+            
             if (_isMine)
             {
-                if (other.gameObject == _ownerObject)
-                {
-                    // Debug.Log("自傷を防止したよ");
-                    Release();
-                    return;
-                }
-
-                if (other.gameObject.TryGetComponent<IDamageable>(out var damage)) 
+                if (other.gameObject != _ownerObject && other.gameObject.TryGetComponent<IDamageable>(out var damage)) 
                 {
                     int appliedDamage = other.gameObject.GetComponent<CrystalHealth>() != null ? _objectDamage : _playerDamage;
                     damage.Damage(appliedDamage);
@@ -117,6 +111,7 @@ namespace MoreSpace.InGame.Weapons.Bullets
             _speed = 0;
             await UniTask.WaitForSeconds(destroyParticleTime);
             bulletMesh.enabled = true;
+            _target = null;
             Release();
         }
     }

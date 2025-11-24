@@ -9,7 +9,6 @@ namespace MoreSpace.InGame.Weapons.Bullets
     public class MissileExplosion : PooledObject
     {
         [SerializeField] private ParticleSystem explosion;
-        private bool _isCollisioned;
         private int _playerDamage;
         private int _objectDamage;
         private GameObject _ownerObject;
@@ -21,7 +20,6 @@ namespace MoreSpace.InGame.Weapons.Bullets
             _isMine = isMine;
             _playerDamage = finalPlayerDamage;
             _objectDamage = finalObjectDamage;
-            _isCollisioned = false;
             
             transform.position = position;
             explosion.Play();
@@ -31,9 +29,6 @@ namespace MoreSpace.InGame.Weapons.Bullets
 
         private void OnCollisionEnter(Collision other)
         {
-            if (_isCollisioned) return;
-            _isCollisioned = true;
-            
             if (_isMine)
             {
                 if (other.gameObject == _ownerObject)
