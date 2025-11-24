@@ -12,16 +12,13 @@ namespace MoreSpace.InGame
         private int maxHp;
         public Action<int, int> OnDamage;
         protected Action OnHpZero;
+        protected float _defenseBonus = 0f;
 
-        /// <summary>
-        /// ダメージを受けることが可能かどうかを判定するプロパティ。
-        /// 派生クラスで条件（無敵モードなど）を追加可能にします。
-        /// </summary>
         protected virtual bool CanTakeDamage => true;
 
         private void Start()
         {
-            DamageableHolder.Holders.Add(photonView.ViewID, this);
+            DamageableHolder.Holders.Add(photonView.ViewID,this);
             maxHp = hp;
             OnInitialize();
         }
@@ -30,7 +27,7 @@ namespace MoreSpace.InGame
 
         public void Damage(int damage)
         {
-            photonView.RPC(nameof(DamageOnRPC), RpcTarget.All, damage);
+            photonView.RPC(nameof(DamageOnRPC),RpcTarget.All,damage);
         }
 
         [PunRPC]
@@ -43,9 +40,10 @@ namespace MoreSpace.InGame
                 Debug.Log($"{gameObject.name}はダメージを無効化しました。");
                 return;
             }
-            // ----------------------------------
 
-            hp -= damage;
+            int finalDamage = rawDamage - Mathf.RoundToInt(_defenseBonus);
+
+            hp -= finalDamage;
             OnDamage?.Invoke(hp, maxHp);
             Debug.Log($"{gameObject.name}が{rawDamage}をうけて{_defenseBonus}で守り最終{finalDamage}受けています, 残りHP: {hp}");
             if (hp <= 0)

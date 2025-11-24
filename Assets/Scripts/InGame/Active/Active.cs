@@ -13,8 +13,9 @@ namespace MoreSpace.InGame.Weapons
         protected bool  _isActive        = false;
 
         // --- 時間管理（自分専用のCD/Durationだけ進める） ---
-        protected virtual void Update()
+        protected override void Update()
         {
+            base.Update();
             // 効果時間中
             if (_isActive)
             {
@@ -29,11 +30,11 @@ namespace MoreSpace.InGame.Weapons
         // --- 発動ボタン押した瞬間（ControlWeapon から全クライアントで呼ばれる） ---
         public override void OnFireDown()
         {
-            // すでに発動中なら無視
-            if (_isActive) return;
-
             // リキャスト中なら無視
             if (!CanShot()) return;
+
+            // すでに発動中なら無視
+            if (_isActive) return;
 
             // ここでローカル発動（RPCは不要）
             StartActiveLocal();

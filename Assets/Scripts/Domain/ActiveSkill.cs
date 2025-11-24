@@ -60,6 +60,8 @@ public sealed class ActiveSkill : Skill
 
         cw.AddWeapon(active);
 
+        owner.GetComponent<SkillViewer>().ActivateSkillUI(this, active);
+
         Debug.Log(
             $"{SkillName} initialized on {owner.name} " +
             $"(Type={SkillType}, Recast={RecastTime}, Duration={Duration})"

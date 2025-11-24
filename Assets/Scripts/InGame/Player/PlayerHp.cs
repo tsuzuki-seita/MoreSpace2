@@ -7,6 +7,7 @@ namespace MoreSpace.InGame.Player
 {
     public class PlayerHp : HealthBase
     {
+        [SerializeField] private PlayerBuffs playerBuffs;
         // 外部（Unbreakableスキル）から操作するためのフラグ
         public bool IsUnbreakable = false;
 
@@ -14,7 +15,6 @@ namespace MoreSpace.InGame.Player
         // IsUnbreakableが true なら、CanTakeDamage は false (ダメージ受けない) になる
         protected override bool CanTakeDamage => !IsUnbreakable;
 
-        [SerializeField] private PlayerBuffs playerBuffs;
         protected override void OnInitialize()
         {
             base.OnInitialize();
@@ -32,8 +32,8 @@ namespace MoreSpace.InGame.Player
         }
         public override void Die(Photon.Realtime.Player doPlayer)
         {
-            if(doPlayer.Equals(PhotonNetwork.LocalPlayer)) 
-                JudgeVictory.Instance.photonView.RPC(nameof(JudgeVictory.AddClearIncident), RpcTarget.AllViaServer);
+            if(doPlayer.Equals(PhotonNetwork.LocalPlayer)) JudgeVictory.Instance.photonView.RPC(nameof(JudgeVictory.AddClearIncident),RpcTarget.AllViaServer);
         }
     }
 }
+
