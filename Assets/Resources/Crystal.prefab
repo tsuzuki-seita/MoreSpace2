@@ -162,7 +162,12 @@ MonoBehaviour:
   hp: 200
   damageParticle: {fileID: 2715520829400124307}
   destroyParticle: {fileID: 5619544210750912257}
-  mesh: {fileID: 260804840909819979}
+  crystalMesh: {fileID: 260804840909819979}
+  crystalCollider: {fileID: 3228747656879740910}
+  planetMesh: {fileID: 0}
+  changedColor:
+  - {r: 0, g: 1, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &3612101996811855752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,15 +248,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8269900518796485572, guid: 6f971a6d33a1a744088a1cc9ce0ca805, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.0083
       objectReference: {fileID: 0}
     - target: {fileID: 8269900518796485572, guid: 6f971a6d33a1a744088a1cc9ce0ca805, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.0118
       objectReference: {fileID: 0}
     - target: {fileID: 8269900518796485572, guid: 6f971a6d33a1a744088a1cc9ce0ca805, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.0162
       objectReference: {fileID: 0}
     - target: {fileID: 8269900518796485572, guid: 6f971a6d33a1a744088a1cc9ce0ca805, type: 3}
       propertyPath: m_LocalRotation.w
@@ -314,15 +319,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 4ded0374b4ef8ff40ac55fd3567b76e5, type: 2}
     - target: {fileID: 8269900518796485572, guid: 6f971a6d33a1a744088a1cc9ce0ca805, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.0083
       objectReference: {fileID: 0}
     - target: {fileID: 8269900518796485572, guid: 6f971a6d33a1a744088a1cc9ce0ca805, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.0118
       objectReference: {fileID: 0}
     - target: {fileID: 8269900518796485572, guid: 6f971a6d33a1a744088a1cc9ce0ca805, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.0162
       objectReference: {fileID: 0}
     - target: {fileID: 8269900518796485572, guid: 6f971a6d33a1a744088a1cc9ce0ca805, type: 3}
       propertyPath: m_LocalRotation.w
