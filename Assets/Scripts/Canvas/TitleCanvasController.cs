@@ -13,7 +13,11 @@ namespace MoreSpace.Title
         {
             OnEdit(baseName);
             view.OnNameInput += OnEdit;
-            view.OnInputGoSelectSkills += () => IngameSceneManager.Instance.ChangeScene(InGameState.SelectSkills);
+            view.OnInputGoSelectSkills += () =>
+            {
+                IngameSceneManager.Instance.ChangeScene(InGameState.SelectSkills);
+                SoundManager.Instance.PlaySE(SoundManager.SEData.SETYPE.Button);
+            };
             view.Initialize();
             SoundManager.Instance.PlayBGM(SoundManager.BGMData.BGMTYPE.Title);
         }

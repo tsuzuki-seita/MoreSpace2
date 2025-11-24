@@ -28,7 +28,12 @@ namespace MoreSpace.Result
                     SoundManager.Instance.PlayBGM(SoundManager.BGMData.BGMTYPE.Loser);
             }
 
-            backButton.onClick.AddListener(() => IngameSceneManager.Instance.ChangeScene(InGameState.Title));
+            backButton.onClick.AddListener(() =>
+            {
+                SoundManager.Instance.PlaySE(SoundManager.SEData.SETYPE.Button);
+                IngameSceneManager.Instance.ChangeScene(InGameState.Title);
+            });
+            
         }
     }
 }

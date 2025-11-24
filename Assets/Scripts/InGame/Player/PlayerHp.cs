@@ -11,6 +11,13 @@ namespace MoreSpace.InGame.Player
         protected override void OnInitialize()
         {
             base.OnInitialize();
+            OnDamage += (hp, maxHp) =>
+    {
+        if (hp >= 0)
+        {
+            SoundManager.Instance.PlaySE(SoundManager.SEData.SETYPE.PlayerDamage); 
+        }
+    };
             
             if (playerBuffs != null)
             {

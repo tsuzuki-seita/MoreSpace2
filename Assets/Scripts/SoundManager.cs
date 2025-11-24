@@ -132,8 +132,12 @@ public class SoundManager : MonoBehaviour
         {
             //ここの部分がラベルになる
             CrystalBreak = 0,
-            CardCreateButton = 1,
+            CrystalDamage = 1,
             ShingleShot = 2,
+            Beam = 3,
+            PlayerDamage = 4,
+            SceneMove = 5,
+            Button = 6,
         }
 
         public SETYPE se;

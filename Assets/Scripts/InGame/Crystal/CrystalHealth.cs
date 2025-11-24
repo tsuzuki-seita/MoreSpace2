@@ -22,7 +22,10 @@ namespace MoreSpace.InGame
             {
                 _instance.SetFloat(Degree,(float)hp/maxHp);
                 if(hp > 0)
+                {
                     damageParticle.Emit(1);
+                    SoundManager.Instance.PlaySE(SoundManager.SEData.SETYPE.CrystalDamage);
+                }
                 else 
                     destroyParticle.Emit(1);
             };

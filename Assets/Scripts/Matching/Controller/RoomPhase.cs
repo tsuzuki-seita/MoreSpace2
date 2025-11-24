@@ -19,6 +19,7 @@ public class RoomPhase : IPhase
         viewer.OnInputDisconnectButton += Disconnect;
         viewer.OnChangeState += () =>
         {
+            SoundManager.Instance.PlaySE(SoundManager.SEData.SETYPE.Button);
             photonView.RPC(nameof(ChangeState), RpcTarget.All, GetPlayerIndex(PhotonNetwork.LocalPlayer));
         };
         ResetModelData();
@@ -75,6 +76,7 @@ public class RoomPhase : IPhase
     
     void Disconnect()
     {
+        SoundManager.Instance.PlaySE(SoundManager.SEData.SETYPE.Button);
         isBack = true;
         PhotonNetwork.Disconnect();
         IngameSceneManager.Instance.ChangeScene(InGameState.Title);
