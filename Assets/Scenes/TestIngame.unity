@@ -1005,11 +1005,11 @@ PrefabInstance:
     - target: {fileID: 2035122955157570633, guid: 36d2f3b8ddc55914189cdb36aba98f3d, type: 3}
       propertyPath: 'skill.Array.data[2]'
       value: 
-      objectReference: {fileID: 11400000, guid: 46d777f8a4d6a4090b2669ce76b19675, type: 2}
+      objectReference: {fileID: 11400000, guid: 66e6ac799c1a24fa8b8031648fd77ed5, type: 2}
     - target: {fileID: 2035122955157570633, guid: 36d2f3b8ddc55914189cdb36aba98f3d, type: 3}
       propertyPath: 'skill.Array.data[3]'
       value: 
-      objectReference: {fileID: 11400000, guid: 845eb7c3aa09e42fd9169f14a9b17a4c, type: 2}
+      objectReference: {fileID: 11400000, guid: 64ef5db46f4875343ad3674143d94986, type: 2}
     - target: {fileID: 6954974114598861642, guid: 36d2f3b8ddc55914189cdb36aba98f3d, type: 3}
       propertyPath: sceneViewId
       value: 1
@@ -1197,8 +1197,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d203bf87a1c47bab43973d2947b1fe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UIs: []
-  mainCamera: {fileID: 0}
 --- !u!4 &1370734178
 Transform:
   m_ObjectHideFlags: 0
@@ -1488,3 +1486,4 @@ SceneRoots:
   - {fileID: 373661060}
   - {fileID: 1335776797}
   - {fileID: 53618069}
+  - {fileID: 1370734178}

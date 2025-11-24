@@ -21,4 +21,4 @@ MonoBehaviour:
   Damage: 999
   RecastTime: 20
   Speed: 100
-  ProjectilePrefab: {fileID: 5380397611793071110, guid: 41afb0e02558347269b2e6f2faf81557, type: 3}
+  ProjectilePrefab: {fileID: 8948734382549703326, guid: 41afb0e02558347269b2e6f2faf81557, type: 3}

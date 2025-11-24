@@ -9,14 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66e4a8d6a04a3417ea265bcaf9eb4d30, type: 3}
+  m_Script: {fileID: 11500000, guid: 384246beb261849ad9296c0336a77c82, type: 3}
   m_Name: Laser
-  m_EditorClassIdentifier: Assembly-CSharp:MoreSpace.Domain:WeaponSkill
+  m_EditorClassIdentifier: 
   Type: 2
   Level: 3
   SkillName: "\u30EC\u30FC\u30B6\u30FC"
   Description: "\u30EC\u30FC\u30B6\u30FC"
   Icon: {fileID: 21300000, guid: 7336ce69b1d214e74b38e96d14d78df5, type: 3}
-  Distance: 0
-  Damage: 0
-  RecastTime: 0
+  Distance: 100
+  Damage: 5
+  RecastTime: 10
+  Speed: 0
+  ProjectilePrefab: {fileID: 2729334507290620734, guid: 4b8e88befc211a340a6f54c10205e838, type: 3}
+  ReleaseDurationTime: 10
