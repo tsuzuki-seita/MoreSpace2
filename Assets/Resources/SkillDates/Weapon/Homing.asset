@@ -16,7 +16,7 @@ MonoBehaviour:
   Level: 2
   SkillName: "\u8FFD\u5C3E\u5F3E"
   Description: "\u8FFD\u5C3E\u5F3E"
-  Icon: {fileID: 21300000, guid: 000567f48fd64496baa6acd3d8d5c7a2, type: 3}
+  Icon: {fileID: 21300000, guid: 5f5231a9df6bc4d8c8772dd053253c75, type: 3}
   Distance: 50
   Damage: 20
   RecastTime: 0
