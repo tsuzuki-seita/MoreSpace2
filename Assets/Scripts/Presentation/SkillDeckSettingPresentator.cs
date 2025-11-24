@@ -158,6 +158,7 @@ namespace MoreSpace.Presentation
             
             // Application Serviceを呼び出す
             _service.ConfirmSelection(s1, s2, s3);
+            SoundManager.Instance.PlaySE(SoundManager.SEData.SETYPE.Button);
         }
 
         // 戻るボタン処理
