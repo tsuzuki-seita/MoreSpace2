@@ -1,4 +1,6 @@
 using System;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using ObjectPool;
 using UnityEngine;
 
@@ -19,14 +21,24 @@ namespace MoreSpace.InGame.Weapons.Bullets
         // 追尾用
         private GameObject _target;
         private float _speed;
+        [SerializeField] private MeshRenderer bulletMesh;
+        [SerializeField] private float destroyParticleTime = 1f;
+
+        [Header("爆発用　不要ならnullでOK")] [SerializeField] private MissileExplosion explosion;
+        private static Pool<MissileExplosion> explosionPool;
+        private bool isCollisioned;
 
         // 引数に target (GameObject) を追加
         public void Shot(Vector3 targetPosition, float speed, int finalPlayerDamage, int finalObjectDamage, GameObject ownerObject, bool isMine, GameObject target = null)
         {
+            if(explosion != null && explosionPool == null)
+                InitializeExplosionPool();
+               
             _ownerObject = ownerObject;
             _isMine = isMine;
             _playerDamage = finalPlayerDamage;
             _objectDamage = finalObjectDamage;
+            isCollisioned = false;
             
             _target = target; // ターゲットを保存（nullなら直進モード）
             _speed = speed;
@@ -46,6 +58,11 @@ namespace MoreSpace.InGame.Weapons.Bullets
 
             // 初速を与える
             _rigidbody.linearVelocity = transform.forward * _speed;
+        }
+
+        void InitializeExplosionPool()
+        {
+            explosionPool = new Pool<MissileExplosion>(0, explosion);
         }
 
         private void FixedUpdate()
@@ -69,6 +86,8 @@ namespace MoreSpace.InGame.Weapons.Bullets
 
         private void OnCollisionEnter(Collision other)
         {
+            if (isCollisioned) return;
+            isCollisioned = true;
             if (_isMine)
             {
                 if (other.gameObject == _ownerObject)
@@ -85,6 +104,19 @@ namespace MoreSpace.InGame.Weapons.Bullets
                 }
             }
 
+            //エフェクト関係
+            if (explosion != null)
+                _ = explosionPool.GetPooledObject().Explosion(this.transform.position,_playerDamage,_objectDamage,_ownerObject,_isMine);
+            
+            _ = WaitTrail();
+        }
+
+        private async Task WaitTrail()
+        {
+            bulletMesh.enabled = false;
+            _speed = 0;
+            await UniTask.WaitForSeconds(destroyParticleTime);
+            bulletMesh.enabled = true;
             Release();
         }
     }

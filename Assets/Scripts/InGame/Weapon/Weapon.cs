@@ -26,7 +26,6 @@ namespace MoreSpace.InGame.Weapons
         protected virtual void Update()
         {
             nextFireTime.Value = Mathf.Clamp(nextFireTime.Value - Time.deltaTime, 0, Mathf.Infinity);
-            Debug.Log($"[{fireRate}] 次の発射までの時間: {nextFireTime.Value:F2}秒");
         }
 
         protected bool CanShot()
