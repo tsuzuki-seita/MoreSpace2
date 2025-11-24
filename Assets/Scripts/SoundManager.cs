@@ -189,6 +189,7 @@ public class SoundManager : MonoBehaviour
             PlayerDamage = 4,
             SceneMove = 5,
             Button = 6,
+            SelectMove = 7,
         }
 
         public SETYPE se;

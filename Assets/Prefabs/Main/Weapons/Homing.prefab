@@ -51,6 +51,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rotateSpeed: 5
   _rigidbody: {fileID: 6422280980887434219}
+  bulletMesh: {fileID: 5458709462415557850}
+  destroyParticleTime: 2
+  explosion: {fileID: 0}
 --- !u!54 &6422280980887434219
 Rigidbody:
   m_ObjectHideFlags: 0
