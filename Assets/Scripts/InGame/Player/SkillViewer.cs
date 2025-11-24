@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using JetBrains.Annotations;
 using MoreSpace.Domain;
 using MoreSpace.InGame.Weapons;
@@ -11,6 +12,8 @@ public class SkillViewer : MonoBehaviour
     [SerializeField] private Image[] baseImage = new Image[4];
     [SerializeField] private Image[] enableImage = new Image[4];
     [SerializeField] private Scrollbar[] recastTimeBar = new Scrollbar[4];
+
+    private Dictionary<int, int> indexToViewIndex = new();
     
     public void VisualizeSkills(Skill[] skills)
     {
@@ -21,10 +24,10 @@ public class SkillViewer : MonoBehaviour
             recastTimeBar[i].size = 0;
         }
 
-        this.gameObject.GetComponent<ControlWeapon>().nowIndex.Subscribe(index =>
+        this.gameObject.GetComponent<ControlWeapon>().nowIndex.Skip(1).Subscribe(index =>
         {
-            Debug.Log($"ChangeTo{index}");
-            selectFrame.SetParent(baseImage[index].rectTransform);
+            Debug.Log($"ChangeTo{index}:Dict{indexToViewIndex[index]}");
+            selectFrame.SetParent(baseImage[indexToViewIndex[index]].rectTransform);
             selectFrame.localPosition = Vector3.zero;
         });
     }
@@ -37,6 +40,8 @@ public class SkillViewer : MonoBehaviour
         if (weapon != null)
         {
             weapon.nextFireTime.Subscribe(f => recastTimeBar[index].size = (1 - f / weapon.fireRate));
+            Debug.Log($"{indexToViewIndex.Count},{index}");
+            indexToViewIndex.Add(indexToViewIndex.Count,index);
         }
     }
 }

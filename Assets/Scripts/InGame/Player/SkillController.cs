@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using MoreSpace.Domain;
@@ -11,14 +12,18 @@ namespace MoreSpace.InGame.Player
 {
     public class SkillController : SingletonMonoBehaviourPunCallbacks<SkillController>
     {
+        [SerializeField] private PlayerObjectHolder playerHolder;
         [SerializeField] private Skill[] skill = new Skill[4];
         [SerializeField] private int index = 0;
-        private List<PhotonView> _player = new List<PhotonView>();
         private List<(string, int)> _cacheAddSkill = new List<(string, int)>();
-        
-        public void SetPlayer(PhotonView p)
+
+        private void Awake()
         {
-            _player.Add(p);
+            playerHolder.OnAddPlayer += SetPlayer;
+        }
+
+        private void SetPlayer(PhotonView p)
+        {
             foreach (var cache in _cacheAddSkill)
                 if(cache.Item2 == p.ViewID)
                     InitializeSkill(cache.Item1,cache.Item2);
@@ -26,7 +31,7 @@ namespace MoreSpace.InGame.Player
 
         public void SetSelectedSkills(SkillSet set)
         {
-            Debug.Log(_player.First(p => p.IsMine));
+            Debug.Log(playerHolder.player.First(p => p.IsMine));
             
             if (set != null)
             {
@@ -40,15 +45,15 @@ namespace MoreSpace.InGame.Player
             }
             Debug.Log("SkillController: Selected skills were set.");
             
-            _player.First(p => p.IsMine).gameObject.GetComponent<SkillViewer>().VisualizeSkills(skill);
-            photonView.RPC(nameof(InitializeSkill),RpcTarget.All,skill[index].ToString(), _player.First(p => p.IsMine).ViewID);
+            playerHolder.player.First(p => p.IsMine).gameObject.GetComponent<SkillViewer>().VisualizeSkills(skill);
+            photonView.RPC(nameof(InitializeSkill),RpcTarget.All,skill[index].ToString(), playerHolder.player.First(p => p.IsMine).ViewID);
         }
 
         public void BreakCrystal()
         {
             index++;
             Debug.Log($"{index}番目を開放");
-            if (index < 4) photonView.RPC(nameof(InitializeSkill),RpcTarget.All,skill[index].ToString(), _player.First(p => p.IsMine).ViewID);
+            if (index < 4) photonView.RPC(nameof(InitializeSkill),RpcTarget.All,skill[index].ToString(), playerHolder.player.First(p => p.IsMine).ViewID);
             else JudgeVictory.Instance.photonView.RPC(nameof(JudgeVictory.AddClearIncident), RpcTarget.AllViaServer);
         }
 
@@ -56,11 +61,16 @@ namespace MoreSpace.InGame.Player
         public void InitializeSkill(string target, int id)
         {
             Debug.Log($"InitializeSkill:{id}/{target}");
-            var targetPlayer = _player.FirstOrDefault(p => p.ViewID == id);
+            var targetPlayer = playerHolder.player.FirstOrDefault(p => p.ViewID == id);
             if (targetPlayer == null)
                 _cacheAddSkill.Add((target,id));
             else
                 ResourceSkillRepository.Skills[target].Initialize(targetPlayer.gameObject);
+        }
+        
+        private void OnDestroy()
+        {
+            playerHolder.OnAddPlayer -= SetPlayer;
         }
     }
 }

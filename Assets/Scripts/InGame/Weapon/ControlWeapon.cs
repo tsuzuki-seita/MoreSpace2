@@ -18,6 +18,7 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
     public ReadOnlyReactiveProperty<int> nowIndex => _nowIndex;
     private int usingIndex; //現在発火している武器
     private InputSystem_Actions _actions;
+    private bool isForceStop = false;
 
     //int toIndex, int weaponsCountの順で保持します
     private List<(int, int)> ChangeWeaponCache = new List<(int, int)>();
@@ -90,6 +91,11 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
             photonView.RPC(nameof(ChangeWeapon), RpcTarget.All, index, weapons.Count);
         }
     }
+
+    private void OnForceStop()
+    {
+        OnFireUp(default);
+    }
     
     private int GetWrappedIndex(int toIndex, int count)
     {
@@ -102,17 +108,20 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
     [PunRPC]
     void OnFireDownRPC(int fireIndex)
     {
+        isForceStop = false;
         usingIndex = fireIndex;
         weapons[usingIndex]?.OnFireDown();
     }
     [PunRPC]
     void OnFireRPC()
     {
+        if(isForceStop) return;
         weapons[usingIndex]?.OnFire();
     }
     [PunRPC]
     void OnFireUpRPC()
     {
+        isForceStop = true;
         weapons[usingIndex]?.OnFireUp();
     }
 
@@ -125,9 +134,15 @@ public class ControlWeapon : MonoBehaviourPunCallbacks
             ChangeWeaponCache.Add((toIndex,weaponsCount));
             return;
         }
-        weapons[_nowIndex.Value]?.OnUnEquip();
+
+        if (weapons[_nowIndex.Value] != null)
+        {
+            weapons[_nowIndex.Value].OnForceStop -= OnForceStop;
+            weapons[_nowIndex.Value].OnUnEquip();
+        }
         _nowIndex.Value = toIndex;
         weapons[_nowIndex.Value].OnEquip();
+        weapons[_nowIndex.Value].OnForceStop += OnForceStop;
     }
 
     private void OnDestroy()
