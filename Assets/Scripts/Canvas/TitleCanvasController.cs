@@ -13,6 +13,8 @@ namespace MoreSpace.Title
         {
             OnEdit(baseName);
             view.OnNameInput += OnEdit;
+            view.OnInputSetting += OnSettingsButton;
+            view.OnInputCloseSetting += CloseSettingsPanel;
             view.OnInputGoSelectSkills += () =>
             {
                 IngameSceneManager.Instance.ChangeScene(InGameState.SelectSkills);
@@ -25,6 +27,19 @@ namespace MoreSpace.Title
         void OnEdit(string target)
         {
             PhotonNetwork.NickName = target;
+        }
+        void OnSettingsButton()
+        {
+            view.SettingsPanel.SetActive(true);
+            SoundManager.Instance.PlaySE(SoundManager.SEData.SETYPE.Button);
+        }
+        void CloseSettingsPanel()
+        {
+            if (view.SettingsPanel.activeSelf)
+            {
+                view.SettingsPanel.SetActive(false);
+                SoundManager.Instance.PlaySE(SoundManager.SEData.SETYPE.Button); // 閉じるSEがあれば再生
+            }
         }
     }
 }

@@ -10,10 +10,14 @@ namespace MoreSpace.Title
         public UnityAction<string> OnNameInput;
         public UnityAction OnInputTutorial;
         public UnityAction OnInputSetting;
+        public UnityAction OnInputCloseSetting;
         [SerializeField] private Button goSelectSkills;
         [SerializeField] private InputField nickName;
         [SerializeField] private Button goTutorial;
         [SerializeField] private Button goSetting;
+        [SerializeField] private Button settingsBackgroundButton;
+        [SerializeField] public GameObject SettingsPanel;
+        
 
         public void Initialize()
         {
@@ -21,6 +25,8 @@ namespace MoreSpace.Title
             nickName.onValueChanged.AddListener(OnNameInput);
             goTutorial.onClick.AddListener(OnInputTutorial);
             goSetting.onClick.AddListener(OnInputSetting);
+            SettingsPanel.SetActive(false);
+            settingsBackgroundButton.onClick.AddListener(OnInputCloseSetting);
         }
     }
 }
