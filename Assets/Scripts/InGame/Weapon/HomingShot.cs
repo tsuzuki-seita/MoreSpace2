@@ -60,9 +60,11 @@ namespace MoreSpace.InGame.Weapons
             int finalObjectDamage = _finalObjectDamage;
             Debug.Log($"最終攻撃力: {finalDamage}, 最終対物攻撃力: {finalObjectDamage}");
 
+            var targetPosition = CalcTargetPosition();
             var instance =  pool.GetPooledObject();
             instance.transform.position = this.transform.position + this.transform.forward*30;
-            instance.Shot(CalcTargetPosition(),speed,finalDamage,finalObjectDamage,this.gameObject,photonView.IsMine,CheckEnemyInCamera());
+            instance.transform.LookAt(targetPosition);
+            instance.Shot(targetPosition,speed,finalDamage,finalObjectDamage,this.gameObject,photonView.IsMine,CheckEnemyInCamera());
             SetNextFireTime();
         }
         

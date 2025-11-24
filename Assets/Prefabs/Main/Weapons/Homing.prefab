@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6678155471498097627}
-  - component: {fileID: 6422280980887434219}
   - component: {fileID: 3571184551130365932}
+  - component: {fileID: 6422280980887434219}
+  - component: {fileID: 8074346272086251923}
   m_Layer: 0
   m_Name: Homing
   m_TagString: Untagged
@@ -36,6 +37,20 @@ Transform:
   - {fileID: 7026279702816455226}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3571184551130365932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765997890892215509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e7556cdc984b5642825daffe258cfde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotateSpeed: 5
+  _rigidbody: {fileID: 6422280980887434219}
 --- !u!54 &6422280980887434219
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -63,20 +78,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3571184551130365932
-MonoBehaviour:
+--- !u!65 &8074346272086251923
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 765997890892215509}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e7556cdc984b5642825daffe258cfde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rotateSpeed: 5
-  _rigidbody: {fileID: 1081174074155691577}
+  serializedVersion: 3
+  m_Size: {x: 5, y: 8, z: 8.25}
+  m_Center: {x: 0, y: 0, z: -0.6}
 --- !u!1 &4840157883018633655
 GameObject:
   m_ObjectHideFlags: 0
@@ -9553,8 +9575,6 @@ GameObject:
   - component: {fileID: 7212590167676769403}
   - component: {fileID: 8427781928242579049}
   - component: {fileID: 5458709462415557850}
-  - component: {fileID: 8648514775381740410}
-  - component: {fileID: 1081174074155691577}
   m_Layer: 0
   m_Name: HomingMesh
   m_TagString: Untagged
@@ -9630,51 +9650,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8648514775381740410
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8697939016533080101}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.948926, y: 8.122838, z: 4.948926}
-  m_Center: {x: -0.0039030313, y: -0.61011267, z: 0.0033400059}
---- !u!54 &1081174074155691577
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8697939016533080101}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
