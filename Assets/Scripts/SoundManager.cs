@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -24,6 +25,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioSource _seAudioSource;
     [SerializeField] List<BGMData> _bgmSoundDatas;
     [SerializeField] List<SEData> _seSoundDatas;
+    [SerializeField] private Slider _masterVolumeSlider;
+    [SerializeField] private Slider _bgmVolumeSlider;
+    [SerializeField] private Slider _seVolumeSlider;
 
     BGMData _currentBGM;
     SEData _currentSE;
@@ -36,26 +40,29 @@ public class SoundManager : MonoBehaviour
     {
         AdjustmentBGM();
         AdjustmentSE();
+        SetInitialSliderValues();
+        RegisterSliderListeners();
     }
 
-    private void Update()
-    {
-        // 音量調整のためのキー入力
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            masterVolume -= 0.1f;
-            if (masterVolume < 0) masterVolume = 0;
-            AdjustmentBGM();
-            AdjustmentSE();
-        }
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            masterVolume += 0.1f;
-            if (masterVolume > 1) masterVolume = 1;
-            AdjustmentBGM();
-            AdjustmentSE();
-        }
-    }
+    // これいったん消した
+    // private void Update()
+    // {
+    //     // 音量調整のためのキー入力
+    //     if (Input.GetKeyDown(KeyCode.DownArrow))
+    //     {
+    //         masterVolume -= 0.1f;
+    //         if (masterVolume < 0) masterVolume = 0;
+    //         AdjustmentBGM();
+    //         AdjustmentSE();
+    //     }
+    //     else if (Input.GetKeyDown(KeyCode.UpArrow))
+    //     {
+    //         masterVolume += 0.1f;
+    //         if (masterVolume > 1) masterVolume = 1;
+    //         AdjustmentBGM();
+    //         AdjustmentSE();
+    //     }
+    // }
 
     /// <summary>
     /// BGMを流すメソッド
@@ -104,6 +111,50 @@ public class SoundManager : MonoBehaviour
         _currentSE = data;
         //_seAudioSource.volume = data.volume * seMasterVolume * masterVolume;
         _seAudioSource.PlayOneShot(data.audioClip);
+    }
+    private void SetInitialSliderValues()
+    {
+        _masterVolumeSlider.value = masterVolume;
+        _bgmVolumeSlider.value = bgmMasterVolume;
+        _seVolumeSlider.value = seMasterVolume;
+    }
+    private void RegisterSliderListeners()
+    {
+        // AddListenerで、値変更時に対応する On...Changed メソッドを呼び出すように登録
+        _masterVolumeSlider.onValueChanged.AddListener(OnMasterVolumeChanged);
+        _bgmVolumeSlider.onValueChanged.AddListener(OnBGMVolumeChanged);
+        _seVolumeSlider.onValueChanged.AddListener(OnSEVolumeChanged);
+    }
+    private void OnMasterVolumeChanged(float newValue)
+    {
+        SetMasterVolume(newValue);
+    }
+    
+    private void OnBGMVolumeChanged(float newValue)
+    {
+        SetBGMVolume(newValue);
+    }
+
+    private void OnSEVolumeChanged(float newValue)
+    {
+        SetSEVolume(newValue);
+    }
+    public void SetMasterVolume(float volume)
+    {
+        masterVolume = volume;
+        AdjustmentBGM();
+        AdjustmentSE();
+    }
+    public void SetBGMVolume(float volume)
+    {
+        bgmMasterVolume = volume;
+        AdjustmentBGM();
+    }
+    public void SetSEVolume(float volume)
+    {
+        seMasterVolume = volume;
+        AdjustmentSE();
+        SoundManager.Instance.PlaySE(SoundManager.SEData.SETYPE.ShingleShot);
     }
 
     [System.Serializable]
