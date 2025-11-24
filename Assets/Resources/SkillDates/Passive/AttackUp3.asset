@@ -16,5 +16,6 @@ MonoBehaviour:
   Level: 3
   SkillName: "\u653B\u6483\u529BUP"
   Description: "\u6A5F\u4F53\u306E\u653B\u6483\u529BUP"
-  Icon: {fileID: 21300000, guid: f5866f8b6886949a0ba9db77e7f93429, type: 3}
+  Icon: {fileID: 21300000, guid: 042a4d53b79cf4c199ec5437176a98a1, type: 3}
+  Kind: 0
   Value: 20

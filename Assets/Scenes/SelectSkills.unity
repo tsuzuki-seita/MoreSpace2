@@ -752,6 +752,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 919775633877518578, guid: 1912fdde775da5147897bc5a1d16bc04, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1b78af62de6d34225810a6fa9c0c0161, type: 3}
+    - target: {fileID: 2588980881125121098, guid: 1912fdde775da5147897bc5a1d16bc04, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2588980881125121098, guid: 1912fdde775da5147897bc5a1d16bc04, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -7
+      objectReference: {fileID: 0}
     - target: {fileID: 2653929976387757073, guid: 1912fdde775da5147897bc5a1d16bc04, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -832,14 +844,50 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4522630666849858497, guid: 1912fdde775da5147897bc5a1d16bc04, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4522630666849858497, guid: 1912fdde775da5147897bc5a1d16bc04, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2
+      objectReference: {fileID: 0}
     - target: {fileID: 5403093797496194573, guid: 1912fdde775da5147897bc5a1d16bc04, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5949947689133782174, guid: 1912fdde775da5147897bc5a1d16bc04, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5949947689133782174, guid: 1912fdde775da5147897bc5a1d16bc04, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -141
+      objectReference: {fileID: 0}
+    - target: {fileID: 7445338342424235845, guid: 1912fdde775da5147897bc5a1d16bc04, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7445338342424235845, guid: 1912fdde775da5147897bc5a1d16bc04, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7445338342424235845, guid: 1912fdde775da5147897bc5a1d16bc04, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7574810008194738960, guid: 1912fdde775da5147897bc5a1d16bc04, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5c95d316ba9254cd0a50a0bb99219eef, type: 3}
     - target: {fileID: 8423188219438900020, guid: 1912fdde775da5147897bc5a1d16bc04, type: 3}
       propertyPath: m_Name
       value: SelectSkillCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8512176006271324088, guid: 1912fdde775da5147897bc5a1d16bc04, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5ed55f34f390b4d6f814089d7f045535, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
