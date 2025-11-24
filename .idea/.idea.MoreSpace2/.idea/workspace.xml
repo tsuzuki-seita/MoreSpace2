@@ -1,147 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="8fe98c55-1ddb-4105-9c37-509009933026" name="変更" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Domain/WeaponHomingSkill.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Domain/WeaponHomingSkill.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/InGame/Weapon/HomingShot.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/InGame/Weapon/HomingShot.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.MoreSpace2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MoreSpace2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Planets/Materials/stars.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Planets/Materials/stars.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Main/JudgesOnMaster.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Main/JudgesOnMaster.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Main/Weapons/Homing.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Main/Weapons/Homing.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Main/Weapons/Missile.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Main/Weapons/Missile.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Crystal.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Crystal.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/SkillDates/Weapon/Homing.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/SkillDates/Weapon/Homing.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/SkillDates/Weapon/Homing.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/SkillDates/Weapon/Homing.asset.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/SkillDates/Weapon/Missile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/SkillDates/Weapon/Missile.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/SkillDates/Weapon/Missile.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/SkillDates/Weapon/Missile.asset.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestIngame.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TestIngame.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InGame/Player/SetDataToPlayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InGame/Player/SetDataToPlayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InGame/Player/SkillController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InGame/Player/SkillController.cs" afterDir="false" />
-    </list>
+    <list default="true" id="da9d3056-f4e9-4391-b946-513acf76ac62" name="変更" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/../MR1_QRTest/Assets/Scripts/ControlPhase/PhaseRouter.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../MR1_QRTest/Assets/Scripts/Phases/BasePhase.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/InGame/Master/DamageableHolder.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/InGame/Player/SetHpToUI.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/InGame/Weapon/Bullets/HomingBullet.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../Urs1week_ver2025/Assets/Scripts/Utils/SingletonMonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 5
-}</component>
-  <component name="ProjectId" id="33xHxAd85DQyIhTjHFq6SXnxfib" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="35vjBIEv19Lrm4lLRlTO1AiMbam" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/Weapons&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\yuuse\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\yuuse\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\yuuse\\AppData\\Local\\Symbols\\src"
-    ]
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "nodejs_package_manager_path": "npm"
   }
 }]]></component>
-  <component name="RunManager" selected="Unity エディターにアタッチ.Unity エディターにアタッチ">
-    <configuration name="ユニットテスト (バッチモード)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\6000.0.58f2\Editor\Unity.exe" />
-      <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath C:\Drive_D\Unity_GameData\MoreSpace2 -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
-      <option name="WORKING_DIRECTORY" value="C:\Drive_D\Unity_GameData\MoreSpace2" />
-      <option name="PASS_PARENT_ENVS" value="1" />
-      <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      <method v="2" />
-    </configuration>
-    <configuration name="スタンドアロンプレイヤー" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/../Builds/MoreSpace2\MoreSpace2.exe" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="C:\Drive_D\Unity_GameData\Builds\MoreSpace2" />
-      <option name="PASS_PARENT_ENVS" value="1" />
-      <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Unity の起動" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\6000.0.58f2\Editor\Unity.exe" />
-      <option name="PROGRAM_PARAMETERS" value="-projectPath C:\Drive_D\Unity_GameData\MoreSpace2 -debugCodeOptimization" />
-      <option name="WORKING_DIRECTORY" value="C:\Drive_D\Unity_GameData\MoreSpace2" />
-      <option name="PASS_PARENT_ENVS" value="1" />
-      <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Unity エディターにアタッチ" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
-      <option name="allowRunningInParallel" value="false" />
-      <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
-      <option name="projectPathOnTarget" />
-      <option name="selectedOptions">
-        <list />
-      </option>
-      <method v="2" />
-    </configuration>
-    <configuration name="Unity エディターにアタッチして再生" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
-      <option name="allowRunningInParallel" value="false" />
-      <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
-      <option name="projectPathOnTarget" />
-      <option name="selectedOptions">
-        <list />
-      </option>
-      <method v="2" />
-    </configuration>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="アプリケーションレベル" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="デフォルトタスク">
-      <changelist id="8fe98c55-1ddb-4105-9c37-509009933026" name="変更" comment="" />
-      <created>1760252048042</created>
+      <changelist id="da9d3056-f4e9-4391-b946-513acf76ac62" name="変更" comment="" />
+      <created>1763997305024</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1760252048042</updated>
-      <workItem from="1760252050724" duration="5471000" />
-      <workItem from="1762394446029" duration="729000" />
-      <workItem from="1763550561876" duration="1973000" />
+      <updated>1763997305024</updated>
     </task>
     <servers />
   </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-  </component>
-  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityProjectDiscoverer">
-    <option name="hasUnityReference" value="true" />
     <option name="unityProject" value="true" />
     <option name="unityProjectFolder" value="true" />
-  </component>
-  <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
-  <component name="VcsManagerConfiguration">
-    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
 </project>

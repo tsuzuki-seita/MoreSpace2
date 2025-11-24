@@ -30,14 +30,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5909807719114952957}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 376, y: 1, z: -307}
   m_LocalScale: {x: 30.000004, y: 30.000004, z: 30.000004}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3430288358717556105}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &5909807719111888125
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -143,8 +143,7 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents:
-  - {fileID: 111996309256965944}
+  ObservedComponents: []
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -172,6 +171,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5909807719114788061}
     m_Modifications:
+    - target: {fileID: 3612101996811855752, guid: 1b05a48c58b3d7e45a7c875f49389f19, type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3919832563230665875, guid: 1b05a48c58b3d7e45a7c875f49389f19, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.63
