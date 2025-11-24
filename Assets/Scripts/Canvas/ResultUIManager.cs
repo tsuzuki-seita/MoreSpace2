@@ -11,7 +11,7 @@ namespace MoreSpace.Result
     {
         [SerializeField] private GameObject[] uis = new GameObject[4];
         [SerializeField] private Button backButton;
-        
+
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
@@ -21,10 +21,19 @@ namespace MoreSpace.Result
             if (IngameSceneManager.Instance != null
                 && IngameSceneManager.Instance.TryConsume<ResultArgs>(out var args))
             {
-                uis[(int)args.Result].SetActive(true);  
+                uis[(int)args.Result].SetActive(true);
+                if ((int)args.Result == 0)
+                    SoundManager.Instance.PlayBGM(SoundManager.BGMData.BGMTYPE.Winner);
+                else if ((int)args.Result == 1)
+                    SoundManager.Instance.PlayBGM(SoundManager.BGMData.BGMTYPE.Loser);
             }
+
+            backButton.onClick.AddListener(() =>
+            {
+                SoundManager.Instance.PlaySE(SoundManager.SEData.SETYPE.Button);
+                IngameSceneManager.Instance.ChangeScene(InGameState.Title);
+            });
             
-            backButton.onClick.AddListener(() => IngameSceneManager.Instance.ChangeScene(InGameState.Title));
         }
     }
 }

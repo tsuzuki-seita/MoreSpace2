@@ -13,6 +13,9 @@ namespace MoreSpace.InGame
         public Action<int, int> OnDamage;
         protected Action OnHpZero;
         protected float _defenseBonus = 0f;
+
+        protected virtual bool CanTakeDamage => true;
+
         private void Start()
         {
             DamageableHolder.Holders.Add(photonView.ViewID,this);
@@ -30,6 +33,14 @@ namespace MoreSpace.InGame
         [PunRPC]
         protected void DamageOnRPC(int rawDamage, PhotonMessageInfo info)
         {
+            // --- 追加箇所: ダメージ判定チェック ---
+            if (!CanTakeDamage)
+            {
+                // 無敵状態などでダメージが無効化された場合
+                Debug.Log($"{gameObject.name}はダメージを無効化しました。");
+                return;
+            }
+
             int finalDamage = rawDamage - Mathf.RoundToInt(_defenseBonus);
 
             hp -= finalDamage;

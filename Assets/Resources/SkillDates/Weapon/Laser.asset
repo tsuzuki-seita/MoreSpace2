@@ -16,7 +16,9 @@ MonoBehaviour:
   Level: 3
   SkillName: "\u30EC\u30FC\u30B6\u30FC"
   Description: "\u30EC\u30FC\u30B6\u30FC"
-  Icon: {fileID: 21300000, guid: 7336ce69b1d214e74b38e96d14d78df5, type: 3}
+  Icon: {fileID: 21300000, guid: 9d29d61196b7b42979fdd5f2102eb4f8, type: 3}
   Distance: 0
   Damage: 0
   RecastTime: 0
+  Speed: 0
+  ProjectilePrefab: {fileID: 0}
