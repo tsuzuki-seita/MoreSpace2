@@ -10,9 +10,14 @@ public class SearchingPhase : IPhase
 
     public override void OnJoinedRoom()
     {
+        if(PhotonNetwork.CurrentRoom.PlayerCount == 2) _router.ChangePhase(PhaseType.Room);
+    }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
         _router.ChangePhase(PhaseType.Room);
     }
-    
+
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
         PhotonNetwork.CreateRoom(_router.Model.RoomName + PhotonNetwork.CountOfRooms, new RoomOptions() { MaxPlayers = 2 });
