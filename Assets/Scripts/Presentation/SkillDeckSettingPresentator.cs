@@ -121,6 +121,7 @@ namespace MoreSpace.Presentation
                     break;
             }
             UpdateSkillUI(level);
+            SoundManager.Instance.PlaySE(SoundManager.SEData.SETYPE.SelectMove);
         }
 
         // スロットのUIを更新する
