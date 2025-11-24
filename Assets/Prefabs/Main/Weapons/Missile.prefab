@@ -99,6 +99,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rotateSpeed: 5
   _rigidbody: {fileID: 7504950990133632244}
+  bulletMesh: {fileID: 5307537093378442991}
+  destroyParticleTime: 2
+  explosion: {fileID: -4543244337993448860, guid: b02817d564f140e45880c1bf42bd1e6c, type: 3}
 --- !u!1 &7205269416478192876
 GameObject:
   m_ObjectHideFlags: 0
