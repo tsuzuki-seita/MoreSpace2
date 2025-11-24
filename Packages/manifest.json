@@ -52,26 +52,12 @@
   },
   "scopedRegistries": [
     {
-      "name": "VContainer",
-      "url": "https://package.openupm.com",
-      "scopes": [
-        "jp.hadashikick.vcontainer"
-      ],
-      "overrideBuiltIns": true
-    },
-    {
-      "name": "Unity NuGet",
-      "url": "https://unitynuget-registry.openupm.com",
-      "scopes": [
-        "org.nuget"
-      ],
-      "overrideBuiltIns": true
-    },
-    {
       "name": "OpenUPM",
       "url": "https://package.openupm.com",
       "scopes": [
-        "com.cysharp"
+        "com.cysharp",
+        "org.nuget",
+        "jp.hadashikick.vcontainer"
       ],
       "overrideBuiltIns": true
     }
