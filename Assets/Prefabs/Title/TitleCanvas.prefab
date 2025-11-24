@@ -530,6 +530,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4412344766264314240}
   - component: {fileID: 6255299973731837167}
+  - component: {fileID: 8710173477233962498}
   m_Layer: 5
   m_Name: SEVolumeSlider
   m_TagString: Untagged
@@ -610,6 +611,35 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8710173477233962498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2990841857409922910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2317065504109502632}
+          m_TargetAssemblyTypeName: MoreSpace.Title.TitleCanvasView, Assembly-CSharp
+          m_MethodName: PlaySEOnChange
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3141478695553513723
 GameObject:
   m_ObjectHideFlags: 0

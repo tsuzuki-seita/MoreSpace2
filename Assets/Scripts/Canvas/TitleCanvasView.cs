@@ -61,5 +61,10 @@ namespace MoreSpace.Title
         {
             SoundManager.Instance.SetSEVolume(newValue);
         }
+
+        public void PlaySEOnChange()
+        {
+            SoundManager.Instance.PlaySE(SoundManager.SEData.SETYPE.ShingleShot);
+        }
     }
 }

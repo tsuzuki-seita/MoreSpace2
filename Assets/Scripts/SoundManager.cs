@@ -103,7 +103,6 @@ public class SoundManager : MonoBehaviour
     {
         seMasterVolume = volume;
         AdjustmentSE();
-        Instance.PlaySE(SoundManager.SEData.SETYPE.ShingleShot);
     }
 
     [System.Serializable]
