@@ -235,7 +235,7 @@ namespace MoreSpace.Presentation
             else if (skill is WeaponSkill weapon)
             {
                 statsBuilder.AppendLine($"ダメージ: {weapon.Damage}");
-                statsBuilder.AppendLine($"射程: {weapon.Distance}");
+                statsBuilder.AppendLine($"射程: {weapon.Distance * weapon.Speed}");
                 statsBuilder.AppendLine($"リキャスト: {weapon.RecastTime}秒");
             }
             else if (skill is ActiveSkill buff)

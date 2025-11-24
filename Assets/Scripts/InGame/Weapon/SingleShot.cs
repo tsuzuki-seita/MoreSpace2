@@ -11,6 +11,7 @@ namespace MoreSpace.InGame.Weapons
         [SerializeField] public uint initCount = 10;
         [SerializeField] public float speed = 10;
         [SerializeField] public int damage = 10;
+        [SerializeField] public float Distance = 10;
 
         private Pool<SingleBullet> pool;
         private int _finalDamage = 0;
@@ -53,7 +54,7 @@ namespace MoreSpace.InGame.Weapons
 
             var instance =  pool.GetPooledObject();
             instance.transform.position = this.transform.position + this.transform.forward*20;
-            instance.Shot(CalcTargetPosition(),speed,finalDamage,finalObjectDamage,this.gameObject,photonView.IsMine);
+            instance.Shot(CalcTargetPosition(),speed,finalDamage,finalObjectDamage,this.gameObject,photonView.IsMine,Distance);
             SetNextFireTime();
         }
 
