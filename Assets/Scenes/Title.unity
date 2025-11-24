@@ -780,6 +780,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6585609989554365632, guid: 47fe66776305598408a8a423ab51b7f8, type: 3}
+      propertyPath: masterVolume
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6585609989554365632, guid: 47fe66776305598408a8a423ab51b7f8, type: 3}
+      propertyPath: _seSoundDatas.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6585609989554365632, guid: 47fe66776305598408a8a423ab51b7f8, type: 3}
+      propertyPath: _seSoundDatas.Array.data[7].se
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6585609989554365632, guid: 47fe66776305598408a8a423ab51b7f8, type: 3}
+      propertyPath: _seSoundDatas.Array.data[7].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6585609989554365632, guid: 47fe66776305598408a8a423ab51b7f8, type: 3}
+      propertyPath: _seSoundDatas.Array.data[0].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: ac1877d86f868426c8a29899e60b3fcf, type: 3}
+    - target: {fileID: 6585609989554365632, guid: 47fe66776305598408a8a423ab51b7f8, type: 3}
+      propertyPath: _seSoundDatas.Array.data[7].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b4d05f07eb45d4172aa5e257377ac5d9, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
