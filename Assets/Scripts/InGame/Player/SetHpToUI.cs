@@ -17,8 +17,6 @@ namespace MoreSpace.InGame.Player
 
         void Start()
         {
-            if (isLookPlayer)
-                FindAnyObjectByType<LookUiToCamera>().AssertUI(hpBar.transform);
             target.OnDamage += ChangeValue;
             _currentHp = target.hp;
         }

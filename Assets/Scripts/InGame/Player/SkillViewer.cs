@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class SkillViewer : MonoBehaviour
 {
+    [SerializeField] private RectTransform selectFrame;
     [SerializeField] private Image[] baseImage = new Image[4];
     [SerializeField] private Image[] enableImage = new Image[4];
     [SerializeField] private Scrollbar[] recastTimeBar = new Scrollbar[4];
@@ -19,6 +20,13 @@ public class SkillViewer : MonoBehaviour
             enableImage[i].sprite = skills[i].Icon;
             recastTimeBar[i].size = 0;
         }
+
+        this.gameObject.GetComponent<ControlWeapon>().nowIndex.Subscribe(index =>
+        {
+            Debug.Log($"ChangeTo{index}");
+            selectFrame.SetParent(baseImage[index].rectTransform);
+            selectFrame.localPosition = Vector3.zero;
+        });
     }
 
     public void ActivateSkillUI(Skill target, [CanBeNull] Weapon weapon)

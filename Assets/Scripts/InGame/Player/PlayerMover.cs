@@ -10,6 +10,7 @@ namespace MoreSpace.InGame.Player
     {
         [SerializeField] private Rigidbody rigid;
         [SerializeField] private float moveSpeed;
+        [SerializeField] private float acceleration;
         private PlayerBuffs _buffs;
         private float finalSpeed;
 
@@ -25,12 +26,22 @@ namespace MoreSpace.InGame.Player
                 .AddTo(this);
         }
 
-        void Update()
+        void FixedUpdate()
         {
-            if (!StartGameWithCountDown.isStartGame) return;
+            if (!photonView.IsMine) return;
+            if (!StartGameWithCountDown.isStartGame)
+            {
+                rigid.linearVelocity = Vector3.zero;
+                return;
+            }
 
-            Debug.Log(finalSpeed + "fianalSpeed");
-            rigid.AddForce(finalSpeed * transform.forward, ForceMode.Acceleration);
+            Debug.Log(finalSpeed + "finalSpeed");
+            rigid.AddForce(acceleration * transform.forward, ForceMode.Acceleration);
+
+            if (rigid.linearVelocity.magnitude > finalSpeed)
+            {
+                rigid.linearVelocity = rigid.linearVelocity.normalized * finalSpeed;
+            }
         }
     }
 }
