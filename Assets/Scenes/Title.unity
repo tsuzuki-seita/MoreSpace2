@@ -781,6 +781,10 @@ PrefabInstance:
       value: SoundManager
       objectReference: {fileID: 0}
     - target: {fileID: 6585609989554365632, guid: 47fe66776305598408a8a423ab51b7f8, type: 3}
+      propertyPath: masterVolume
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6585609989554365632, guid: 47fe66776305598408a8a423ab51b7f8, type: 3}
       propertyPath: _seSoundDatas.Array.size
       value: 8
       objectReference: {fileID: 0}
