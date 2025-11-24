@@ -4,6 +4,7 @@
     "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
     "com.lilytech-lab.wireframe-shader": "https://github.com/lilytech-lab/WireframeShader.git",
     "com.unity.ai.navigation": "2.0.7",
+    "com.unity.cinemachine": "2.10.4",
     "com.unity.collab-proxy": "2.9.3",
     "com.unity.ide.rider": "3.0.36",
     "com.unity.ide.visualstudio": "2.0.23",

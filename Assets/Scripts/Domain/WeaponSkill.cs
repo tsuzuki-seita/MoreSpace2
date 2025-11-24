@@ -13,7 +13,7 @@ public class WeaponSkill : Skill
     public float Speed;
 
     [Header("Bullet Prefab")]
-    public SingleBullet ProjectilePrefab;
+    public GameObject ProjectilePrefab;
     
     public override void Initialize(GameObject owner)
     {
@@ -22,7 +22,7 @@ public class WeaponSkill : Skill
         var shot = owner.AddComponent<MoreSpace.InGame.Weapons.SingleShot>();
 
         // ★ 直代入（public化したのでリフレクション不要）
-        shot.bullet = ProjectilePrefab;
+        shot.bullet = ProjectilePrefab.GetComponent<SingleBullet>();
         shot.speed = Speed;
         shot.damage = Mathf.RoundToInt(Damage);
         shot.fireRate = RecastTime;

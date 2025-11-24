@@ -9,11 +9,12 @@ namespace MoreSpace.InGame.Weapons
     public abstract class Weapon : MonoBehaviourPunCallbacks
     {
         public float fireRate = 0.25f;
-        [SerializeField] protected float maxDistance = 10000;
+        public Action OnForceStop;
         public ReactiveProperty<float> nextFireTime { get; private set; } = new ReactiveProperty<float>(0);
+        [SerializeField] public float maxDistance = 10000;
+        [SerializeField] public PlayerBuffs playerBuffs;
         private GameObject hitObject;
         private Transform _mainCameraTransform;
-        public PlayerBuffs playerBuffs;
 
         private void Start()
         {

@@ -5,7 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8fe98c55-1ddb-4105-9c37-509009933026" name="変更" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Domain/WeaponHomingSkill.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Domain/WeaponHomingSkill.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/InGame/Weapon/HomingShot.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/InGame/Weapon/HomingShot.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.MoreSpace2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MoreSpace2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Planets/Materials/stars.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Planets/Materials/stars.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Main/JudgesOnMaster.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Main/JudgesOnMaster.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Main/Weapons/Homing.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Main/Weapons/Homing.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Main/Weapons/Missile.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Main/Weapons/Missile.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Crystal.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Crystal.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Player1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/SkillDates/Weapon/Homing.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/SkillDates/Weapon/Homing.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/SkillDates/Weapon/Homing.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/SkillDates/Weapon/Homing.asset.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/SkillDates/Weapon/Missile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/SkillDates/Weapon/Missile.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/SkillDates/Weapon/Missile.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/SkillDates/Weapon/Missile.asset.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestIngame.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TestIngame.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InGame/Player/SetDataToPlayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InGame/Player/SetDataToPlayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InGame/Player/SkillController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InGame/Player/SkillController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +37,7 @@
     <setting file="file://$PROJECT_DIR$/../MR1_QRTest/Assets/Scripts/Phases/BasePhase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/InGame/Master/DamageableHolder.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/InGame/Player/SetHpToUI.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/InGame/Weapon/Bullets/HomingBullet.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Urs1week_ver2025/Assets/Scripts/Utils/SingletonMonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -34,16 +52,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "feature/ChangeCrystalColorAndInitializePosition",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/Weapons&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   "keyToStringList": {
     "rider.external.source.directories": [

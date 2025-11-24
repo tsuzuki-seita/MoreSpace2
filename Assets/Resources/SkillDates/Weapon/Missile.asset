@@ -9,16 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66e4a8d6a04a3417ea265bcaf9eb4d30, type: 3}
+  m_Script: {fileID: 11500000, guid: aab14dad507a458aab2f4f77bb136450, type: 3}
   m_Name: Missile
-  m_EditorClassIdentifier: Assembly-CSharp:MoreSpace.Domain:WeaponSkill
-  Type: 4
+  m_EditorClassIdentifier: 
+  Type: 3
   Level: 3
   SkillName: "\u30DF\u30B5\u30A4\u30EB"
   Description: "\u4E00\u6483\u5FC5\u6BBA\u30DF\u30B5\u30A4\u30EB"
   Icon: {fileID: 21300000, guid: f9afbf7da389f44a7ab38761aab9e4fa, type: 3}
   Distance: 999
   Damage: 999
-  RecastTime: 20
-  Speed: 100
-  ProjectilePrefab: {fileID: 5380397611793071110, guid: 41afb0e02558347269b2e6f2faf81557, type: 3}
+  RecastTime: 10
+  Speed: 30
+  ProjectilePrefab: {fileID: 350413884495386825, guid: 41afb0e02558347269b2e6f2faf81557, type: 3}
+  IsHomingAlways: 1
