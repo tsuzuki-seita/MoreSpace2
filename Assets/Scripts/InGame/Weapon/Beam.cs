@@ -1,6 +1,8 @@
 using ObjectPool;
 using UnityEngine;
 using MoreSpace.InGame.Weapons.Bullets;
+using R3;
+
 namespace MoreSpace.InGame.Weapons
 {
     public class Beam : Weapon
@@ -13,6 +15,31 @@ namespace MoreSpace.InGame.Weapons
         private float _currentBeamDuration = 0f;
         private bool isReseted;
         private BeamBullet bullet;
+        
+        [SerializeField] public int ObjectDamage = 10;
+        private int _finalDamage = 0;
+        private int _finalObjectDamage = 0;
+        
+        protected override void InitializeBuffsAndSubscribe()
+        {
+            _finalDamage = damage;
+            _finalObjectDamage = ObjectDamage;
+            if (playerBuffs == null) return; 
+
+            playerBuffs.Attack
+                .Subscribe(atkBonus => 
+                {
+                    _finalDamage = damage + Mathf.RoundToInt(atkBonus);
+                })
+                .AddTo(this); 
+
+            playerBuffs.AttackForObject
+                .Subscribe(objAtkBonus => 
+                {
+                    _finalObjectDamage = ObjectDamage + Mathf.RoundToInt(objAtkBonus);
+                })
+                .AddTo(this);
+        }
         
         public override void OnEquip()
         {
