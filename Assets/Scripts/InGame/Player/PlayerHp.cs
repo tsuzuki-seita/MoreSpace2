@@ -8,6 +8,13 @@ namespace MoreSpace.InGame.Player
     public class PlayerHp : HealthBase
     {
         [SerializeField] private PlayerBuffs playerBuffs;
+        // 外部（Unbreakableスキル）から操作するためのフラグ
+        public bool IsUnbreakable = false;
+
+        // 親クラスの判定をオーバーライド
+        // IsUnbreakableが true なら、CanTakeDamage は false (ダメージ受けない) になる
+        protected override bool CanTakeDamage => !IsUnbreakable;
+
         protected override void OnInitialize()
         {
             base.OnInitialize();
