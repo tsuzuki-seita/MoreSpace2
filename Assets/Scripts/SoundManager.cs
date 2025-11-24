@@ -113,8 +113,11 @@ public class SoundManager : MonoBehaviour
         {
             //ここの部分がラベルになる
             Title = 0,
-            CardCreate = 1,
-            Battle = 2
+            SkillSelect = 1,
+            Mating = 2,
+            InGame = 3,
+            Winner = 4,
+            Loser = 5,
         }
 
         public BGMTYPE bgm;
@@ -128,9 +131,13 @@ public class SoundManager : MonoBehaviour
         public enum SETYPE
         {
             //ここの部分がラベルになる
-            NormalButton = 0,
-            CardCreateButton = 1,
-            Punch = 2,
+            CrystalBreak = 0,
+            CrystalDamage = 1,
+            ShingleShot = 2,
+            Beam = 3,
+            PlayerDamage = 4,
+            SceneMove = 5,
+            Button = 6,
         }
 
         public SETYPE se;
