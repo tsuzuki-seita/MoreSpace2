@@ -31,7 +31,7 @@ namespace MoreSpace.InGame.Player
 
         public void SetSelectedSkills(SkillSet set)
         {
-            Debug.Log(playerHolder.player.First(p => p.IsMine));
+            Debug.Log(playerHolder.player[PhotonNetwork.LocalPlayer]);
             
             if (set != null)
             {
@@ -45,15 +45,15 @@ namespace MoreSpace.InGame.Player
             }
             Debug.Log("SkillController: Selected skills were set.");
             
-            playerHolder.player.First(p => p.IsMine).gameObject.GetComponent<SkillViewer>().VisualizeSkills(skill);
-            photonView.RPC(nameof(InitializeSkill),RpcTarget.All,skill[index].ToString(), playerHolder.player.First(p => p.IsMine).ViewID);
+            playerHolder.player[PhotonNetwork.LocalPlayer].GetComponent<SkillViewer>().VisualizeSkills(skill);
+            photonView.RPC(nameof(InitializeSkill),RpcTarget.All,skill[index].ToString(), playerHolder.player[PhotonNetwork.LocalPlayer].ViewID);
         }
 
         public void BreakCrystal()
         {
             index++;
             Debug.Log($"{index}番目を開放");
-            if (index < 4) photonView.RPC(nameof(InitializeSkill),RpcTarget.All,skill[index].ToString(), playerHolder.player.First(p => p.IsMine).ViewID);
+            if (index < 4) photonView.RPC(nameof(InitializeSkill),RpcTarget.All,skill[index].ToString(), playerHolder.player[PhotonNetwork.LocalPlayer].ViewID);
             else JudgeVictory.Instance.photonView.RPC(nameof(JudgeVictory.AddClearIncident), RpcTarget.AllViaServer);
         }
 
@@ -61,7 +61,7 @@ namespace MoreSpace.InGame.Player
         public void InitializeSkill(string target, int id)
         {
             Debug.Log($"InitializeSkill:{id}/{target}");
-            var targetPlayer = playerHolder.player.FirstOrDefault(p => p.ViewID == id);
+            var targetPlayer = playerHolder.player.FirstOrDefault(p => p.Value.ViewID == id).Value;
             if (targetPlayer == null)
                 _cacheAddSkill.Add((target,id));
             else

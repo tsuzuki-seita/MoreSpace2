@@ -53,7 +53,7 @@ namespace MoreSpace.InGame.Weapons
         {
             pool ??= new Pool<HomingBullet>(initCount, bullet);
             cam ??= gameObject.GetComponentInChildren<Camera>();
-            enemyObject ??= PlayerObjectHolder.Instance.player.FirstOrDefault(p => !p.IsMine)?.gameObject;
+            enemyObject ??= PlayerObjectHolder.Instance.player.FirstOrDefault(p => !p.Value.IsMine).Value?.gameObject;
         }
 
         public override void OnUnEquip() { }

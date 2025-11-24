@@ -9,11 +9,11 @@ namespace MoreSpace.InGame.Player
     public class PlayerObjectHolder : SingletonMonoBehaviourPunCallbacks<PlayerObjectHolder>
     {
         public UnityAction<PhotonView> OnAddPlayer;
-        public readonly List<PhotonView> player = new List<PhotonView>();
+        public readonly Dictionary<Photon.Realtime.Player,PhotonView> player = new ();
         
         public void SetPlayer(PhotonView p)
         {
-            player.Add(p);
+            player.Add(p.Owner,p);
             OnAddPlayer?.Invoke(p);
         }
     }
