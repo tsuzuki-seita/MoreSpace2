@@ -1005,11 +1005,11 @@ PrefabInstance:
     - target: {fileID: 2035122955157570633, guid: 36d2f3b8ddc55914189cdb36aba98f3d, type: 3}
       propertyPath: 'skill.Array.data[2]'
       value: 
-      objectReference: {fileID: 11400000, guid: 66e6ac799c1a24fa8b8031648fd77ed5, type: 2}
+      objectReference: {fileID: 11400000, guid: 24c0fcf35ac7efc4e91247c3fefa40d1, type: 2}
     - target: {fileID: 2035122955157570633, guid: 36d2f3b8ddc55914189cdb36aba98f3d, type: 3}
       propertyPath: 'skill.Array.data[3]'
       value: 
-      objectReference: {fileID: 11400000, guid: 64ef5db46f4875343ad3674143d94986, type: 2}
+      objectReference: {fileID: 11400000, guid: 6e44da93b6f71164996ae3fadb275333, type: 2}
     - target: {fileID: 6954974114598861642, guid: 36d2f3b8ddc55914189cdb36aba98f3d, type: 3}
       propertyPath: sceneViewId
       value: 1

@@ -21,7 +21,7 @@ public class SetDataToPlayer : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        SkillController.Instance.SetPlayer(photonView);
+        PlayerObjectHolder.Instance.SetPlayer(photonView);
         
         if (photonView.IsMine)
         {
