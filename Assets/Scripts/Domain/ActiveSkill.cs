@@ -47,7 +47,7 @@ public sealed class ActiveSkill : Skill
         }
 
         // ScriptableObject 側の値を反映
-        active.RecastTime = RecastTime;
+        active.fireRate = RecastTime;
         active.Duration   = Duration;
 
         // ControlWeapon に登録

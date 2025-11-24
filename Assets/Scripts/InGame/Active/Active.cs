@@ -7,10 +7,8 @@ namespace MoreSpace.InGame.Weapons
     public abstract class Active : Weapon
     {
         [Header("Active Config (Skillデータから代入される)")]
-        public float RecastTime = 10f;
         public float Duration   = 5f;
 
-        protected float _currentRecast   = 0f;
         protected float _currentDuration = 0f;
         protected bool  _isActive        = false;
 
@@ -26,13 +24,6 @@ namespace MoreSpace.InGame.Weapons
                     StopActiveLocal();
                 }
             }
-
-            // リキャスト中
-            if (_currentRecast > 0f)
-            {
-                _currentRecast -= Time.deltaTime;
-                if (_currentRecast < 0f) _currentRecast = 0f;
-            }
         }
 
         // --- 発動ボタン押した瞬間（ControlWeapon から全クライアントで呼ばれる） ---
@@ -42,10 +33,12 @@ namespace MoreSpace.InGame.Weapons
             if (_isActive) return;
 
             // リキャスト中なら無視
-            if (_currentRecast > 0f) return;
+            if (!CanShot()) return;
 
             // ここでローカル発動（RPCは不要）
             StartActiveLocal();
+
+            SetNextFireTime();
         }
 
         // 押しっぱなし／離した瞬間はActiveでは特に使わない
@@ -93,9 +86,6 @@ namespace MoreSpace.InGame.Weapons
 
             _isActive        = false;
             _currentDuration = 0f;
-
-            // 自分だけリキャストに入る
-            _currentRecast = RecastTime;
 
             OnActivateStop();
         }
