@@ -12,8 +12,6 @@ namespace MoreSpace.InGame.Weapons
         [SerializeField] public float speed = 10;
         [SerializeField] public int damage = 10;
 
-        [SerializeField] public int ObjectDamage = 10;
-
         private Pool<SingleBullet> pool;
         private int _finalDamage = 0;
         private int _finalObjectDamage = 0;
@@ -21,7 +19,7 @@ namespace MoreSpace.InGame.Weapons
         protected override void InitializeBuffsAndSubscribe()
         {
             _finalDamage = damage;
-            _finalObjectDamage = ObjectDamage;
+            _finalObjectDamage = damage;
             if (playerBuffs == null) return; 
 
             playerBuffs.Attack
@@ -34,7 +32,7 @@ namespace MoreSpace.InGame.Weapons
             playerBuffs.AttackForObject
                 .Subscribe(objAtkBonus => 
                 {
-                    _finalObjectDamage = ObjectDamage + Mathf.RoundToInt(objAtkBonus);
+                    _finalObjectDamage = damage + Mathf.RoundToInt(objAtkBonus);
                 })
                 .AddTo(this);
         }

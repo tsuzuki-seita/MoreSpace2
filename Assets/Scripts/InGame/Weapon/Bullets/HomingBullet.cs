@@ -27,13 +27,19 @@ namespace MoreSpace.InGame.Weapons.Bullets
         [Header("爆発用　不要ならnullでOK")] [SerializeField] private MissileExplosion explosion;
         private static Pool<MissileExplosion> explosionPool;
         private bool isCollisioned;
+        private Vector3 stopPosition;
+        //爆発同期用
+        private int _bulletId;
+        private Action<int, Vector3> _onHitCallback;
 
         // 引数に target (GameObject) を追加
-        public void Shot(Vector3 targetPosition, float speed, int finalPlayerDamage, int finalObjectDamage, GameObject ownerObject, bool isMine, GameObject target = null)
+        public void Shot(int bulletId, Action<int, Vector3> onHitCallback,Vector3 targetPosition, float speed, int finalPlayerDamage, int finalObjectDamage, GameObject ownerObject, bool isMine, GameObject target = null)
         {
             if(explosion != null && explosionPool == null)
                 InitializeExplosionPool();
-               
+            
+            _bulletId = bulletId;
+            _onHitCallback = onHitCallback;
             _ownerObject = ownerObject;
             _isMine = isMine;
             _playerDamage = finalPlayerDamage;
@@ -82,33 +88,38 @@ namespace MoreSpace.InGame.Weapons.Bullets
 
             // 毎フレーム速度ベクトルを更新（回転しても前進し続けるため）
             _rigidbody.linearVelocity = transform.forward * _speed;
+            if (isCollisioned) transform.position = stopPosition;
         }
 
         private void OnCollisionEnter(Collision other)
         {
+            stopPosition = transform.position;
             if (isCollisioned) return;
-            isCollisioned = true;
-            if (_isMine)
-            {
-                if (other.gameObject == _ownerObject)
-                {
-                    // Debug.Log("自傷を防止したよ");
-                    Release();
-                    return;
-                }
-
-                if (other.gameObject.TryGetComponent<IDamageable>(out var damage)) 
-                {
-                    int appliedDamage = other.gameObject.GetComponent<CrystalHealth>() != null ? _objectDamage : _playerDamage;
-                    damage.Damage(appliedDamage);
-                }
-            }
-
-            //エフェクト関係
-            if (explosion != null)
-                _ = explosionPool.GetPooledObject().Explosion(this.transform.position,_playerDamage,_objectDamage,_ownerObject,_isMine);
+            if (!_isMine) return;
             
-            _ = WaitTrail();
+            isCollisioned = true;
+
+            if (other.gameObject != _ownerObject && other.gameObject.TryGetComponent<IDamageable>(out var damage)) 
+            {
+                int appliedDamage = other.gameObject.GetComponent<CrystalHealth>() != null ? _objectDamage : _playerDamage;
+                damage.Damage(appliedDamage);
+            }
+            
+            _onHitCallback?.Invoke(_bulletId, this.transform.position);
+        }
+        
+        public async void NetworkExplode(Vector3 hitPosition)
+        {
+            if (!bulletMesh.enabled) return;
+            
+            isCollisioned = true;
+            _speed = 0;
+            _rigidbody.linearVelocity = Vector3.zero;
+
+            if (explosion != null)
+                _ = explosionPool.GetPooledObject().Explosion(hitPosition, _playerDamage, _objectDamage, _ownerObject, _isMine);
+            
+            await WaitTrail();
         }
 
         private async Task WaitTrail()
@@ -117,6 +128,7 @@ namespace MoreSpace.InGame.Weapons.Bullets
             _speed = 0;
             await UniTask.WaitForSeconds(destroyParticleTime);
             bulletMesh.enabled = true;
+            _target = null;
             Release();
         }
     }

@@ -20,7 +20,7 @@ namespace MoreSpace.InGame
 
         protected override void OnInitialize()
         {
-            DetachParticles();
+            SetParticleScale();
             _instance = crystalMesh.material;
             OnDamage += (hp,maxHp) =>
             {
@@ -42,27 +42,32 @@ namespace MoreSpace.InGame
 
         public override void Die(Photon.Realtime.Player doPlayer)
         {
+            DetachParticles();
             SoundManager.Instance.PlaySE(SoundManager.SEData.SETYPE.CrystalBreak);
             if(doPlayer.Equals(PhotonNetwork.LocalPlayer)) SkillController.Instance.BreakCrystal();
-            ChangeColor(doPlayer);
+            VisualizeBreak(doPlayer);
             Destroy(this.gameObject);
         }
 
-        void ChangeColor(Photon.Realtime.Player doPlayer)
+        void VisualizeBreak(Photon.Realtime.Player doPlayer)
         {
             var playerIndex = doPlayer.IsMasterClient ? 0 : 1;
+            VisualizeJudge.AddBreakCount(playerIndex);
             planetMesh.material.mainTexture = null;
             planetMesh.material.color = changedColor[playerIndex];
         }
 
-        void DetachParticles()
+        void SetParticleScale()
         {
             var scaleValue = damageParticle.transform.localScale.x;
-            damageParticle.transform.SetParent(null);
-            destroyParticle.transform.SetParent(null);
-
             damageParticle.transform.localScale = Vector3.one * scaleValue;
             destroyParticle.transform.localScale = Vector3.one * scaleValue;
+        }
+
+        void DetachParticles()
+        {
+            damageParticle.transform.SetParent(null);
+            destroyParticle.transform.SetParent(null);
         }
     }
 }
