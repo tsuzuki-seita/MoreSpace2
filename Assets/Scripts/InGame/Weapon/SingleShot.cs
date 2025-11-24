@@ -48,6 +48,7 @@ namespace MoreSpace.InGame.Weapons
         public override void OnFireDown()
         {
             if (!CanShot()) return;
+            SoundManager.Instance.PlaySE(SoundManager.SEData.SETYPE.ShingleShot);
             int finalDamage       = _finalDamage;
             int finalObjectDamage = _finalObjectDamage;
             Debug.Log($"最終攻撃力: {finalDamage}, 最終対物攻撃力: {finalObjectDamage}");
