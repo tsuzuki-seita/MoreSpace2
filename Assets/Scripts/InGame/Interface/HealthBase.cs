@@ -7,7 +7,8 @@ namespace MoreSpace.InGame
 {
     public class HealthBase : MonoBehaviourPunCallbacks, IDamageable
     {
-        [SerializeField] int hp = 100;
+        // [SerializeField] int hp = 100;
+        public int hp = 100;
         private int maxHp;
         public Action<int, int> OnDamage;
         protected Action OnHpZero;
