@@ -18,7 +18,7 @@ MonoBehaviour:
   Description: "\u901A\u5E38\u5F3E"
   Icon: {fileID: 21300000, guid: 4754dec0c9320412c9d8a90cc328f613, type: 3}
   Distance: 1.5
-  Damage: 10
+  Damage: 5
   RecastTime: 0.4
   Speed: 300
   ProjectilePrefab: {fileID: 8826079935224666159, guid: 399da5b80593b4cf684c22b7f2cb67d4, type: 3}
