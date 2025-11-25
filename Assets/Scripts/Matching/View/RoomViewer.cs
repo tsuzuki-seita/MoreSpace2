@@ -12,11 +12,13 @@ public class RoomViewer : MonoBehaviour
     [SerializeField] private Text[] playerState = new Text[2];
     [SerializeField] private Button localStateChangeButton;
     [SerializeField] private Button disconnectButton;
+    [SerializeField] private Button matchingCancelButton;
 
     public void Initialize()
     {
         localStateChangeButton.onClick.AddListener(OnChangeState);
         disconnectButton.onClick.AddListener(OnInputDisconnectButton);
+        matchingCancelButton.onClick.AddListener(OnInputDisconnectButton);
     }
 
     public void UpdateLocalPlayer(string localName, bool ready)

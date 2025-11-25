@@ -13,8 +13,8 @@ using UnityEngine.UI;
 public class RoomPhase : IPhase
 {
     [SerializeField] private RoomViewer viewer;
-    
-    protected override void OnInitializePhase()
+
+    protected override void OnStart()
     {
         viewer.OnInputDisconnectButton += Disconnect;
         viewer.OnChangeState += () =>
@@ -24,7 +24,10 @@ public class RoomPhase : IPhase
         };
         ResetModelData();
         viewer.Initialize();
-        
+    }
+
+    protected override void OnInitializePhase()
+    {
         SetLocalPlayerToView();
         if(PhotonNetwork.PlayerList.Length == 2)
             viewer.UpdateRemotePlayer(PhotonNetwork.PlayerListOthers[0].NickName,false);
