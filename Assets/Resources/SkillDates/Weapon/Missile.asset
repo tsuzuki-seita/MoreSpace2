@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aab14dad507a458aab2f4f77bb136450, type: 3}
+  m_Script: {fileID: 11500000, guid: b3c7c14a328e47a4bf2f23bfecc8ca6a, type: 3}
   m_Name: Missile
   m_EditorClassIdentifier: 
-  Type: 3
+  Type: 4
   Level: 3
   SkillName: "\u30DF\u30B5\u30A4\u30EB"
   Description: "\u4E00\u6483\u5FC5\u6BBA\u30DF\u30B5\u30A4\u30EB"

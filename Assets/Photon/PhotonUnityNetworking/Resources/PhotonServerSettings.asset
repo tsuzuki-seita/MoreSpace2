@@ -58,6 +58,7 @@ MonoBehaviour:
   - RPC_StopActive
   - RpcSetStartTime
   - RPC_ReleaseBullet
+  - RPC_ReleaseMissileBullet
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

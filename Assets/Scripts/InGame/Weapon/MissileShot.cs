@@ -9,7 +9,7 @@ using R3;
 
 namespace MoreSpace.InGame.Weapons
 {
-    public class HomingShot : Weapon
+    public class MissileShot : Weapon
     {
         [SerializeField] public HomingBullet bullet;
         [SerializeField] public uint initCount = 5;
@@ -83,11 +83,11 @@ namespace MoreSpace.InGame.Weapons
         private void OnBulletHit(int bulletId, Vector3 hitPosition)
         {
             // 全員に「弾を消せ」と命令
-            photonView.RPC(nameof(RPC_ReleaseBullet), RpcTarget.All, bulletId, hitPosition);
+            photonView.RPC(nameof(RPC_ReleaseMissileBullet), RpcTarget.All, bulletId, hitPosition);
         }
 
         [PunRPC]
-        private void RPC_ReleaseBullet(int bulletId, Vector3 hitPosition)
+        private void RPC_ReleaseMissileBullet(int bulletId, Vector3 hitPosition)
         {
             if (_activeBullets.TryGetValue(bulletId, out var targetBullet))
             {
