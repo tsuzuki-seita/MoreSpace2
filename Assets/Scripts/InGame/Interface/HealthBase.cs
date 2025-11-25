@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using MoreSpace.InGame.Master;
+using MoreSpace.InGame.Player;
 using Photon.Pun;
 using UnityEngine;
 
@@ -13,6 +15,7 @@ namespace MoreSpace.InGame
         public Action<int, int> OnDamage;
         protected Action OnHpZero;
         protected float _defenseBonus = 0f;
+        private static Dictionary<Photon.Realtime.Player, VisualizeWireOnAttackCrystal> _visualizeDictionary = new();
 
         protected virtual bool CanTakeDamage => true;
 
@@ -54,6 +57,13 @@ namespace MoreSpace.InGame
                         nameof(CheckDestroyOnMasterClient.RPC_ReportDeath), RpcTarget.AllViaServer,
                         this.photonView.ViewID);
             }
+            
+            //ワイヤーの表示
+            if (!_visualizeDictionary.ContainsKey(info.Sender))
+            {
+                _visualizeDictionary.Add(info.Sender,PlayerObjectHolder.Instance.player[info.Sender].GetComponent<VisualizeWireOnAttackCrystal>());
+            }
+            _visualizeDictionary[info.Sender].StartVisualize();
         }
 
         public virtual void Die(Photon.Realtime.Player doPlayer){}
