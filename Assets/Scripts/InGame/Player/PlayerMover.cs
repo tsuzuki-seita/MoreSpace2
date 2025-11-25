@@ -35,7 +35,6 @@ namespace MoreSpace.InGame.Player
                 return;
             }
 
-            Debug.Log(finalSpeed + "finalSpeed");
             rigid.AddForce(acceleration * transform.forward, ForceMode.Acceleration);
 
             if (rigid.linearVelocity.magnitude > finalSpeed)

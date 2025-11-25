@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using ObjectPool;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace MoreSpace.InGame.Weapons.Bullets
 {
@@ -27,7 +28,6 @@ namespace MoreSpace.InGame.Weapons.Bullets
         [Header("爆発用　不要ならnullでOK")] [SerializeField] private MissileExplosion explosion;
         private static Pool<MissileExplosion> explosionPool;
         private bool isCollisioned;
-        private Vector3 stopPosition;
         //爆発同期用
         private int _bulletId;
         private Action<int, Vector3> _onHitCallback;
@@ -37,6 +37,11 @@ namespace MoreSpace.InGame.Weapons.Bullets
         {
             if(explosion != null && explosionPool == null)
                 InitializeExplosionPool();
+            
+            bulletMesh.enabled = true; 
+            isCollisioned = false;
+            _rigidbody.isKinematic = false; 
+            _rigidbody.detectCollisions = true;
             
             _bulletId = bulletId;
             _onHitCallback = onHitCallback;
@@ -64,7 +69,7 @@ namespace MoreSpace.InGame.Weapons.Bullets
 
             // 初速を与える
             _rigidbody.linearVelocity = transform.forward * _speed;
-            Invoke(nameof(Release),releaseTime);
+            Release(releaseTime);
         }
 
         void InitializeExplosionPool()
@@ -74,6 +79,7 @@ namespace MoreSpace.InGame.Weapons.Bullets
 
         private void FixedUpdate()
         {
+            if(isCollisioned) return;
             // ターゲットが存在する場合（破壊されてnullになったら自動的に直進になる）
             if (_target != null)
             {
@@ -89,16 +95,17 @@ namespace MoreSpace.InGame.Weapons.Bullets
 
             // 毎フレーム速度ベクトルを更新（回転しても前進し続けるため）
             _rigidbody.linearVelocity = transform.forward * _speed;
-            if (isCollisioned) transform.position = stopPosition;
         }
 
         private void OnCollisionEnter(Collision other)
         {
-            stopPosition = transform.position;
             if (isCollisioned) return;
             if (!_isMine) return;
             
             isCollisioned = true;
+            _rigidbody.linearVelocity = Vector3.zero;
+            _rigidbody.angularVelocity = Vector3.zero;
+            _rigidbody.isKinematic = true;
 
             if (other.gameObject != _ownerObject && other.gameObject.TryGetComponent<IDamageable>(out var damage)) 
             {
@@ -123,14 +130,30 @@ namespace MoreSpace.InGame.Weapons.Bullets
             await WaitTrail();
         }
 
-        private async Task WaitTrail()
+        private async UniTask WaitTrail()
         {
             bulletMesh.enabled = false;
             _speed = 0;
-            await UniTask.WaitForSeconds(destroyParticleTime);
-            bulletMesh.enabled = true;
-            _target = null;
+            _target = null; // 追尾参照を切る
+
+            await UniTask.WaitForSeconds(destroyParticleTime, cancellationToken: this.GetCancellationTokenOnDestroy());
             Release();
+        }
+        
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        static void InitStaticData()
+        {
+            explosionPool = null;
+
+            SceneManager.sceneUnloaded -= OnSceneUnloaded;
+            SceneManager.sceneUnloaded += OnSceneUnloaded;
+        }
+
+        // シーンがアンロードされたらプールを破棄する
+        private static void OnSceneUnloaded(Scene scene)
+        {
+            // ここでプールを空にする（プール内のGameObjectへの参照を切る）
+            explosionPool = null; 
         }
     }
 }

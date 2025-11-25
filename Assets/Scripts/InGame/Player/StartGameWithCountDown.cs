@@ -11,6 +11,10 @@ namespace MoreSpace.InGame.Player
     public class StartGameWithCountDown : MonoBehaviourPunCallbacks
     {
         public static bool isStartGame { get; private set; } = false;
+        public static void ForceSetGamePlayableState(bool isPlayable)
+        {
+            isStartGame = isPlayable;
+        }
         
         [SerializeField] private Text _countdownText;
 
@@ -56,6 +60,11 @@ namespace MoreSpace.InGame.Player
 
             // 全員準備完了時に未来の時刻を設定 (現在時刻 + カウントダウン秒数 + バッファ)
             double startTime = PhotonNetwork.Time + _countDownTime + _startDelayBuffer;
+            if (PhotonNetwork.OfflineMode)
+            {
+                startTime = 0;
+                _countdownText.gameObject.SetActive(false);
+            }
             photonView.RPC(nameof(RpcSetStartTime), RpcTarget.AllBuffered, startTime);
         }
 

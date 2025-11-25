@@ -15,13 +15,16 @@ namespace MoreSpace.Title
             view.OnNameInput += OnEdit;
             view.OnInputSetting += OnSettingsButton;
             view.OnInputCloseSetting += CloseSettingsPanel;
+            view.OnInputTutorial += () => IngameSceneManager.Instance.ChangeScene(InGameState.Tutorial);
             view.OnInputGoSelectSkills += () =>
             {
-                IngameSceneManager.Instance.ChangeScene(InGameState.SelectSkills);
                 SoundManager.Instance.PlaySE(SoundManager.SEData.SETYPE.Button);
+                IngameSceneManager.Instance.ChangeScene(InGameState.SelectSkills);
             };
             view.Initialize();
             SoundManager.Instance.PlayBGM(SoundManager.BGMData.BGMTYPE.Title);
+
+            PhotonNetwork.OfflineMode = false;
         }
 
         void OnEdit(string target)
