@@ -131,12 +131,15 @@ namespace MoreSpace.InGame.Weapons.Bullets
                 damage.Damage(appliedDamage);
             }
             
+            Debug.Log($"衝突したのはこれ{_bulletId}");
             _onHitCallback?.Invoke(_bulletId, this.transform.position);
         }
         
         public async void NetworkExplode(Vector3 hitPosition)
         {
+            Debug.Log($"ホーミング同期");
             if (!bulletMesh.enabled) return;
+            Debug.Log($"爆破処理");
             
             isCollisioned = true;
             _speed = 0;
