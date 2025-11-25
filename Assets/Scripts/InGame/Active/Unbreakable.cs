@@ -60,6 +60,7 @@ namespace MoreSpace.InGame.Weapons
 
         protected override void OnActivateStart()
         {
+            SoundManager.Instance.PlaySE(SoundManager.SEData.SETYPE.Stealth);
             // --- HPの無敵フラグをON ---
             if (_playerHp != null) _playerHp.IsUnbreakable = true;
             

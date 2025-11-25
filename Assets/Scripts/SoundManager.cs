@@ -31,7 +31,7 @@ public class SoundManager : MonoBehaviour
 
     [Range(0, 1)] public float masterVolume = 1;
     [Range(0, 1)] public float bgmMasterVolume = 1;
-    [Range(0, 1)] public float seMasterVolume = 1;
+    [Range(0, 6)] public float seMasterVolume = 2;
 
     private void Start()
     {
@@ -48,7 +48,7 @@ public class SoundManager : MonoBehaviour
         BGMData data = _bgmSoundDatas.Find(data => data.bgm == bgm);
         _bgmAudioSource.clip = data.audioClip;
         //_bgmAudioSource.volume = data.volume * bgmMasterVolume * masterVolume;
-        _bgmAudioSource.loop = false;
+        _bgmAudioSource.loop = true;
         _bgmAudioSource.Play();
         _currentBGM = data;
         AdjustmentBGM();
@@ -87,7 +87,7 @@ public class SoundManager : MonoBehaviour
         //_seAudioSource.volume = data.volume * seMasterVolume * masterVolume;
         _seAudioSource.PlayOneShot(data.audioClip);
     }
-    
+
     public void SetMasterVolume(float volume)
     {
         masterVolume = volume;
@@ -115,8 +115,6 @@ public class SoundManager : MonoBehaviour
             SkillSelect = 1,
             Mating = 2,
             InGame = 3,
-            Winner = 4,
-            Loser = 5,
         }
 
         public BGMTYPE bgm;
@@ -138,6 +136,12 @@ public class SoundManager : MonoBehaviour
             SceneMove = 5,
             Button = 6,
             SelectMove = 7,
+            Stealth = 8,
+            Winner = 9,
+            Loser = 10,
+            HomingShot = 11,
+            Missile = 12,
+            Invincible = 13,
         }
 
         public SETYPE se;

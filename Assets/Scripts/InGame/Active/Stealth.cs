@@ -21,7 +21,7 @@ namespace MoreSpace.InGame.Weapons
 
         private void Awake()
         {
-            _view        = GetComponentInParent<PhotonView>();
+            _view = GetComponentInParent<PhotonView>();
             _alphaPropID = Shader.PropertyToID(alphaPropertyName);
 
             FindTargetMaterial();
@@ -43,7 +43,7 @@ namespace MoreSpace.InGame.Weapons
                     if (m == null) continue;
 
                     // UnbreakablePlayer を使っているマテリアルだけ対象
-                    if (!m.name.Contains("UnbreakablePlayer")) 
+                    if (!m.name.Contains("UnbreakablePlayer"))
                         continue;
 
                     // Alpha プロパティを持っているかチェック
@@ -69,6 +69,8 @@ namespace MoreSpace.InGame.Weapons
         protected override void OnActivateStart()
         {
             if (_targetMaterial == null) return;
+
+            SoundManager.Instance.PlaySE(SoundManager.SEData.SETYPE.Stealth);
 
             // 自分から見えるときは少し透明、他人からは完全透明
             if (_view != null && _view.IsMine)

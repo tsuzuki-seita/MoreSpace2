@@ -59,6 +59,7 @@ namespace MoreSpace.InGame.Weapons
             bullet.gameObject.SetActive(true);
             _currentBeamDuration = 0f;
             isReseted = false;
+            SoundManager.Instance.PlaySE(SoundManager.SEData.SETYPE.Beam);
         }
 
         public override void OnFire()

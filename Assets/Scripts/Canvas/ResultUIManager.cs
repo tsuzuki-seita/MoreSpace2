@@ -22,10 +22,11 @@ namespace MoreSpace.Result
                 && IngameSceneManager.Instance.TryConsume<ResultArgs>(out var args))
             {
                 uis[(int)args.Result].SetActive(true);
+                SoundManager.Instance.StopBGM();
                 if ((int)args.Result == 0)
-                    SoundManager.Instance.PlayBGM(SoundManager.BGMData.BGMTYPE.Winner);
+                    SoundManager.Instance.PlaySE(SoundManager.SEData.SETYPE.Winner);
                 else if ((int)args.Result == 1)
-                    SoundManager.Instance.PlayBGM(SoundManager.BGMData.BGMTYPE.Loser);
+                    SoundManager.Instance.PlaySE(SoundManager.SEData.SETYPE.Loser);
             }
 
             backButton.onClick.AddListener(() =>
