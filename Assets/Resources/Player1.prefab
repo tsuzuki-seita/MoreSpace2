@@ -2936,7 +2936,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigid: {fileID: 5069624683707410861}
-  moveSpeed: 500
+  moveSpeed: 700
   acceleration: 200
 --- !u!114 &8953529862208123403
 MonoBehaviour:
