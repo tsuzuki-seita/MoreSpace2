@@ -1,3 +1,4 @@
+using MoreSpace.InGame.Master;
 using Photon.Pun;
 using UnityEngine;
 
@@ -22,6 +23,7 @@ public class PlayerMaker : MonoBehaviour
         {
             Planets = planets
         };
+        CheckDestroyOnMasterClient.Instance.ResetData();
         Cursor.lockState = CursorLockMode.Locked;
     }
 

@@ -14,6 +14,7 @@ namespace MoreSpace.InGame.Master
 
         private void Start()
         {
+            NowCount = new ReactiveProperty<int[]>(new int[2]);
             NowCount.Subscribe(val => ResetView());
         }
 
