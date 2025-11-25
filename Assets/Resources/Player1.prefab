@@ -2980,7 +2980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 857e523130331445db0d7bfa025b56fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
+  hp: 150
   playerBuffs: {fileID: 0}
   IsUnbreakable: 0
 --- !u!114 &-8596913082856945091
