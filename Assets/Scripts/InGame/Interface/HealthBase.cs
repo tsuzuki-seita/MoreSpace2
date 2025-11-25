@@ -48,7 +48,7 @@ namespace MoreSpace.InGame
 
             hp -= finalDamage;
             OnDamage?.Invoke(hp, maxHp);
-            Debug.Log($"{gameObject.name}が{rawDamage}をうけて{_defenseBonus}で守り最終{finalDamage}受けています, 残りHP: {hp}");
+            Debug.Log($"owner?{info.Sender.NickName}/{gameObject.name}が{rawDamage}をうけて{_defenseBonus}で守り最終{finalDamage}受けています, 残りHP: {hp}");
             if (hp <= 0)
             {
                 OnHpZero?.Invoke();
