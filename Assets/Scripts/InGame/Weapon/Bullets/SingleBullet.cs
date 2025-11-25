@@ -20,7 +20,7 @@ namespace MoreSpace.InGame.Weapons.Bullets
             _objectDamage = finalObjectDamage;
             this.transform.LookAt(targetPosition);
             _rigidbody.linearVelocity = transform.forward * speed;
-            Invoke(nameof(Release),releaseTime);
+            Release(releaseTime);
         }
 
         private void OnCollisionEnter(Collision other)

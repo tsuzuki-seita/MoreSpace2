@@ -19,12 +19,12 @@ namespace MoreSpace.InGame.Player
         {
             base.OnInitialize();
             OnDamage += (hp, maxHp) =>
-    {
-        if (hp >= 0)
-        {
-            SoundManager.Instance.PlaySE(SoundManager.SEData.SETYPE.PlayerDamage); 
-        }
-    };
+            {
+                if (hp >= 0)
+                {
+                    SoundManager.Instance.PlaySE(SoundManager.SEData.SETYPE.PlayerDamage);
+                }
+            };
             
             if (playerBuffs != null)
             {

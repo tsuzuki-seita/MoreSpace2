@@ -22,6 +22,7 @@ public class PlayerMaker : MonoBehaviour
         {
             Planets = planets
         };
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Start()
