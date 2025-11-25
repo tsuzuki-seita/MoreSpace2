@@ -52,7 +52,7 @@ namespace MoreSpace.InGame
             if (hp <= 0)
             {
                 OnHpZero?.Invoke();
-                if (info.Sender.Equals(PhotonNetwork.LocalPlayer))
+                if (info.Sender.IsLocal)
                 {
                     Debug.Log($"私が壊したので破壊処理を送信します");
                     CheckDestroyOnMasterClient.Instance.photonView.RPC(
