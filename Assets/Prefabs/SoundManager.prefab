@@ -47,36 +47,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bgmAudioSource: {fileID: 8586146835579164588}
-  _seAudioSource: {fileID: 8586146835579164588}
+  _seAudioSource: {fileID: 4708679027816659631}
   _bgmSoundDatas:
   - bgm: 0
     audioClip: {fileID: 8300000, guid: 9041853f27bcc46fab147dca3673c3a6, type: 3}
-    volume: 0.5
+    volume: 0.3
   - bgm: 1
     audioClip: {fileID: 8300000, guid: 52d1cac7693784feb981fe79290c43d5, type: 3}
-    volume: 0.5
+    volume: 0.3
   - bgm: 2
     audioClip: {fileID: 8300000, guid: efb379aa364054d128af5508aa44fab7, type: 3}
-    volume: 0.5
+    volume: 0.4
   - bgm: 3
     audioClip: {fileID: 8300000, guid: 5d37e15d5386945069a71f965edd98f5, type: 3}
     volume: 0.5
-  - bgm: 4
-    audioClip: {fileID: 8300000, guid: 0682a3a4fc4d947aa9b33deff110f343, type: 3}
-    volume: 0.5
-  - bgm: 5
-    audioClip: {fileID: 8300000, guid: c3ba715546bbe45438a608c811aad29e, type: 3}
-    volume: 0.5
   _seSoundDatas:
   - se: 0
-    audioClip: {fileID: 8300000, guid: 0fd7de23af6ae4c4fbb82d8ba1e31158, type: 3}
+    audioClip: {fileID: 8300000, guid: ac1877d86f868426c8a29899e60b3fcf, type: 3}
     volume: 0.5
   - se: 2
     audioClip: {fileID: 8300000, guid: 353e949d0d7b0468098cbfb8cc211642, type: 3}
     volume: 0.5
   - se: 6
     audioClip: {fileID: 8300000, guid: 2d227217d205e49a7a3f9805cb660bb8, type: 3}
-    volume: 0.5
+    volume: 0.3
   - se: 3
     audioClip: {fileID: 8300000, guid: 4a39e4d1b34ef486fb9e80f173a57f53, type: 3}
     volume: 0.5
@@ -85,16 +79,31 @@ MonoBehaviour:
     volume: 0.5
   - se: 4
     audioClip: {fileID: 8300000, guid: 3522b638583674fbe87adad22a7e1729, type: 3}
-    volume: 0.5
+    volume: 0.3
   - se: 5
     audioClip: {fileID: 8300000, guid: 93f64e6da07ba425abdfb569d1383bcf, type: 3}
     volume: 0.5
   - se: 7
     audioClip: {fileID: 8300000, guid: b4d05f07eb45d4172aa5e257377ac5d9, type: 3}
-    volume: 0.5
-  masterVolume: 0.1
+    volume: 1
+  - se: 8
+    audioClip: {fileID: 8300000, guid: 866d827c3e1dc4adc9fa9018e6e00608, type: 3}
+    volume: 1
+  - se: 9
+    audioClip: {fileID: 8300000, guid: 0682a3a4fc4d947aa9b33deff110f343, type: 3}
+    volume: 0.7
+  - se: 10
+    audioClip: {fileID: 8300000, guid: c3ba715546bbe45438a608c811aad29e, type: 3}
+    volume: 0.7
+  - se: 10
+    audioClip: {fileID: 8300000, guid: c3ba715546bbe45438a608c811aad29e, type: 3}
+    volume: 0.7
+  - se: 13
+    audioClip: {fileID: 8300000, guid: 30936137f43124c90857fe1d6edfbea2, type: 3}
+    volume: 1
+  masterVolume: 0.5
   bgmMasterVolume: 0.5
-  seMasterVolume: 0.5
+  seMasterVolume: 2
 --- !u!82 &8586146835579164588
 AudioSource:
   m_ObjectHideFlags: 0

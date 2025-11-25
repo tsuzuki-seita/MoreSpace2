@@ -2631,8 +2631,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   breakCrystalCount:
-  - {fileID: 3161587127790302040}
   - {fileID: 7167990654514313769}
+  - {fileID: 3161587127790302040}
   barImage: {fileID: 2032863664415739186}
   barImagePosition:
   - 0

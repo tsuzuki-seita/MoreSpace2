@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using ObjectPool;
@@ -31,6 +32,7 @@ namespace MoreSpace.InGame.Weapons.Bullets
         //爆発同期用
         private int _bulletId;
         private Action<int, Vector3> _onHitCallback;
+        private CancellationTokenSource cts;
 
         // 引数に target (GameObject) を追加
         public void Shot(int bulletId, Action<int, Vector3> onHitCallback,Vector3 targetPosition, float speed, int finalPlayerDamage, int finalObjectDamage, GameObject ownerObject, bool isMine, float releaseTime, GameObject target = null)
@@ -69,7 +71,22 @@ namespace MoreSpace.InGame.Weapons.Bullets
 
             // 初速を与える
             _rigidbody.linearVelocity = transform.forward * _speed;
-            Release(releaseTime);
+            cts?.Cancel();
+            cts?.Dispose();
+            cts = new CancellationTokenSource();
+            WaitRelease(releaseTime, cts.Token).Forget();
+        }
+
+        private async UniTaskVoid WaitRelease(float timer, CancellationToken token)
+        {
+            bool canceled = await UniTask.WaitForSeconds(timer, cancellationToken: token).SuppressCancellationThrow();
+            if (canceled) return;
+
+            // 時間切れ時のみ、Ownerがコールバックを呼ぶ
+            if (_isMine && !isCollisioned)
+            {
+                _onHitCallback?.Invoke(_bulletId, this.transform.position);
+            }
         }
 
         void InitializeExplosionPool()
@@ -101,6 +118,7 @@ namespace MoreSpace.InGame.Weapons.Bullets
         {
             if (isCollisioned) return;
             if (!_isMine) return;
+            cts?.Cancel();
             
             isCollisioned = true;
             _rigidbody.linearVelocity = Vector3.zero;
