@@ -12,7 +12,7 @@ namespace MoreSpace.InGame.Weapons.Bullets
         private int _objectDamage;    // クリスタル（CrystalHealthなど）用
         private GameObject _ownerObject;
         private bool _isMine;
-        public void Shot(Vector3 targetPosition, float speed, int finalPlayerDamage, int finalObjectDamage,GameObject ownerObject,bool isMine)
+        public void Shot(Vector3 targetPosition, float speed, int finalPlayerDamage, int finalObjectDamage,GameObject ownerObject,bool isMine, float releaseTime)
         {
             _ownerObject = ownerObject;
             _isMine = isMine;
@@ -20,6 +20,7 @@ namespace MoreSpace.InGame.Weapons.Bullets
             _objectDamage = finalObjectDamage;
             this.transform.LookAt(targetPosition);
             _rigidbody.linearVelocity = transform.forward * speed;
+            Invoke(nameof(Release),releaseTime);
         }
 
         private void OnCollisionEnter(Collision other)

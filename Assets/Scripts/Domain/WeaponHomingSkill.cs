@@ -14,6 +14,7 @@ public class WeaponHomingSkill : WeaponSkill
 
         // ★ 直代入（public化したのでリフレクション不要）
         shot.bullet = ProjectilePrefab.GetComponent<HomingBullet>();
+        shot.Distance = Distance;
         shot.speed = Speed;
         shot.damage = Mathf.RoundToInt(Damage);
         shot.fireRate = RecastTime;

@@ -33,7 +33,7 @@ namespace MoreSpace.InGame.Weapons.Bullets
         private Action<int, Vector3> _onHitCallback;
 
         // 引数に target (GameObject) を追加
-        public void Shot(int bulletId, Action<int, Vector3> onHitCallback,Vector3 targetPosition, float speed, int finalPlayerDamage, int finalObjectDamage, GameObject ownerObject, bool isMine, GameObject target = null)
+        public void Shot(int bulletId, Action<int, Vector3> onHitCallback,Vector3 targetPosition, float speed, int finalPlayerDamage, int finalObjectDamage, GameObject ownerObject, bool isMine, float releaseTime, GameObject target = null)
         {
             if(explosion != null && explosionPool == null)
                 InitializeExplosionPool();
@@ -64,6 +64,7 @@ namespace MoreSpace.InGame.Weapons.Bullets
 
             // 初速を与える
             _rigidbody.linearVelocity = transform.forward * _speed;
+            Invoke(nameof(Release),releaseTime);
         }
 
         void InitializeExplosionPool()

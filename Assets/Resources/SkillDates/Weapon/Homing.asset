@@ -17,7 +17,7 @@ MonoBehaviour:
   SkillName: "\u8FFD\u5C3E\u5F3E"
   Description: "\u8FFD\u5C3E\u5F3E"
   Icon: {fileID: 21300000, guid: 5f5231a9df6bc4d8c8772dd053253c75, type: 3}
-  Distance: 50
+  Distance: 3
   Damage: 20
   RecastTime: 5
   Speed: 150
