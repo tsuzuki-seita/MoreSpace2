@@ -16,13 +16,6 @@
       "dependencies": {},
       "hash": "73a63b7f672b88f7e9992f6917eb458a8cbb6fa9"
     },
-    "com.lilytech-lab.wireframe-shader": {
-      "version": "https://github.com/lilytech-lab/WireframeShader.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "964c5863f4314aa3951d844cd4f879b691c06bb9"
-    },
     "com.unity.ai.navigation": {
       "version": "2.0.7",
       "depth": 0,
