@@ -19,7 +19,6 @@ namespace MoreSpace.InGame.Player
 
         void Start()
         {
-            Cursor.lockState = CursorLockMode.Locked;
             _actions = new InputSystem_Actions();
             _actions.MainPlayer.Enable();
             _buffs = GetComponent<PlayerBuffs>();
@@ -46,7 +45,6 @@ namespace MoreSpace.InGame.Player
         void ControlFromAD(float value)
         {
             transform.Rotate(Vector3.forward, value * _finalYawSpeed * Time.deltaTime, Space.Self);
-            Debug.Log(_finalYawSpeed+"finalYawSpeed");
         }
 
         void ControlFromMouse(Vector2 vector)

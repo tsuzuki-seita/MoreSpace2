@@ -146,7 +146,8 @@ namespace MoreSpace.InGame.Master
         Win,
         Lose,
         Draw,
-        Disconnect
+        Disconnect,
+        Finish
     }
     public sealed class ResultArgs : ITransientArgs
     {

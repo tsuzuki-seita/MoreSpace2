@@ -13,7 +13,7 @@ namespace MoreSpace.InGame
         public int hp = 100;
         private int maxHp;
         public Action<int, int> OnDamage;
-        protected Action OnHpZero;
+        public Action OnHpZero;
         protected float _defenseBonus = 0f;
         private static Dictionary<Photon.Realtime.Player, VisualizeWireOnAttackCrystal> _visualizeDictionary = new();
 
