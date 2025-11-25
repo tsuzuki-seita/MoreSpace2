@@ -265,8 +265,4 @@ Shader "Custom/Wireframe_Front" {
             ENDHLSL
         }
     }
-
-
-
-    FallBack "Universal Render Pipeline/Lit"
 }

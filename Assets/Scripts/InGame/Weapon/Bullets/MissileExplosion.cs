@@ -1,5 +1,3 @@
-using System;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using ObjectPool;
 using UnityEngine;
@@ -14,7 +12,7 @@ namespace MoreSpace.InGame.Weapons.Bullets
         private GameObject _ownerObject;
         private bool _isMine;
 
-        public async Task Explosion(Vector3 position,int finalPlayerDamage, int finalObjectDamage, GameObject ownerObject, bool isMine)
+        public async UniTask Explosion(Vector3 position,int finalPlayerDamage, int finalObjectDamage, GameObject ownerObject, bool isMine)
         {
             _ownerObject = ownerObject;
             _isMine = isMine;
@@ -23,7 +21,7 @@ namespace MoreSpace.InGame.Weapons.Bullets
             
             transform.position = position;
             explosion.Play();
-            await UniTask.WaitForSeconds(1);
+            await UniTask.WaitForSeconds(1, cancellationToken: this.GetCancellationTokenOnDestroy());
             Release();
         }
 
