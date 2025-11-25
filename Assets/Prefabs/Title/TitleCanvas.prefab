@@ -2445,7 +2445,7 @@ MonoBehaviour:
   goTutorial: {fileID: 4356216308699343138}
   goSetting: {fileID: 3088645687583825649}
   settingsBackgroundButton: {fileID: 4442229031688826911}
-  SettingsPanel: {fileID: 0}
+  SettingsPanel: {fileID: 7566909722189620878}
   _masterVolumeSlider: {fileID: 5184877906993199295}
   _bgmVolumeSlider: {fileID: 3293187251842535744}
   _seVolumeSlider: {fileID: 6255299973731837167}
