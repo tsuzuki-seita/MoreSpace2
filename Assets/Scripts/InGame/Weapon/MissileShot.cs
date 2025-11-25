@@ -54,7 +54,7 @@ namespace MoreSpace.InGame.Weapons
         public override void OnEquip()
         {
             pool ??= new Pool<HomingBullet>(initCount, bullet);
-            cam ??= gameObject.GetComponentInChildren<Camera>();
+            cam ??= gameObject.GetComponentInChildren<Camera>(true);
             enemyObject ??= PlayerObjectHolder.Instance.player.FirstOrDefault(p => !p.Value.IsMine).Value?.gameObject;
         }
 
@@ -99,7 +99,7 @@ namespace MoreSpace.InGame.Weapons
         private GameObject CheckEnemyInCamera()
         {
             if(cam == null)
-                cam ??= gameObject.GetComponentInChildren<Camera>();
+                cam ??= gameObject.GetComponentInChildren<Camera>(true);
             if(cam == null) Debug.LogError("カメラが存在しない");
             if (enemyObject == null) return null;
             if (isHomingAlways) return enemyObject;

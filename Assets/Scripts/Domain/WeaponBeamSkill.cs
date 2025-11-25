@@ -13,7 +13,7 @@ namespace MoreSpace.InGame.Weapons
             var laser = owner.AddComponent<MoreSpace.InGame.Weapons.Beam>();
 
             laser.bulletPrefab = ProjectilePrefab.GetComponent<BeamBullet>();
-            laser.maxDistance = Distance;
+            laser.maxDistance = Distance*3;
             laser.damage = Mathf.RoundToInt(Damage);
             laser.fireRate = RecastTime;
             laser.maxBeamDuration = ReleaseDurationTime;
