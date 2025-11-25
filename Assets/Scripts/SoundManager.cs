@@ -31,12 +31,12 @@ public class SoundManager : MonoBehaviour
 
     [Range(0, 1)] public float masterVolume = 1;
     [Range(0, 1)] public float bgmMasterVolume = 1;
-    [Range(0, 6)] public float seMasterVolume = 2;
+    [Range(0, 4)] public float seMasterVolume = 2;
 
     private void Start()
     {
-        AdjustmentBGM();
-        AdjustmentSE();
+        // AdjustmentBGM();
+        // AdjustmentSE();
     }
 
     /// <summary>

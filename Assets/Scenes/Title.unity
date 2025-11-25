@@ -467,6 +467,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1198231319 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4708679027816659631, guid: 47fe66776305598408a8a423ab51b7f8, type: 3}
+  m_PrefabInstance: {fileID: 5722135004634314292}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1478560939 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5184877906993199295, guid: 9a13c50dfc221994eab537ca73187c1e, type: 3}
@@ -818,8 +823,12 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6585609989554365632, guid: 47fe66776305598408a8a423ab51b7f8, type: 3}
+      propertyPath: _seAudioSource
+      value: 
+      objectReference: {fileID: 1198231319}
+    - target: {fileID: 6585609989554365632, guid: 47fe66776305598408a8a423ab51b7f8, type: 3}
       propertyPath: seMasterVolume
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6585609989554365632, guid: 47fe66776305598408a8a423ab51b7f8, type: 3}
       propertyPath: _seVolumeSlider
@@ -887,7 +896,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6585609989554365632, guid: 47fe66776305598408a8a423ab51b7f8, type: 3}
       propertyPath: _bgmSoundDatas.Array.data[1].volume
-      value: 0
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6585609989554365632, guid: 47fe66776305598408a8a423ab51b7f8, type: 3}
       propertyPath: _bgmSoundDatas.Array.data[2].volume
@@ -1104,7 +1113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6255299973731837167, guid: 9a13c50dfc221994eab537ca73187c1e, type: 3}
       propertyPath: m_MaxValue
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6629477832975404288, guid: 9a13c50dfc221994eab537ca73187c1e, type: 3}
       propertyPath: m_AnchorMax.x
