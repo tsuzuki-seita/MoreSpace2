@@ -47,6 +47,7 @@ namespace MoreSpace.InGame.Weapons
 
         protected Vector3 CalcTargetPosition()
         {
+            hitObject = null;
             Ray cameraRay = new Ray(_mainCameraTransform.position, _mainCameraTransform.forward);
             int count = Physics.RaycastNonAlloc(cameraRay, hits, maxDistance);
             if(count == 0) return cameraRay.GetPoint(maxDistance);
@@ -63,7 +64,6 @@ namespace MoreSpace.InGame.Weapons
                 return hit.point;
             }
 
-            hitObject = null;
             return cameraRay.GetPoint(maxDistance);
         }
 

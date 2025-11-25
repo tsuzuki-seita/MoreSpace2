@@ -27,7 +27,7 @@ namespace MoreSpace.InGame.Weapons.Bullets
         [SerializeField] private float destroyParticleTime = 1f;
 
         [Header("爆発用　不要ならnullでOK")] [SerializeField] private MissileExplosion explosion;
-        private static Pool<MissileExplosion> explosionPool;
+        public static Pool<MissileExplosion> explosionPool;
         private bool isCollisioned;
         //爆発同期用
         private int _bulletId;
@@ -140,6 +140,7 @@ namespace MoreSpace.InGame.Weapons.Bullets
             Debug.Log($"ホーミング同期");
             if (!bulletMesh.enabled) return;
             Debug.Log($"爆破処理");
+            cts?.Cancel();
             
             isCollisioned = true;
             _speed = 0;
@@ -157,6 +158,7 @@ namespace MoreSpace.InGame.Weapons.Bullets
             _speed = 0;
             _target = null; // 追尾参照を切る
 
+            Debug.Log("エフェクトを待ちます");
             await UniTask.WaitForSeconds(destroyParticleTime, cancellationToken: this.GetCancellationTokenOnDestroy());
             Release();
         }

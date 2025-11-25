@@ -49,6 +49,7 @@ namespace MoreSpace.InGame.Weapons
                     _finalObjectDamage = damage + Mathf.RoundToInt(objAtkBonus);
                 })
                 .AddTo(this);
+            HomingBullet.explosionPool = null;
         }
         public override void OnEquip()
         {

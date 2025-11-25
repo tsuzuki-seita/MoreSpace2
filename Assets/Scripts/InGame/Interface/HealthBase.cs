@@ -53,9 +53,12 @@ namespace MoreSpace.InGame
             {
                 OnHpZero?.Invoke();
                 if (info.Sender.Equals(PhotonNetwork.LocalPlayer))
+                {
+                    Debug.Log($"私が壊したので破壊処理を送信します");
                     CheckDestroyOnMasterClient.Instance.photonView.RPC(
                         nameof(CheckDestroyOnMasterClient.RPC_ReportDeath), RpcTarget.AllViaServer,
                         this.photonView.ViewID);
+                }
             }
             
             //ワイヤーの表示

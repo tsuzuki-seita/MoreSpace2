@@ -24,9 +24,10 @@ namespace MoreSpace.InGame.Master
         [PunRPC]
         public void RPC_ReportDeath(int deadViewID, PhotonMessageInfo info)
         {
+            Debug.Log("破壊処理を受け取りました");
             if (!PhotonNetwork.IsMasterClient) return; 
+            Debug.Log("マスターなので継続");
             
-            // 既に判定が終わっているIDなら無視
             if (_processedIDs.Contains(deadViewID)) return;
 
             int timestamp = info.SentServerTimestamp;
