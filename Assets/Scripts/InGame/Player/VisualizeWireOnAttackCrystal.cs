@@ -1,5 +1,6 @@
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace MoreSpace.InGame.Player
 {
@@ -10,18 +11,12 @@ namespace MoreSpace.InGame.Player
 
         // シェーダーのプロパティID
         private static readonly int BaseColorID = Shader.PropertyToID("_BaseColor");
-        private static readonly int XRayColorID = Shader.PropertyToID("_XRayColor");
+        private static readonly int ZTest = Shader.PropertyToID("_ZTest");
+        private static readonly int ZWrite = Shader.PropertyToID("_ZWrite");
 
         private void Start()
         {
             if (wireRenderer == null) wireRenderer = GetComponent<MeshRenderer>();
-
-            // 【重要】確実に色が見えるように、Startで色をセットしてしまう
-            // DebugXRayAlways と同じ設定値にします
-            Material mat = wireRenderer.material;
-            mat.SetColor(BaseColorID, new Color(1f, 0f, 0f, 0.3f)); // 赤 (手前)
-            mat.SetColor(XRayColorID, new Color(0f, 1f, 0f, 1f));   // 緑 (奥/XRay)
-
             // 初期状態は非表示
             wireRenderer.enabled = false;
         }
@@ -36,9 +31,9 @@ namespace MoreSpace.InGame.Player
         }
 
         [PunRPC]
-        private void RpcShowWireframe()
+        private void RpcShowWireframe(PhotonMessageInfo info)
         {
-            // 誰であろうと、命令が来たら表示する
+            if(info.Sender.IsLocal) return;
             wireRenderer.enabled = true;
 
             // 以前の実行待ちがあればキャンセルして、新しくタイマーセット
