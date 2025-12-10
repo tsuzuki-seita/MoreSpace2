@@ -1,86 +1,54 @@
-using DG.Tweening; // DOTweenの名前空間を追加
 using Photon.Pun;
 using UnityEngine;
 
 namespace MoreSpace.InGame.Player
 {
-    public class VisualizeWireOnAttackCrystal : MonoBehaviourPunCallbacks
+    public class VisualizeWireOnAttackCrystal : MonoBehaviourPun
     {
         [SerializeField] private MeshRenderer wireRenderer;
-        [SerializeField] private float visualizeTime = 1.5f;
-        [SerializeField] private float fadeDuration = 0.25f; // フェードにかかる時間
+        [SerializeField] private float visualizeTime = 2.0f; // 表示時間
 
-        private int propertyID;
-        private string frameColorPropertyName = "_WireframeColor";
+        // シェーダーのプロパティID
+        private static readonly int BaseColorID = Shader.PropertyToID("_BaseColor");
+        private static readonly int XRayColorID = Shader.PropertyToID("_XRayColor");
 
-        private Material _cachedMaterial;
-        private Color _targetColor;      // 表示時の色（Alphaあり）
-        private Color _transparentColor; // 非表示時の色（Alpha 0）
-        private Tween _currentTween;     // 現在実行中のアニメーション
-
-        void Start()
+        private void Start()
         {
-            propertyID = Shader.PropertyToID(frameColorPropertyName);
-            _cachedMaterial = wireRenderer.material;
+            if (wireRenderer == null) wireRenderer = GetComponent<MeshRenderer>();
 
-            Color baseColor = !photonView.IsMine ? new Color32(255, 0, 0, 255) : new Color32(255, 0, 0, 50);
-            
-            _targetColor = baseColor;
-            _transparentColor = baseColor;
-            _transparentColor.a = 0f;
+            // 【重要】確実に色が見えるように、Startで色をセットしてしまう
+            // DebugXRayAlways と同じ設定値にします
+            Material mat = wireRenderer.material;
+            mat.SetColor(BaseColorID, new Color(1f, 0f, 0f, 0.3f)); // 赤 (手前)
+            mat.SetColor(XRayColorID, new Color(0f, 1f, 0f, 1f));   // 緑 (奥/XRay)
 
-            // 初期状態設定
+            // 初期状態は非表示
             wireRenderer.enabled = false;
-            _cachedMaterial.SetColor(propertyID, _transparentColor);
         }
 
+        /// <summary>
+        /// 外部から呼ばれるトリガー
+        /// </summary>
         public void StartVisualize()
         {
-            // 既にアニメーション中ならキャンセルしてリセット（連打対応）
-            if (_currentTween != null && _currentTween.IsActive())
-            {
-                _currentTween.Kill();
-            }
-
-            VisualizeSequence();
+            // 全員（自分含む）に対して「表示しろ」と命令を送る
+            photonView.RPC(nameof(RpcShowWireframe), RpcTarget.All);
         }
 
-        void VisualizeSequence()
+        [PunRPC]
+        private void RpcShowWireframe()
         {
+            // 誰であろうと、命令が来たら表示する
             wireRenderer.enabled = true;
-            
-            // 初期色を透明にセット（念のため）
-            _cachedMaterial.SetColor(propertyID, _transparentColor);
 
-            Sequence seq = DOTween.Sequence();
-            seq.Append(_cachedMaterial.DOColor(_targetColor, propertyID, fadeDuration));
-            float waitTime = Mathf.Max(0, visualizeTime - (fadeDuration * 2));
-            seq.AppendInterval(waitTime);
-            seq.Append(_cachedMaterial.DOColor(_transparentColor, propertyID, fadeDuration));
-
-            // 4. 終了時の処理
-            seq.OnComplete(() =>
-            {
-                wireRenderer.enabled = false;
-                _currentTween = null;
-            });
-
-            _currentTween = seq;
+            // 以前の実行待ちがあればキャンセルして、新しくタイマーセット
+            CancelInvoke(nameof(HideWireframe));
+            Invoke(nameof(HideWireframe), visualizeTime);
         }
 
-        // オブジェクト破棄時にTweenを安全にキルする
-        private void OnDestroy()
+        private void HideWireframe()
         {
-            if (_currentTween != null && _currentTween.IsActive())
-            {
-                _currentTween.Kill();
-            }
-            
-            // マテリアルインスタンスの破棄（メモリリーク防止）
-            if (_cachedMaterial != null)
-            {
-                Destroy(_cachedMaterial);
-            }
+            wireRenderer.enabled = false;
         }
     }
 }
