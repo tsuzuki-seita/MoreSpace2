@@ -61,6 +61,7 @@ namespace MoreSpace.InGame
                 }
             }
             
+            if (!info.Sender.IsLocal) return;
             //ワイヤーの表示
             if (!_visualizeDictionary.ContainsKey(info.Sender))
             {

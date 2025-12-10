@@ -17,11 +17,9 @@ namespace MoreSpace.InGame.Weapons
 
         private Material _targetMaterial;
         private int _alphaPropID;
-        private PhotonView _view;
 
         private void Awake()
         {
-            _view = GetComponentInParent<PhotonView>();
             _alphaPropID = Shader.PropertyToID(alphaPropertyName);
 
             FindTargetMaterial();
@@ -68,21 +66,15 @@ namespace MoreSpace.InGame.Weapons
 
         protected override void OnActivateStart()
         {
+            Debug.Log($"{(photonView.IsMine ? selfAlpha : 0.0f)} : {_targetMaterial}");
             if (_targetMaterial == null) return;
 
             SoundManager.Instance.PlaySE(SoundManager.SEData.SETYPE.Stealth);
 
             // 自分から見えるときは少し透明、他人からは完全透明
-            if (_view != null && _view.IsMine)
-            {
-                // 自分視点：SurfaceInputs.Alpha を selfAlpha に
-                _targetMaterial.SetFloat(_alphaPropID, selfAlpha);
-            }
-            else
-            {
-                // 相手視点：完全透明
-                _targetMaterial.SetFloat(_alphaPropID, 0.0f);
-            }
+            // 相手視点：完全透明
+            // 自分視点：SurfaceInputs.Alpha を selfAlpha に
+            _targetMaterial.SetFloat(_alphaPropID, photonView.IsMine ? selfAlpha : 0.0f);
         }
 
         protected override void OnActivateStop()

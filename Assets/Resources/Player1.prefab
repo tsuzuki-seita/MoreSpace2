@@ -3032,7 +3032,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wireRenderer: {fileID: 9219956584431137083}
   visualizeTime: 1.5
-  fadeDuration: 0.25
 --- !u!1 &7126118708290053763
 GameObject:
   m_ObjectHideFlags: 0
@@ -4002,7 +4001,7 @@ PrefabInstance:
     - target: {fileID: 1702472911302673798, guid: c484e9ee88e6f4942ad5c8a0461c6493, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: f6705e80f63bf5c44b1d71ce61f37bc4, type: 2}
+      objectReference: {fileID: 2100000, guid: 116d5dc7da2b1124a96f1784dcf6f6fd, type: 2}
     - target: {fileID: 5401419747407503732, guid: c484e9ee88e6f4942ad5c8a0461c6493, type: 3}
       propertyPath: m_Convex
       value: 1
